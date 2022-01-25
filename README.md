@@ -2,9 +2,9 @@
 
 [![CI](https://github.com/bpmn-io/connectors-modeling-demo/actions/workflows/CI.yml/badge.svg)](https://github.com/bpmn-io/connectors-modeling-demo/actions/workflows/CI.yml)
 
-This demo showcases the in-the-works connectors modeling experience. Some day maybe to be integrated into the Camunda Modeler ([Web](https://github.com/camunda/web-modeler)/[Desktop](https://github.com/camunda/camunda-modeler)).
+This demo showcases the in-the-works connectors modeling experience. Some day maybe to be integrated into the Camunda Modeler ([Web](https://github.com/camunda/web-modeler)/[Desktop](https://github.com/camunda/camunda-modeler)). **[Try it out](https://bpmn-io.github.io/connectors-modeling-demo/)**.
 
-![screenshot](./resources/screenshot.png)
+[![screenshot](./resources/screenshot.png)](https://bpmn-io.github.io/connectors-modeling-demo/)
 
 
 ## Features
