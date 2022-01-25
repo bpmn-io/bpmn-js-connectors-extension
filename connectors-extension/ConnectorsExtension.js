@@ -118,7 +118,7 @@ ConnectorsExtension.prototype._createElement = function() {
 };
 
 
-ConnectorsExtension.prototype.getPaletteEntries = function(element) {
+ConnectorsExtension.prototype.getPaletteEntries = function() {
 
   const title = this._translate('Create REST Connector');
 
