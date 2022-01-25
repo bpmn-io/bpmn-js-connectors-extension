@@ -37,8 +37,8 @@ export default function ConnectorsExtension(injector, create, elementFactory, bp
 
   this._autoPlace = injector.get('autoPlace', false);
 
-  contextPad.registerProvider(this);
-  palette.registerProvider(this);
+  contextPad.registerProvider(LOWER_PRIORITY, this);
+  palette.registerProvider(LOWER_PRIORITY, this);
 }
 
 ConnectorsExtension.$inject = ['injector', 'create', 'elementFactory', 'bpmnFactory', 'contextPad', 'palette', 'translate'];
