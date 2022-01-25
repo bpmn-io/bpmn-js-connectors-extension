@@ -47,6 +47,9 @@ html, body, #canvas {
   display: none;
 }
 
+.drop-message, .top-links {
+  z-index: 1;
+}
 
 /** file-drops */
 
