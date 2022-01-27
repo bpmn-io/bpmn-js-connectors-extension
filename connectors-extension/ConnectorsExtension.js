@@ -28,7 +28,11 @@ const restImagePaletteUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(rest
 const LOWER_PRIORITY = 499;
 
 
-export default function ConnectorsExtension(injector, create, elementFactory, bpmnFactory, contextPad, palette, translate) {
+export default function ConnectorsExtension(
+    injector, create, elementFactory,
+    bpmnFactory, contextPad, palette,
+    translate) {
+
   this._create = create;
   this._elementFactory = elementFactory;
   this._bpmnFactory = bpmnFactory;
@@ -41,7 +45,11 @@ export default function ConnectorsExtension(injector, create, elementFactory, bp
   palette.registerProvider(LOWER_PRIORITY, this);
 }
 
-ConnectorsExtension.$inject = ['injector', 'create', 'elementFactory', 'bpmnFactory', 'contextPad', 'palette', 'translate'];
+ConnectorsExtension.$inject = [
+  'injector', 'create', 'elementFactory',
+  'bpmnFactory', 'contextPad', 'palette',
+  'translate'
+];
 
 ConnectorsExtension.prototype._createElement = function() {
 
@@ -141,7 +149,7 @@ ConnectorsExtension.prototype.getPaletteEntries = function() {
   };
 };
 
-ConnectorsExtension.prototype.getContextPadEntries = function(element) {
+ConnectorsExtension.prototype.getContextPadEntries = function() {
   const title = this._translate('Append REST Task');
 
   var self = this;
