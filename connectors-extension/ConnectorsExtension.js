@@ -128,7 +128,7 @@ ConnectorsExtension.prototype._createElement = function() {
 
 ConnectorsExtension.prototype.getPaletteEntries = function() {
 
-  const title = this._translate('Create REST Connector');
+  const title = this._translate('Create REST Task');
 
   const self = this;
 
@@ -137,7 +137,7 @@ ConnectorsExtension.prototype.getPaletteEntries = function() {
   }
 
   return {
-    'create-rest-connector': {
+    'create.rest-task': {
       group: 'activity',
       imageUrl: restImagePaletteUrl,
       title,
@@ -152,7 +152,7 @@ ConnectorsExtension.prototype.getPaletteEntries = function() {
 ConnectorsExtension.prototype.getContextPadEntries = function() {
   const title = this._translate('Append REST Task');
 
-  var self = this;
+  const self = this;
 
   return (entries) => {
 
@@ -167,7 +167,7 @@ ConnectorsExtension.prototype.getContextPadEntries = function() {
       });
     }
 
-    var append = self._autoPlace
+    const append = self._autoPlace
       ? function(event, shape) {
         self._autoPlace.append(shape, self._createElement());
       }
@@ -175,7 +175,7 @@ ConnectorsExtension.prototype.getContextPadEntries = function() {
 
     return {
       ...entries,
-      'append-rest-task': {
+      'append.append-rest-task': {
         group: 'model',
         title,
         imageUrl: restImageUrl,
