@@ -3,7 +3,8 @@ import inherits from 'inherits';
 import BaseRenderer from 'diagram-js/lib/draw/BaseRenderer';
 
 import {
-  getBusinessObject
+  getBusinessObject,
+  is
 } from 'bpmn-js/lib/util/ModelUtil';
 
 import {
@@ -35,7 +36,7 @@ ConnectorTaskRenderer.$inject = [
 ];
 
 ConnectorTaskRenderer.prototype.canRender = function(element) {
-  return !isLabel(element) && !!getBusinessObject(element).get('zeebe:modelerTemplate');
+  return !isLabel(element) && is(element, 'bpmn:Activity') && !!getBusinessObject(element).get('zeebe:modelerTemplate');
 };
 
 ConnectorTaskRenderer.prototype.drawShape = function(parentGfx, element) {
