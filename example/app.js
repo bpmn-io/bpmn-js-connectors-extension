@@ -2,6 +2,8 @@ import ConnectorsExtensionModule from '..';
 
 import ZeebeModdle from 'zeebe-bpmn-moddle/resources/zeebe.json';
 
+import ZeebeModdleModule from 'zeebe-bpmn-moddle/lib';
+
 import {
   BpmnPropertiesPanelModule,
   BpmnPropertiesProviderModule,
@@ -10,7 +12,7 @@ import {
 
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 
-import AddExporter from '@bpmn-io/add-exporter';
+import AddExporterModule from '@bpmn-io/add-exporter';
 
 import fileDrop from 'file-drops';
 
@@ -48,11 +50,12 @@ if (persistent) {
 const modeler = new BpmnModeler({
   container: '#canvas',
   additionalModules: [
-    AddExporter,
+    AddExporterModule,
     ConnectorsExtensionModule,
     BpmnPropertiesPanelModule,
     BpmnPropertiesProviderModule,
-    ZeebePropertiesProviderModule
+    ZeebePropertiesProviderModule,
+    ZeebeModdleModule
   ],
   exporter: {
     name: 'connectors-modeling-demo',
