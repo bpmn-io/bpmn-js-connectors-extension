@@ -11,7 +11,7 @@ const restImageSvg = `
 `;
 
 const restImagePaletteSvg = `
-<svg width="30" height="30" viewBox="0 0 52.92 52.92" xmlns="http://www.w3.org/2000/svg">
+<svg width="30" height="46" viewBox="0 0 52.92 52.92" xmlns="http://www.w3.org/2000/svg">
   <path style="stroke:#000;stroke-width:.524999;stroke-linecap:round;stroke-linejoin:round;stop-color:#000" d="M4.32 5.55H48.6a3 3 0 0 1 3 3V44.9a3 3 0 0 1-3 3H4.32a3 3 0 0 1-3-3V8.55a3 3 0 0 1 3-3z"/>
   <path style="fill:#fff;stroke:#000;stroke-width:.524999;stroke-linecap:round;stroke-linejoin:round;stop-color:#000" d="M6.02 7.95h41.13a2.4 2.4 0 0 1 2.41 2.41v33.2a2.4 2.4 0 0 1-2.41 2.4H6.02a2.4 2.4 0 0 1-2.41-2.4v-33.2a2.4 2.4 0 0 1 2.41-2.41z"/>
   <g style="font-size:31.8344px;line-height:1.25;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';letter-spacing:0;word-spacing:0;stroke-width:.264583">
