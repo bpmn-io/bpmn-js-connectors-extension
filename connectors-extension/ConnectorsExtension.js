@@ -1,4 +1,4 @@
-import { is, getBusinessObject } from 'bpmn-js/lib/util/ModelUtil';
+import { getBusinessObject } from 'bpmn-js/lib/util/ModelUtil';
 
 const restImageSvg = `
 <svg width="22" height="22" viewBox="0 0 52.92 52.92" xmlns="http://www.w3.org/2000/svg">
@@ -144,34 +144,38 @@ ConnectorsExtension.prototype.getPaletteEntries = function() {
 ConnectorsExtension.prototype.getContextPadEntries = function(element) {
   const title = this._translate('Append REST Task');
 
-  // only allow on non event sub-process activities
-  if (!is(element, 'bpmn:Activity') || getBusinessObject(element).triggeredByEvent) {
-    return {};
-  }
-
   var self = this;
 
-  function appendStart(event, shape) {
-    self._create.start(event, self._createElement(), {
-      source: shape
-    });
-  }
+  return (entries) => {
 
-  var append = self._autoPlace
-    ? function(event, shape) {
-      self._autoPlace.append(shape, self._createElement());
+    // only allow when appending task is allowed, too
+    if (!entries['append.append-task']) {
+      return entries;
     }
-    : appendStart;
 
-  return {
-    'append-rest-task': {
-      group: 'model',
-      title,
-      imageUrl: restImageUrl,
-      action: {
-        dragstart: appendStart,
-        click: append
+    function appendStart(event, shape) {
+      self._create.start(event, self._createElement(), {
+        source: shape
+      });
+    }
+
+    var append = self._autoPlace
+      ? function(event, shape) {
+        self._autoPlace.append(shape, self._createElement());
       }
-    }
+      : appendStart;
+
+    return {
+      ...entries,
+      'append-rest-task': {
+        group: 'model',
+        title,
+        imageUrl: restImageUrl,
+        action: {
+          dragstart: appendStart,
+          click: append
+        }
+      }
+    };
   };
 };
