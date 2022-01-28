@@ -2,8 +2,10 @@ const path = require('path');
 
 const CopyPlugin = require('copy-webpack-plugin');
 
+const mode = process.env.NODE_ENV || 'development';
+
 module.exports = {
-  mode: 'development',
+  mode,
   entry: './example/app.js',
   output: {
     path: path.join(__dirname, 'public'),
@@ -30,5 +32,5 @@ module.exports = {
       ],
     }),
   ],
-  devtool: 'eval-source-map'
+  devtool: mode === 'development' ? 'eval-source-map' : 'source-map'
 };

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm start",
     "all": "run-s lint build",
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack",
     "start": "webpack serve --open",
     "lint": "eslint ."
   },
