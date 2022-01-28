@@ -17,21 +17,21 @@ import {
 
 
 export default function ConnectorTaskRenderer(
-    injector,
     config,
+    eventBus,
     bpmnRenderer) {
 
   this._bpmnRenderer = bpmnRenderer;
   this._config = config || {};
 
-  injector.invoke(BaseRenderer, this, { renderPriority: 1250 });
+  BaseRenderer.call(this, eventBus, 1250);
 }
 
 inherits(ConnectorTaskRenderer, BaseRenderer);
 
 ConnectorTaskRenderer.$inject = [
-  'injector',
   'config.bpmnRenderer',
+  'eventBus',
   'bpmnRenderer'
 ];
 
@@ -40,11 +40,11 @@ ConnectorTaskRenderer.prototype.canRender = function(element) {
 };
 
 ConnectorTaskRenderer.prototype.drawShape = function(parentGfx, element) {
-  var h = this._bpmnRenderer.handlers['bpmn:Task'];
+  const renderer = this._bpmnRenderer.handlers['bpmn:Task'];
 
-  var gfx = h(parentGfx, element);
+  const gfx = renderer(parentGfx, element);
 
-  var paths = [
+  const paths = [
     'm21.04 33.52-4.5-8h-2.7v8H9.27V12.55h7.68q4.1 0 6.14 1.6t2.04 4.62q0 2.13-1.15 3.62-1.15 1.5-3.2 2.1l5.43 9.03zm-.54-14.56q0-1.47-.96-2.15-.97-.7-3.08-.7h-2.61v5.85h2.73q3.92 0 3.92-3z'
   ];
 
