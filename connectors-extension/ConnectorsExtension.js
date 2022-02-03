@@ -1,27 +1,76 @@
 import { getBusinessObject } from 'bpmn-js/lib/util/ModelUtil';
 
 const restImageSvg = `
-<svg width="22" height="22" viewBox="0 0 52.92 52.92" xmlns="http://www.w3.org/2000/svg">
-  <path style="stroke:#000;stroke-width:.524999;stroke-linecap:round;stroke-linejoin:round;stop-color:#000" d="M4.32 5.55H48.6a3 3 0 0 1 3 3V44.9a3 3 0 0 1-3 3H4.32a3 3 0 0 1-3-3V8.55a3 3 0 0 1 3-3z"/>
-  <path style="fill:#fff;stroke:#000;stroke-width:.524999;stroke-linecap:round;stroke-linejoin:round;stop-color:#000" d="M6.02 7.95h41.13a2.4 2.4 0 0 1 2.41 2.41v33.2a2.4 2.4 0 0 1-2.41 2.4H6.02a2.4 2.4 0 0 1-2.41-2.4v-33.2a2.4 2.4 0 0 1 2.41-2.41z"/>
-  <g style="font-size:31.8344px;line-height:1.25;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';letter-spacing:0;word-spacing:0;stroke-width:.264583">
-    <path d="m21.04 33.52-4.5-8h-2.7v8H9.27V12.55h7.68q4.1 0 6.14 1.6t2.04 4.62q0 2.13-1.15 3.62-1.15 1.5-3.2 2.1l5.43 9.03zm-.54-14.56q0-1.47-.96-2.15-.97-.7-3.08-.7h-2.61v5.85h2.73q3.92 0 3.92-3z" style="font-weight:700;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold'" aria-label="R"/>
-  </g>
+<svg width="22" height="22" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
+  <rect
+   fill="#ffffff" stroke="#000000" stroke-width="1"
+   id="REST_TASK_RECT"
+   width="25"
+   height="21"
+   x="0.4"
+   y="0.4"
+   rx="5" />
+  <path
+     d="m 4.8866058,14.492357 h 1.9043037 v -4.202586 h 1.6088066 l 2.2982969,4.202586 h 2.15055 l -2.56096,-4.481666 c 1.28048,-0.4432502 2.134133,-1.4446502 2.134133,-3.0698702 0,-2.396794 -1.723723,-3.184781 -3.9563529,-3.184781 H 4.8866058 Z M 6.7909095,8.7794608 v -3.4967 h 1.4774766 c 1.477476,0 2.2818799,0.42683 2.2818799,1.65806 0,1.21481 -0.8044039,1.83864 -2.2818799,1.83864 z"
+     id="REST_TASK_ICON" />
 </svg>
 `;
 
 const restImagePaletteSvg = `
-<svg width="30" height="46" viewBox="0 0 52.92 52.92" xmlns="http://www.w3.org/2000/svg">
-  <path style="stroke:#000;stroke-width:.524999;stroke-linecap:round;stroke-linejoin:round;stop-color:#000" d="M4.32 5.55H48.6a3 3 0 0 1 3 3V44.9a3 3 0 0 1-3 3H4.32a3 3 0 0 1-3-3V8.55a3 3 0 0 1 3-3z"/>
-  <path style="fill:#fff;stroke:#000;stroke-width:.524999;stroke-linecap:round;stroke-linejoin:round;stop-color:#000" d="M6.02 7.95h41.13a2.4 2.4 0 0 1 2.41 2.41v33.2a2.4 2.4 0 0 1-2.41 2.4H6.02a2.4 2.4 0 0 1-2.41-2.4v-33.2a2.4 2.4 0 0 1 2.41-2.41z"/>
-  <g style="font-size:31.8344px;line-height:1.25;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';letter-spacing:0;word-spacing:0;stroke-width:.264583">
-    <path d="m21.04 33.52-4.5-8h-2.7v8H9.27V12.55h7.68q4.1 0 6.14 1.6t2.04 4.62q0 2.13-1.15 3.62-1.15 1.5-3.2 2.1l5.43 9.03zm-.54-14.56q0-1.47-.96-2.15-.97-.7-3.08-.7h-2.61v5.85h2.73q3.92 0 3.92-3z" style="font-weight:700;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono, Bold'" aria-label="R"/>
-  </g>
+<svg width="28" height="44" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
+  <rect
+     fill="#ffffff" stroke="#000000" stroke-width="1"
+     id="REST_TASK_RECT"
+     width="25"
+     height="21"
+     x="0.4"
+     y="0.4"
+     rx="5" />
+  <path
+     d="m 4.8866058,14.492357 h 1.9043037 v -4.202586 h 1.6088066 l 2.2982969,4.202586 h 2.15055 l -2.56096,-4.481666 c 1.28048,-0.4432502 2.134133,-1.4446502 2.134133,-3.0698702 0,-2.396794 -1.723723,-3.184781 -3.9563529,-3.184781 H 4.8866058 Z M 6.7909095,8.7794608 v -3.4967 h 1.4774766 c 1.477476,0 2.2818799,0.42683 2.2818799,1.65806 0,1.21481 -0.8044039,1.83864 -2.2818799,1.83864 z"
+     id="REST_TASK_ICON" />
 </svg>
 `;
+
 const restImageUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(restImageSvg);
 
 const restImagePaletteUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(restImagePaletteSvg);
+
+const emailImageSvg = `
+<svg width="22" height="22" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
+  <rect
+   fill="#ffffff" stroke="#000000" stroke-width="1"
+   id="EMAIL_TASK_RECT"
+   width="25"
+   height="21"
+   x="0.4"
+   y="0.4"
+   rx="5" />
+<path
+   d="m 5.3462639,14.492366 h 7.0426381 v -1.6088 H 7.2505669 V 9.7151961 h 4.2190161 v -1.6088 H 7.2505669 v -2.74154 H 12.224738 V 3.7560341 H 5.3462639 Z"
+   id="EMAIL_TASK_ICON" />
+</svg>
+`;
+
+const emailImagePaletteSvg = `
+<svg width="28" height="44" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
+  <rect
+     fill="#ffffff" stroke="#000000" stroke-width="1"
+     id="EMAIL_TASK_RECT"
+     width="25"
+     height="21"
+     x="0.4"
+     y="0.4"
+     rx="5" />
+  <path
+     d="m 5.3462639,14.492366 h 7.0426381 v -1.6088 H 7.2505669 V 9.7151961 h 4.2190161 v -1.6088 H 7.2505669 v -2.74154 H 12.224738 V 3.7560341 H 5.3462639 Z"
+     id="EMAIL_TASK_ICON" />
+</svg>
+`;
+const emailImageUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(emailImageSvg);
+
+const emailImagePaletteUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(emailImagePaletteSvg);
+
 
 // workaround for
 // https://github.com/camunda/camunda-bpmn-js/issues/87
@@ -51,7 +100,7 @@ ConnectorsExtension.$inject = [
   'translate'
 ];
 
-ConnectorsExtension.prototype._createElement = function() {
+ConnectorsExtension.prototype._createRestElement = function() {
 
   const elementFactory = this._elementFactory;
   const bpmnFactory = this._bpmnFactory;
@@ -125,34 +174,131 @@ ConnectorsExtension.prototype._createElement = function() {
   return element;
 };
 
+ConnectorsExtension.prototype._createEmailElement = function() {
+
+  const elementFactory = this._elementFactory;
+  const bpmnFactory = this._bpmnFactory;
+
+  const element = elementFactory.createShape({ type: 'bpmn:ServiceTask' });
+
+  /**
+   * On creation, scaffold the following moddle (XML representation):
+   *
+   * <bpmn:serviceTask id="Activity_0pge5go" name="Send Email">
+   *   <bpmn:extensionElements>
+   *     <zeebe:taskDefinition type="send-email" />
+   *     <zeebe:ioMapping>
+   *       <zeebe:input source="" target="HOST_NAME" />
+   *       <zeebe:input source="= 25" target="PORT" />
+   *       <zeebe:input source="" target="USER_NAME" />
+   *       <zeebe:input source="" target="PASSWORD" />
+   *       <zeebe:input source="" target="sender" />
+   *       <zeebe:input source="" target="recipient" />
+   *       <zeebe:input source="= &#34;TEST SUBJECT&#34;" target="subject" />
+   *       <zeebe:input source="= &#34;HELLO!&#34;" target="message" />
+   *     </zeebe:ioMapping>
+   *   </bpmn:extensionElements>
+   * </bpmn:serviceTask>
+   */
+
+  const businessObject = getBusinessObject(element);
+
+  const taskDefinition = bpmnFactory.create('zeebe:TaskDefinition', {
+    type: 'send-email'
+  });
+
+  const ioMapping = bpmnFactory.create('zeebe:IoMapping', {
+    inputParameters: [
+      bpmnFactory.create('zeebe:Input', {
+        source: '',
+        target: 'HOST_NAME'
+      }),
+      bpmnFactory.create('zeebe:Input', {
+        source: '= 25',
+        target: 'PORT'
+      }),
+      bpmnFactory.create('zeebe:Input', {
+        source: '',
+        target: 'USER_NAME'
+      }),
+      bpmnFactory.create('zeebe:Input', {
+        source: '',
+        target: 'PASSWORD'
+      }),
+      bpmnFactory.create('zeebe:Input', {
+        source: '',
+        target: 'sender'
+      }),
+      bpmnFactory.create('zeebe:Input', {
+        source: '',
+        target: 'recipient'
+      }),
+      bpmnFactory.create('zeebe:Input', {
+        source: '= "TEST EMAIL"',
+        target: 'subject'
+      }),
+      bpmnFactory.create('zeebe:Input', {
+        source: '= "HELLO!"',
+        target: 'message'
+      })
+    ]
+  });
+
+  const extensionElements = bpmnFactory.create('bpmn:ExtensionElements', {
+    values: [
+      taskDefinition,
+      ioMapping
+    ]
+  });
+
+  businessObject.set('extensionElements', extensionElements);
+
+  businessObject.set('zeebe:modelerTemplate', 'io.camunda.connectors.EmailConnector-s2');
+
+  return element;
+};
+
 
 ConnectorsExtension.prototype.getPaletteEntries = function() {
 
-  const title = this._translate('Create REST Task');
+  const createEntry = (options) => {
 
-  const self = this;
+    const {
+      title,
+      imageUrl,
+      createElement
+    } = options;
 
-  function createListener(event) {
-    self._create.start(event, self._createElement());
-  }
+    const createStart = (event) => {
+      this._create.start(event, createElement());
+    };
+
+    return {
+      group: 'activity',
+      imageUrl,
+      title: this._translate(title),
+      action: {
+        dragstart: createStart,
+        click: createStart
+      }
+    };
+  };
 
   return {
-    'create.rest-task': {
-      group: 'activity',
+    'create.rest-task': createEntry({
       imageUrl: restImagePaletteUrl,
-      title,
-      action: {
-        dragstart: createListener,
-        click: createListener
-      }
-    }
+      title: 'Create REST Task',
+      createElement: () => this._createRestElement()
+    }),
+    'create.email-task': createEntry({
+      imageUrl: emailImagePaletteUrl,
+      title: 'Create mail Task',
+      createElement: () => this._createEmailElement()
+    })
   };
 };
 
 ConnectorsExtension.prototype.getContextPadEntries = function() {
-  const title = this._translate('Append REST Task');
-
-  const self = this;
 
   return (entries) => {
 
@@ -161,29 +307,49 @@ ConnectorsExtension.prototype.getContextPadEntries = function() {
       return entries;
     }
 
-    function appendStart(event, shape) {
-      self._create.start(event, self._createElement(), {
-        source: shape
-      });
-    }
+    const appendEntry = (options) => {
 
-    const append = self._autoPlace
-      ? function(event, shape) {
-        self._autoPlace.append(shape, self._createElement());
-      }
-      : appendStart;
+      const {
+        title,
+        imageUrl,
+        createElement
+      } = options;
+
+      const createStart = (event, shape) => {
+        this._create.start(event, createElement(), {
+          source: shape
+        });
+      };
+
+      const autoPlace = this._autoPlace
+        ? (event, shape) => {
+          this._autoPlace.append(shape, createElement());
+        }
+        : createStart;
+
+      return {
+        group: 'model',
+        title: this._translate(title),
+        imageUrl,
+        action: {
+          dragstart: createStart,
+          click: autoPlace
+        }
+      };
+    };
 
     return {
       ...entries,
-      'append.append-rest-task': {
-        group: 'model',
-        title,
+      'append.append-rest-task': appendEntry({
+        title: 'Append REST Task',
         imageUrl: restImageUrl,
-        action: {
-          dragstart: appendStart,
-          click: append
-        }
-      }
+        createElement: () => this._createRestElement()
+      }),
+      'append.append-email-task': appendEntry({
+        title: 'Append Email Task',
+        imageUrl: emailImageUrl,
+        createElement: () => this._createEmailElement()
+      })
     };
   };
 };

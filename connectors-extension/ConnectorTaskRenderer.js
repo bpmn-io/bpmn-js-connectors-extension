@@ -35,8 +35,21 @@ ConnectorTaskRenderer.$inject = [
   'bpmnRenderer'
 ];
 
+function getElementTemplate(element) {
+  return !isLabel(element) && is(element, 'bpmn:Activity') && getBusinessObject(element).get('zeebe:modelerTemplate');
+}
+
 ConnectorTaskRenderer.prototype.canRender = function(element) {
-  return !isLabel(element) && is(element, 'bpmn:Activity') && !!getBusinessObject(element).get('zeebe:modelerTemplate');
+  return !!getElementTemplate(element);
+};
+
+const connectorTaskIcons = {
+  'io.camunda.connectors.EmailConnector-s2': [
+    'm 11.504082,24.374985 h 9.305414 V 22.249272 H 14.020232 V 18.06292 h 5.574572 V 15.937208 H 14.020232 V 12.31482 h 6.572355 v -2.12571 h -9.088505 z'
+  ],
+  'io.camunda.connectors.RestConnector-s1': [
+    'm 10.896735,24.374985 h 2.51615 v -5.552881 h 2.125711 l 3.036732,5.552881 h 2.841515 l -3.383788,-5.921627 c 1.691894,-0.585656 2.819823,-1.908804 2.819823,-4.056207 0,-3.166877 -2.27755,-4.208042 -5.227517,-4.208042 h -4.728626 z m 2.51615,-7.548447 v -4.620172 h 1.952185 c 1.952184,0 3.015041,0.563965 3.015041,2.190785 0,1.605131 -1.062857,2.429387 -3.015041,2.429387 z'
+  ]
 };
 
 ConnectorTaskRenderer.prototype.drawShape = function(parentGfx, element) {
@@ -44,17 +57,13 @@ ConnectorTaskRenderer.prototype.drawShape = function(parentGfx, element) {
 
   const gfx = renderer(parentGfx, element);
 
-  const paths = [
-    'm21.04 33.52-4.5-8h-2.7v8H9.27V12.55h7.68q4.1 0 6.14 1.6t2.04 4.62q0 2.13-1.15 3.62-1.15 1.5-3.2 2.1l5.43 9.03zm-.54-14.56q0-1.47-.96-2.15-.97-.7-3.08-.7h-2.61v5.85h2.73q3.92 0 3.92-3z'
-  ];
+  const paths = connectorTaskIcons[getElementTemplate(element)];
 
   for (const path of paths) {
-    const p = this._bpmnRenderer._drawPath(parentGfx, path, {
+    this._bpmnRenderer._drawPath(parentGfx, path, {
       fill: getStrokeColor(element, this._config.defaultStrokeColor),
       stroke: 'none'
     });
-
-    p.style.transform = 'scale(0.5) translate(7px, 7px)';
   }
 
   return gfx;
