@@ -9,8 +9,10 @@ This demo showcases the in-the-works connectors modeling experience. To be integ
 
 ## Features
 
-* Create connector tasks from the palette and context pad
-* Visually distinguishable from other tasks
+* General [C8 element template support](https://docs.camunda.io/docs/components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates/)
+* Create connector tasks during modeling
+* Upgrade task to connector tasks
+* Visually distinguish connector tasks from standard BPMN tasks
 
 
 ## Use Extension
