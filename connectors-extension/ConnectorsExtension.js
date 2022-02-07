@@ -3,13 +3,13 @@ import { getBusinessObject } from 'bpmn-js/lib/util/ModelUtil';
 const restImageSvg = `
 <svg width="22" height="22" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
   <rect
-   fill="#ffffff" stroke="#000000" stroke-width="1"
-   id="REST_TASK_RECT"
-   width="25"
-   height="21"
-   x="0.4"
-   y="0.4"
-   rx="5" />
+     fill="#ffffff" stroke="#000000" stroke-width="1"
+     id="REST_TASK_RECT"
+     width="25"
+     height="21"
+     x="0.4"
+     y="0.4"
+     rx="5" />
   <path
      d="m 4.8866058,14.492357 h 1.9043037 v -4.202586 h 1.6088066 l 2.2982969,4.202586 h 2.15055 l -2.56096,-4.481666 c 1.28048,-0.4432502 2.134133,-1.4446502 2.134133,-3.0698702 0,-2.396794 -1.723723,-3.184781 -3.9563529,-3.184781 H 4.8866058 Z M 6.7909095,8.7794608 v -3.4967 h 1.4774766 c 1.477476,0 2.2818799,0.42683 2.2818799,1.65806 0,1.21481 -0.8044039,1.83864 -2.2818799,1.83864 z"
      id="REST_TASK_ICON" />
@@ -33,19 +33,18 @@ const restImagePaletteSvg = `
 `;
 
 const restImageUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(restImageSvg);
-
 const restImagePaletteUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(restImagePaletteSvg);
 
 const emailImageSvg = `
 <svg width="22" height="22" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
   <rect
-   fill="#ffffff" stroke="#000000" stroke-width="1"
-   id="EMAIL_TASK_RECT"
-   width="25"
-   height="21"
-   x="0.4"
-   y="0.4"
-   rx="5" />
+     fill="#ffffff" stroke="#000000" stroke-width="1"
+     id="EMAIL_TASK_RECT"
+     width="25"
+     height="21"
+     x="0.4"
+     y="0.4"
+     rx="5" />
 <path
    d="m 5.3462639,14.492366 h 7.0426381 v -1.6088 H 7.2505669 V 9.7151961 h 4.2190161 v -1.6088 H 7.2505669 v -2.74154 H 12.224738 V 3.7560341 H 5.3462639 Z"
    id="EMAIL_TASK_ICON" />
@@ -67,10 +66,9 @@ const emailImagePaletteSvg = `
      id="EMAIL_TASK_ICON" />
 </svg>
 `;
+
 const emailImageUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(emailImageSvg);
-
 const emailImagePaletteUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(emailImagePaletteSvg);
-
 
 // workaround for
 // https://github.com/camunda/camunda-bpmn-js/issues/87
