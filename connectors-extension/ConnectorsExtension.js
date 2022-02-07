@@ -1,5 +1,9 @@
 import { getBusinessObject } from 'bpmn-js/lib/util/ModelUtil';
 
+import {
+  isAny
+} from 'bpmn-js/lib/features/modeling/util/ModelingUtil';
+
 const restImageSvg = `
 <svg width="22" height="22" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
   <rect
@@ -70,23 +74,52 @@ const emailImagePaletteSvg = `
 const emailImageUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(emailImageSvg);
 const emailImagePaletteUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(emailImagePaletteSvg);
 
+
 // workaround for
 // https://github.com/camunda/camunda-bpmn-js/issues/87
 const LOWER_PRIORITY = 499;
+
+import EMAIL_TEMPLATES from './.camunda/element-templates/email-connector.json';
+import REST_TEMPLATES from './.camunda/element-templates/rest-connector.json';
+
+
+const TEMPLATES = [ ...EMAIL_TEMPLATES, ...REST_TEMPLATES ];
 
 
 export default function ConnectorsExtension(
     injector, create, elementFactory,
     bpmnFactory, contextPad, palette,
-    translate) {
+    translate, elementTemplatesLoader,
+    elementTemplateChooser, eventBus,
+    elementTemplates) {
 
   this._create = create;
   this._elementFactory = elementFactory;
   this._bpmnFactory = bpmnFactory;
   this._contextPad = contextPad;
   this._translate = translate;
+  this._elementTemplates = elementTemplates;
 
   this._autoPlace = injector.get('autoPlace', false);
+
+  eventBus.on('elementTemplates.select', (event) => {
+
+    const { element } = event;
+
+    const templates = this._getMatchingTemplates(element);
+
+    elementTemplateChooser.choose(element, templates).then(template => {
+      updateTemplate(element, template, injector);
+    }).catch(err => {
+      if (err === 'user-canceled') {
+        console.log('elementTemplate.select :: user canceled');
+      }
+
+      console.error('elementTemplate.select', err);
+    });
+  });
+
+  elementTemplatesLoader.setTemplates(TEMPLATES);
 
   contextPad.registerProvider(LOWER_PRIORITY, this);
   palette.registerProvider(LOWER_PRIORITY, this);
@@ -95,8 +128,16 @@ export default function ConnectorsExtension(
 ConnectorsExtension.$inject = [
   'injector', 'create', 'elementFactory',
   'bpmnFactory', 'contextPad', 'palette',
-  'translate'
+  'translate', 'elementTemplatesLoader',
+  'elementTemplateChooser', 'eventBus',
+  'elementTemplates'
 ];
+
+ConnectorsExtension.prototype._getMatchingTemplates = function(element) {
+  return this._elementTemplates.getAll().filter(template => {
+    return isAny(element, template.appliesTo);
+  });
+};
 
 ConnectorsExtension.prototype._createRestElement = function() {
 
@@ -351,3 +392,20 @@ ConnectorsExtension.prototype.getContextPadEntries = function() {
     };
   };
 };
+
+
+
+// helpers ////////////////
+
+function updateTemplate(element, newTemplate, injector) {
+  const commandStack = injector.get('commandStack'),
+        elementTemplates = injector.get('elementTemplates');
+
+  const oldTemplate = elementTemplates.get(element);
+
+  commandStack.execute('propertiesPanel.zeebe.changeTemplate', {
+    element: element,
+    newTemplate,
+    oldTemplate
+  });
+}

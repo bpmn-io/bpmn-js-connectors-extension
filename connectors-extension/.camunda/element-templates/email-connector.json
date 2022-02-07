@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Email Connector",
+    "id": "io.camunda.connectors.EmailConnector-s2",
+    "description": "A Email sending task.",
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "groups": [
+      {
+        "id": "endpoint-configuration",
+        "label": "Email server"
+      },
+      {
+        "id": "authentication",
+        "label": "Authentication"
+      },
+      {
+        "id": "input",
+        "label": "Email"
+      },
+      {
+        "id": "output",
+        "label": "Output"
+      }
+    ],
+    "properties": [
+      {
+        "type": "Hidden",
+        "value": "send-email",
+        "binding": {
+          "type": "zeebe:taskDefinition:type"
+        }
+      },
+      {
+        "label": "Hostname",
+        "description": "Specify the SMTP server hostname",
+        "group": "endpoint-configuration",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "HOST_NAME"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      },
+      {
+        "label": "Port",
+        "description": "Specify the email server (SMTP) port (default=25)",
+        "group": "endpoint-configuration",
+        "type": "String",
+        "value": "= 25",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "PORT"
+        },
+        "constraints": {
+          "optional": true
+        }
+      },
+      {
+        "label": "Username",
+        "description": "Specify the user name to authenticate with the email server",
+        "group": "authentication",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "USER_NAME"
+        },
+        "constraints": {
+          "optional": true
+        }
+      },
+      {
+        "label": "Password",
+        "description": "Specify the password to authenticate with the email server",
+        "group": "authentication",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "PASSWORD"
+        },
+        "constraints": {
+          "optional": true
+        }
+      },
+      {
+        "label": "Sender",
+        "description": "Enter the FROM field",
+        "group": "input",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "sender"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      },
+      {
+        "label": "Recipient",
+        "description": "Enter the TO field",
+        "group": "input",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "recipient"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      },
+      {
+        "label": "Subject",
+        "description": "Enter the mail subject",
+        "group": "input",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "subject"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      },
+      {
+        "label": "Body",
+        "description": "Enter the email message body",
+        "group": "input",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "message"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      }
+    ]
+  }
+]

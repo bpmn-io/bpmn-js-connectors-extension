@@ -7,7 +7,18 @@
 import ConnectorsExtension from './ConnectorsExtension';
 import ConnectorTaskRenderer from './ConnectorTaskRenderer';
 
+import ElementTemplateChooserModule from './element-template-chooser';
+
+import {
+  CloudElementTemplatesPropertiesProviderModule
+} from 'bpmn-js-properties-panel';
+
+
 export default {
+  __depends__: [
+    CloudElementTemplatesPropertiesProviderModule,
+    ElementTemplateChooserModule
+  ],
   __init__: [
     'connectorsExtension',
     'connectorTaskRenderer'

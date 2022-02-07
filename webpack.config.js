@@ -15,7 +15,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        type: 'asset/source'
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.bpmn$/,
