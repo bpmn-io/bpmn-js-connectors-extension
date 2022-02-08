@@ -1,19 +1,15 @@
 [
   {
-    "name": "Email Connector",
+    "name": "Email Task",
     "id": "io.camunda.connectors.EmailConnector-s2",
-    "description": "A Email sending task.",
+    "description": "Send an email via SMTP",
     "appliesTo": [
       "bpmn:ServiceTask"
     ],
     "groups": [
       {
         "id": "endpoint-configuration",
-        "label": "Email server"
-      },
-      {
-        "id": "authentication",
-        "label": "Authentication"
+        "label": "SMTP server"
       },
       {
         "id": "input",
@@ -34,7 +30,6 @@
       },
       {
         "label": "Hostname",
-        "description": "Specify the SMTP server hostname",
         "group": "endpoint-configuration",
         "type": "String",
         "binding": {
@@ -47,7 +42,6 @@
       },
       {
         "label": "Port",
-        "description": "Specify the email server (SMTP) port (default=25)",
         "group": "endpoint-configuration",
         "type": "String",
         "value": "= 25",
@@ -61,8 +55,7 @@
       },
       {
         "label": "Username",
-        "description": "Specify the user name to authenticate with the email server",
-        "group": "authentication",
+        "group": "endpoint-configuration",
         "type": "String",
         "binding": {
           "type": "zeebe:input",
@@ -74,8 +67,7 @@
       },
       {
         "label": "Password",
-        "description": "Specify the password to authenticate with the email server",
-        "group": "authentication",
+        "group": "endpoint-configuration",
         "type": "String",
         "binding": {
           "type": "zeebe:input",
@@ -87,7 +79,6 @@
       },
       {
         "label": "Sender",
-        "description": "Enter the FROM field",
         "group": "input",
         "type": "String",
         "binding": {
@@ -100,7 +91,6 @@
       },
       {
         "label": "Recipient",
-        "description": "Enter the TO field",
         "group": "input",
         "type": "String",
         "binding": {
@@ -113,7 +103,6 @@
       },
       {
         "label": "Subject",
-        "description": "Enter the mail subject",
         "group": "input",
         "type": "String",
         "binding": {
@@ -126,7 +115,6 @@
       },
       {
         "label": "Body",
-        "description": "Enter the email message body",
         "group": "input",
         "type": "Text",
         "binding": {

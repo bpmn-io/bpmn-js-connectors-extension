@@ -1,8 +1,8 @@
 [
   {
-    "name": "REST Connector",
+    "name": "REST Task",
     "id": "io.camunda.connectors.RestConnector-s1",
-    "description": "A REST API invocation task.",
+    "description": "Invoke a REST API and retrieve the result",
     "appliesTo": [
       "bpmn:ServiceTask"
     ],
@@ -17,7 +17,7 @@
       },
       {
         "id": "output",
-        "label": "Result mapping"
+        "label": "Response mapping"
       }
     ],
     "properties": [
@@ -30,7 +30,6 @@
       },
       {
         "label": "URL",
-        "description": "Specify the url of the REST API to talk to.",
         "group": "endpoint-configuration",
         "type": "String",
         "binding": {
@@ -47,7 +46,6 @@
       },
       {
         "label": "Method",
-        "description": "Specify the HTTP method to use.",
         "group": "endpoint-configuration",
         "type": "Dropdown",
         "value": "get",
@@ -64,7 +62,7 @@
       },
       {
         "label": "Request Body",
-        "description": "Data to send to the endpoint.",
+        "description": "Data to send with the request",
         "group": "input",
         "value": "",
         "type": "String",
@@ -78,7 +76,7 @@
       },
       {
         "label": "Result Variable",
-        "description": "Name of variable to store the response data in.",
+        "description": "Name of variable to store the response body in",
         "group": "output",
         "value": "response",
         "type": "String",
