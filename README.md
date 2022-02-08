@@ -4,7 +4,7 @@
 
 This demo showcases the in-the-works connectors modeling experience. To be integrated into the Camunda [Web](https://github.com/camunda/web-modeler) and [Desktop](https://github.com/camunda/camunda-modeler) Modeler apps.
 
-[![screenshot](./resources/screenshot.png)](https://bpmn-io.github.io/connectors-modeling-demo/)
+[![screenshot](./resources/screenshot.png)](https://potential-winner-9f6a854d.pages.github.io/)
 
 
 ## Features
