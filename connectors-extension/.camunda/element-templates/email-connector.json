@@ -49,9 +49,7 @@
           "type": "zeebe:input",
           "name": "PORT"
         },
-        "constraints": {
-          "optional": true
-        }
+        "optional": true
       },
       {
         "label": "Username",
@@ -61,9 +59,7 @@
           "type": "zeebe:input",
           "name": "USER_NAME"
         },
-        "constraints": {
-          "optional": true
-        }
+        "optional": true
       },
       {
         "label": "Password",
@@ -73,9 +69,7 @@
           "type": "zeebe:input",
           "name": "PASSWORD"
         },
-        "constraints": {
-          "optional": true
-        }
+        "optional": true
       },
       {
         "label": "Sender",

@@ -70,9 +70,7 @@
           "type": "zeebe:input",
           "name": "body"
         },
-        "constraints": {
-          "optional": true
-        }
+        "optional": true
       },
       {
         "label": "Result Variable",
@@ -84,9 +82,7 @@
           "type": "zeebe:output",
           "source": "= body"
         },
-        "constraints": {
-          "optional": true
-        }
+        "optional": true
       }
     ]
   }
