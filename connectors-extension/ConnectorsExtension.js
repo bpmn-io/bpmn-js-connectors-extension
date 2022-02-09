@@ -154,12 +154,7 @@ ConnectorsExtension.prototype._createRestElement = function() {
    *    <zeebe:taskDefinition type="http" />
    *    <zeebe:taskHeaders>
    *      <zeebe:header key="method" value="get" />
-   *      <zeebe:header key="url" value="" />
    *     </zeebe:taskHeaders>
-   *     <zeebe:ioMapping>
-   *       <zeebe:input source="" target="body" />
-   *       <zeebe:output source="= body" target="" />
-   *     </zeebe:ioMapping>
    *   </bpmn:extensionElements>
    * </bpmn:serviceTask>
    */
@@ -175,25 +170,6 @@ ConnectorsExtension.prototype._createRestElement = function() {
       bpmnFactory.create('zeebe:Header', {
         key: 'method',
         value: 'get'
-      }),
-      bpmnFactory.create('zeebe:Header', {
-        key: 'url',
-        value: ''
-      })
-    ]
-  });
-
-  const ioMapping = bpmnFactory.create('zeebe:IoMapping', {
-    inputParameters: [
-      bpmnFactory.create('zeebe:Input', {
-        source: '',
-        target: 'body'
-      })
-    ],
-    outputParameters: [
-      bpmnFactory.create('zeebe:Output', {
-        source: '= body',
-        target: ''
       })
     ]
   });
@@ -201,8 +177,7 @@ ConnectorsExtension.prototype._createRestElement = function() {
   const extensionElements = bpmnFactory.create('bpmn:ExtensionElements', {
     values: [
       taskDefinition,
-      taskHeaders,
-      ioMapping
+      taskHeaders
     ]
   });
 
@@ -227,14 +202,7 @@ ConnectorsExtension.prototype._createEmailElement = function() {
    *   <bpmn:extensionElements>
    *     <zeebe:taskDefinition type="send-email" />
    *     <zeebe:ioMapping>
-   *       <zeebe:input source="" target="HOST_NAME" />
    *       <zeebe:input source="= 25" target="PORT" />
-   *       <zeebe:input source="" target="USER_NAME" />
-   *       <zeebe:input source="" target="PASSWORD" />
-   *       <zeebe:input source="" target="sender" />
-   *       <zeebe:input source="" target="recipient" />
-   *       <zeebe:input source="= &#34;TEST SUBJECT&#34;" target="subject" />
-   *       <zeebe:input source="= &#34;HELLO!&#34;" target="message" />
    *     </zeebe:ioMapping>
    *   </bpmn:extensionElements>
    * </bpmn:serviceTask>
@@ -249,36 +217,8 @@ ConnectorsExtension.prototype._createEmailElement = function() {
   const ioMapping = bpmnFactory.create('zeebe:IoMapping', {
     inputParameters: [
       bpmnFactory.create('zeebe:Input', {
-        source: '',
-        target: 'HOST_NAME'
-      }),
-      bpmnFactory.create('zeebe:Input', {
         source: '= 25',
         target: 'PORT'
-      }),
-      bpmnFactory.create('zeebe:Input', {
-        source: '',
-        target: 'USER_NAME'
-      }),
-      bpmnFactory.create('zeebe:Input', {
-        source: '',
-        target: 'PASSWORD'
-      }),
-      bpmnFactory.create('zeebe:Input', {
-        source: '',
-        target: 'sender'
-      }),
-      bpmnFactory.create('zeebe:Input', {
-        source: '',
-        target: 'recipient'
-      }),
-      bpmnFactory.create('zeebe:Input', {
-        source: '= "TEST EMAIL"',
-        target: 'subject'
-      }),
-      bpmnFactory.create('zeebe:Input', {
-        source: '= "HELLO!"',
-        target: 'message'
       })
     ]
   });
