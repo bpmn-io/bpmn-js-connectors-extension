@@ -1,15 +1,23 @@
-import { html, render } from 'htm/preact';
+import {
+  html,
+  render
+} from 'htm/preact';
 
-import clsx from 'clsx';
-
-import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
-
-import './ElementTemplateChooser.css';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'preact/hooks';
 
 import {
   domify,
   remove as domRemove
 } from 'min-dom';
+
+import clsx from 'clsx';
+
+import './ElementTemplateChooser.css';
 
 
 export default function ElementTemplateChooser(config, eventBus) {
@@ -79,7 +87,7 @@ ElementTemplateChooser.prototype._createContainer = function(config) {
   return container;
 };
 
-ElementTemplateChooser.prototype._reset = function() {
+ElementTemplateChooser.prototype._destroy = function() {
   domRemove(this._container);
 };
 
