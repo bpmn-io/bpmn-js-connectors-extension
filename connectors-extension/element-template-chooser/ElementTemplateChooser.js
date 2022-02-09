@@ -187,7 +187,7 @@ function TemplateComponent(props) {
 
         <div class="element-template-chooser__search">
           <input
-            ref=${inputRef}
+            ref=${ inputRef }
             placeholder="Choose task type"
             type="text"
             onKeyup=${ handleKey }
