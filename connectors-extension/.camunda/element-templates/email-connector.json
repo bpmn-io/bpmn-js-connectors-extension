@@ -13,6 +13,10 @@
         "label": "SMTP server"
       },
       {
+        "id": "authentication",
+        "label": "Authentication"
+      },
+      {
         "id": "input",
         "label": "Email"
       },
@@ -54,7 +58,7 @@
       },
       {
         "label": "Username",
-        "group": "endpoint-configuration",
+        "group": "authentication",
         "type": "String",
         "binding": {
           "type": "zeebe:input",
@@ -64,7 +68,7 @@
       },
       {
         "label": "Password",
-        "group": "endpoint-configuration",
+        "group": "authentication",
         "type": "String",
         "binding": {
           "type": "zeebe:input",
