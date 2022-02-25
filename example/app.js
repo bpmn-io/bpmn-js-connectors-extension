@@ -72,6 +72,15 @@ const modeler = new BpmnModeler({
   }
 });
 
+modeler.on('elementTemplates.errors', event => {
+
+  const { errors } = event;
+
+  showTemplateErrors(errors);
+});
+
+modeler.get('connectorsExtension').loadTemplates();
+
 modeler.openDiagram = function(diagram) {
   return this.importXML(diagram)
     .then(({ warnings }) => {
@@ -92,6 +101,19 @@ modeler.openDiagram = function(diagram) {
 
 if (presentationMode) {
   document.body.classList.add('presentation-mode');
+}
+
+function showTemplateErrors(errors) {
+  console.error('Failed to parse element templates', errors);
+
+  const errorMessage = `Failed to parse element templates:
+
+    ${ errors.map(error => error.message).join('\n    ') }
+
+Check the developer tools for details.`;
+
+  document.querySelector('.error-panel pre').textContent = errorMessage;
+  document.querySelector('.error-panel').classList.toggle('hidden');
 }
 
 function openFile(files) {
@@ -118,6 +140,10 @@ function downloadDiagram() {
     }
   });
 }
+
+document.querySelector('.error-panel .toggle').addEventListener('click', () => {
+  document.querySelector('.error-panel').classList.toggle('hidden');
+});
 
 document.body.addEventListener('keydown', function(event) {
   if (event.code === 'KeyS' && (event.metaKey || event.ctrlKey)) {

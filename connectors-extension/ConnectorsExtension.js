@@ -99,6 +99,7 @@ export default function ConnectorsExtension(
   this._contextPad = contextPad;
   this._translate = translate;
   this._elementTemplates = elementTemplates;
+  this._elementTemplatesLoader = elementTemplatesLoader;
 
   this._autoPlace = injector.get('autoPlace', false);
 
@@ -119,8 +120,6 @@ export default function ConnectorsExtension(
     });
   });
 
-  elementTemplatesLoader.setTemplates(TEMPLATES);
-
   contextPad.registerProvider(LOWER_PRIORITY, this);
   palette.registerProvider(LOWER_PRIORITY, this);
 }
@@ -132,6 +131,10 @@ ConnectorsExtension.$inject = [
   'elementTemplateChooser', 'eventBus',
   'elementTemplates'
 ];
+
+ConnectorsExtension.prototype.loadTemplates = function() {
+  this._elementTemplatesLoader.setTemplates(TEMPLATES);
+};
 
 ConnectorsExtension.prototype._getMatchingTemplates = function(element) {
   return this._elementTemplates.getAll().filter(template => {

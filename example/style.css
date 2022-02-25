@@ -51,6 +51,63 @@ html, body, #canvas {
   z-index: 1;
 }
 
+.error-panel {
+  height: 20vh;
+  flex: initial;
+  background: white;
+  position: relative;
+  border-top: solid 2px red;
+}
+
+.error-panel pre {
+  white-space: pre-wrap;
+  overflow: auto;
+  font-size: 1.2em;
+  color: red;
+}
+
+.error-panel .toggle {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+}
+
+.error-panel.hidden {
+  display: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas-parent {
+  display: flex;
+  align-self: stretch;
+  justify-self: stretch;
+  flex: 1;
+  position: relative;
+}
+
+.canvas, .properties-panel {
+  justify-content: stretch;
+}
+
+.canvas {
+  flex: 1;
+  position: relative;
+}
+
+.properties-panel {
+  width: 25vw;
+  border-left: solid 1px #CCC;
+}
+
+.bio-properties-panel-container {
+  width: 100%;
+}
+
 /** file-drops */
 
 .drop-message {
@@ -95,32 +152,4 @@ html, body, #canvas {
 
   display: table-cell;
   vertical-align: middle;
-}
-
-.canvas-parent {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-
-  display: flex;
-}
-
-.canvas, .properties-panel {
-  justify-content: stretch;
-}
-
-.canvas {
-  flex: 1;
-  position: relative;
-}
-
-.properties-panel {
-  width: 25vw;
-  border-left: solid 1px #CCC;
-}
-
-.bio-properties-panel-container {
-  width: 100%;
 }
