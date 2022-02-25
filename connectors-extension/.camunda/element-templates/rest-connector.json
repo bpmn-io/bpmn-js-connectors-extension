@@ -1,5 +1,6 @@
 [
   {
+    "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
     "name": "REST Task",
     "id": "io.camunda.connectors.RestConnector-s1",
     "description": "Invoke a REST API and retrieve the result",
@@ -10,6 +11,10 @@
       {
         "id": "endpoint-configuration",
         "label": "REST endpoint"
+      },
+      {
+        "id": "authentication",
+        "label": "Authentication"
       },
       {
         "id": "input",
@@ -61,11 +66,31 @@
         }
       },
       {
+        "label": "Username",
+        "group": "authentication",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "USER_NAME"
+        },
+        "optional": true
+      },
+      {
+        "label": "Password",
+        "group": "authentication",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "PASSWORD"
+        },
+        "optional": true
+      },
+      {
         "label": "Request Body",
-        "description": "Data to send with the request",
+        "description": "JSON payload to send with the request",
         "group": "input",
         "value": "",
-        "type": "String",
+        "type": "Text",
         "binding": {
           "type": "zeebe:input",
           "name": "body"

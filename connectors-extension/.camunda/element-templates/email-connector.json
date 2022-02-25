@@ -1,5 +1,6 @@
 [
   {
+    "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
     "name": "Email Task",
     "id": "io.camunda.connectors.EmailConnector-s2",
     "description": "Send an email via SMTP",
