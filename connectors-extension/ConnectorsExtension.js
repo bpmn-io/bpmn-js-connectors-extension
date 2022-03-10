@@ -91,7 +91,7 @@ export default function ConnectorsExtension(
     bpmnFactory, contextPad, palette,
     translate, elementTemplatesLoader,
     elementTemplateChooser, eventBus,
-    elementTemplates) {
+    elementTemplates, replaceMenu, canvas) {
 
   this._create = create;
   this._elementFactory = elementFactory;
@@ -100,6 +100,8 @@ export default function ConnectorsExtension(
   this._translate = translate;
   this._elementTemplates = elementTemplates;
   this._elementTemplatesLoader = elementTemplatesLoader;
+  this._replaceMenu = replaceMenu;
+  this._canvas = canvas;
 
   this._autoPlace = injector.get('autoPlace', false);
 
@@ -129,7 +131,8 @@ ConnectorsExtension.$inject = [
   'bpmnFactory', 'contextPad', 'palette',
   'translate', 'elementTemplatesLoader',
   'elementTemplateChooser', 'eventBus',
-  'elementTemplates'
+  'elementTemplates',
+  'replaceMenu', 'canvas'
 ];
 
 ConnectorsExtension.prototype.loadTemplates = function() {
@@ -280,8 +283,72 @@ ConnectorsExtension.prototype.getPaletteEntries = function() {
   };
 };
 
-ConnectorsExtension.prototype.getContextPadEntries = function() {
+ConnectorsExtension.prototype._getReplaceMenuPosition = function(element) {
 
+  var Y_OFFSET = 5;
+
+  var diagramContainer = this._canvas.getContainer(),
+      pad = this._contextPad.getPad(element).html;
+
+  var diagramRect = diagramContainer.getBoundingClientRect(),
+      padRect = pad.getBoundingClientRect();
+
+  var top = padRect.top - diagramRect.top;
+  var left = padRect.left - diagramRect.left;
+
+  var pos = {
+    x: left,
+    y: top + padRect.height + Y_OFFSET
+  };
+
+  return pos;
+};
+
+ConnectorsExtension.prototype.getContextPadEntries = function(element) {
+
+  const replaceMenu = this._replaceMenu;
+  const translate = this._translate;
+
+
+  return (entries) => {
+
+    // hook up new replace menu
+
+    // clear replace menu
+    if (replaceMenu.isEmpty(element)) {
+      const {
+        replace,
+        ...restEntries
+      } = entries;
+
+      entries = restEntries;
+    } else {
+
+      entries = { ...entries };
+
+      entries['replace'] = {
+        group: 'edit',
+        className: 'bpmn-icon-screw-wrench',
+        title: translate('Change type'),
+        action: {
+          click: (event, element) => {
+
+            const position = {
+              ...(this._getReplaceMenuPosition(element)),
+              cursor: { x: event.x, y: event.y }
+            };
+
+            replaceMenu.open(element, position);
+          }
+        }
+      };
+    }
+
+    return entries;
+  };
+};
+
+ConnectorsExtension.prototype.getContextPadEntries_V1 = function(element) {
   return (entries) => {
 
     // only allow when appending task is allowed, too
@@ -334,8 +401,8 @@ ConnectorsExtension.prototype.getContextPadEntries = function() {
       })
     };
   };
-};
 
+};
 
 
 // helpers ////////////////

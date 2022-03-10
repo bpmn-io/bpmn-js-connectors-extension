@@ -8,6 +8,7 @@ import ConnectorsExtension from './ConnectorsExtension';
 import ConnectorTaskRenderer from './ConnectorTaskRenderer';
 
 import ElementTemplateChooserModule from './element-template-chooser';
+import ReplaceMenuModule from './replace-menu';
 
 import {
   CloudElementTemplatesPropertiesProviderModule
@@ -17,7 +18,8 @@ import {
 export default {
   __depends__: [
     CloudElementTemplatesPropertiesProviderModule,
-    ElementTemplateChooserModule
+    ElementTemplateChooserModule,
+    ReplaceMenuModule
   ],
   __init__: [
     'connectorsExtension',
