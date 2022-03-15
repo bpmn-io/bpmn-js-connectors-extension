@@ -4,75 +4,11 @@ import {
   isAny
 } from 'bpmn-js/lib/features/modeling/util/ModelingUtil';
 
-const restImageSvg = `
-<svg width="22" height="22" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
-  <rect
-     fill="#ffffff" stroke="#000000" stroke-width="1"
-     id="REST_TASK_RECT"
-     width="25"
-     height="21"
-     x="0.4"
-     y="0.4"
-     rx="5" />
-  <path
-     d="m 4.8866058,14.492357 h 1.9043037 v -4.202586 h 1.6088066 l 2.2982969,4.202586 h 2.15055 l -2.56096,-4.481666 c 1.28048,-0.4432502 2.134133,-1.4446502 2.134133,-3.0698702 0,-2.396794 -1.723723,-3.184781 -3.9563529,-3.184781 H 4.8866058 Z M 6.7909095,8.7794608 v -3.4967 h 1.4774766 c 1.477476,0 2.2818799,0.42683 2.2818799,1.65806 0,1.21481 -0.8044039,1.83864 -2.2818799,1.83864 z"
-     id="REST_TASK_ICON" />
-</svg>
+const appendSvg = `
+<svg width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m9.529 21 .196-8.108-7.133 4.236-1.322-2.257L8.635 11 1.27 7.128l1.322-2.256 7.133 4.236L9.53 1h2.681l-.196 8.108 7.133-4.236 1.323 2.256L13.104 11l7.366 3.871-1.323 2.257-7.133-4.236L12.21 21H9.53Z" fill="#22242A"/></svg>
 `;
 
-const restImagePaletteSvg = `
-<svg width="28" height="44" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
-  <rect
-     fill="#ffffff" stroke="#000000" stroke-width="1"
-     id="REST_TASK_RECT"
-     width="25"
-     height="21"
-     x="0.4"
-     y="0.4"
-     rx="5" />
-  <path
-     d="m 4.8866058,14.492357 h 1.9043037 v -4.202586 h 1.6088066 l 2.2982969,4.202586 h 2.15055 l -2.56096,-4.481666 c 1.28048,-0.4432502 2.134133,-1.4446502 2.134133,-3.0698702 0,-2.396794 -1.723723,-3.184781 -3.9563529,-3.184781 H 4.8866058 Z M 6.7909095,8.7794608 v -3.4967 h 1.4774766 c 1.477476,0 2.2818799,0.42683 2.2818799,1.65806 0,1.21481 -0.8044039,1.83864 -2.2818799,1.83864 z"
-     id="REST_TASK_ICON" />
-</svg>
-`;
-
-const restImageUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(restImageSvg);
-const restImagePaletteUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(restImagePaletteSvg);
-
-const emailImageSvg = `
-<svg width="22" height="22" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
-  <rect
-     fill="#ffffff" stroke="#000000" stroke-width="1"
-     id="EMAIL_TASK_RECT"
-     width="25"
-     height="21"
-     x="0.4"
-     y="0.4"
-     rx="5" />
-<path
-   d="m 5.3462639,14.492366 h 7.0426381 v -1.6088 H 7.2505669 V 9.7151961 h 4.2190161 v -1.6088 H 7.2505669 v -2.74154 H 12.224738 V 3.7560341 H 5.3462639 Z"
-   id="EMAIL_TASK_ICON" />
-</svg>
-`;
-
-const emailImagePaletteSvg = `
-<svg width="28" height="44" viewBox="0 0 27 22" xmlns="http://www.w3.org/2000/svg">
-  <rect
-     fill="#ffffff" stroke="#000000" stroke-width="1"
-     id="EMAIL_TASK_RECT"
-     width="25"
-     height="21"
-     x="0.4"
-     y="0.4"
-     rx="5" />
-  <path
-     d="m 5.3462639,14.492366 h 7.0426381 v -1.6088 H 7.2505669 V 9.7151961 h 4.2190161 v -1.6088 H 7.2505669 v -2.74154 H 12.224738 V 3.7560341 H 5.3462639 Z"
-     id="EMAIL_TASK_ICON" />
-</svg>
-`;
-
-const emailImageUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(emailImageSvg);
-const emailImagePaletteUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(emailImagePaletteSvg);
+const appendImageUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(appendSvg);
 
 
 // workaround for
@@ -88,10 +24,10 @@ const TEMPLATES = [ ...EMAIL_TEMPLATES, ...REST_TEMPLATES ];
 
 export default function ConnectorsExtension(
     injector, create, elementFactory,
-    bpmnFactory, contextPad, palette,
+    bpmnFactory, contextPad,
     translate, elementTemplatesLoader,
     elementTemplateChooser, eventBus,
-    elementTemplates, replaceMenu, canvas) {
+    elementTemplates, replaceMenu, appendMenu, canvas) {
 
   this._create = create;
   this._elementFactory = elementFactory;
@@ -101,6 +37,7 @@ export default function ConnectorsExtension(
   this._elementTemplates = elementTemplates;
   this._elementTemplatesLoader = elementTemplatesLoader;
   this._replaceMenu = replaceMenu;
+  this._appendMenu = appendMenu;
   this._canvas = canvas;
 
   this._autoPlace = injector.get('autoPlace', false);
@@ -123,16 +60,15 @@ export default function ConnectorsExtension(
   });
 
   contextPad.registerProvider(LOWER_PRIORITY, this);
-  palette.registerProvider(LOWER_PRIORITY, this);
 }
 
 ConnectorsExtension.$inject = [
   'injector', 'create', 'elementFactory',
-  'bpmnFactory', 'contextPad', 'palette',
+  'bpmnFactory', 'contextPad',
   'translate', 'elementTemplatesLoader',
   'elementTemplateChooser', 'eventBus',
   'elementTemplates',
-  'replaceMenu', 'canvas'
+  'replaceMenu', 'appendMenu', 'canvas'
 ];
 
 ConnectorsExtension.prototype.loadTemplates = function() {
@@ -244,46 +180,29 @@ ConnectorsExtension.prototype._createEmailElement = function() {
 };
 
 
-ConnectorsExtension.prototype.getPaletteEntries = function() {
+ConnectorsExtension.prototype._getReplaceMenuPosition = function(element) {
 
-  const createEntry = (options) => {
+  var Y_OFFSET = 5;
 
-    const {
-      title,
-      imageUrl,
-      createElement
-    } = options;
+  var diagramContainer = this._canvas.getContainer(),
+      pad = this._contextPad.getPad(element).html;
 
-    const createStart = (event) => {
-      this._create.start(event, createElement());
-    };
+  var diagramRect = diagramContainer.getBoundingClientRect(),
+      padRect = pad.getBoundingClientRect();
 
-    return {
-      group: 'activity',
-      imageUrl,
-      title: this._translate(title),
-      action: {
-        dragstart: createStart,
-        click: createStart
-      }
-    };
+  var top = padRect.top - diagramRect.top;
+  var left = padRect.left - diagramRect.left;
+
+  var pos = {
+    x: left,
+    y: top + padRect.height + Y_OFFSET
   };
 
-  return {
-    'create.rest-task': createEntry({
-      imageUrl: restImagePaletteUrl,
-      title: 'Create REST Task',
-      createElement: () => this._createRestElement()
-    }),
-    'create.email-task': createEntry({
-      imageUrl: emailImagePaletteUrl,
-      title: 'Create mail Task',
-      createElement: () => this._createEmailElement()
-    })
-  };
+  return pos;
 };
 
-ConnectorsExtension.prototype._getReplaceMenuPosition = function(element) {
+
+ConnectorsExtension.prototype._getAppendMenuPosition = function(element) {
 
   var Y_OFFSET = 5;
 
@@ -307,6 +226,7 @@ ConnectorsExtension.prototype._getReplaceMenuPosition = function(element) {
 ConnectorsExtension.prototype.getContextPadEntries = function(element) {
 
   const replaceMenu = this._replaceMenu;
+  const appendMenu = this._appendMenu;
   const translate = this._translate;
 
 
@@ -344,64 +264,46 @@ ConnectorsExtension.prototype.getContextPadEntries = function(element) {
       };
     }
 
-    return entries;
-  };
-};
-
-ConnectorsExtension.prototype.getContextPadEntries_V1 = function(element) {
-  return (entries) => {
-
     // only allow when appending task is allowed, too
-    if (!entries['append.append-task']) {
-      return entries;
+    if (entries['append.append-task']) {
+
+      entries = { ...entries };
+
+      entries['append-anything'] = {
+        group: 'model',
+        imageUrl: appendImageUrl,
+        title: translate('Append anything...'),
+        action: {
+          click: (event, element) => {
+
+            const position = {
+              ...(this._getAppendMenuPosition(element)),
+              cursor: { x: event.x, y: event.y }
+            };
+
+            appendMenu.open(element, position).then(newElement => {
+
+              const createStart = (source) => {
+                this._create.start(event, newElement, {
+                  source
+                });
+              };
+
+              const autoPlace = this._autoPlace
+                ? (source) => {
+                  this._autoPlace.append(source, newElement);
+                }
+                : createStart;
+
+              autoPlace(element, newElement);
+            }).catch(err => console.warn(err));
+          }
+        }
+      };
     }
 
-    const appendEntry = (options) => {
-
-      const {
-        title,
-        imageUrl,
-        createElement
-      } = options;
-
-      const createStart = (event, shape) => {
-        this._create.start(event, createElement(), {
-          source: shape
-        });
-      };
-
-      const autoPlace = this._autoPlace
-        ? (event, shape) => {
-          this._autoPlace.append(shape, createElement());
-        }
-        : createStart;
-
-      return {
-        group: 'model',
-        title: this._translate(title),
-        imageUrl,
-        action: {
-          dragstart: createStart,
-          click: autoPlace
-        }
-      };
-    };
-
-    return {
-      ...entries,
-      'append.append-rest-task': appendEntry({
-        title: 'Append REST Task',
-        imageUrl: restImageUrl,
-        createElement: () => this._createRestElement()
-      }),
-      'append.append-email-task': appendEntry({
-        title: 'Append Email Task',
-        imageUrl: emailImageUrl,
-        createElement: () => this._createEmailElement()
-      })
-    };
+    return entries;
   };
-
 };
 
 

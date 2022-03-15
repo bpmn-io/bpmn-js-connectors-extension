@@ -1,0 +1,215 @@
+/**
+ * Positioning
+ */
+.append-menu {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 200;
+
+  --color-white: #fff;
+  --color-black-opacity-10: hsla(0, 0%, 0%, 10%);
+  --color-grey-225-10-97: hsl(225, 10%, 97%);
+  --color-grey-225-10-75: hsl(225, 10%, 75%);
+  --color-grey-225-10-50: hsl(225, 10%, 50%);
+  --color-blue-205-100-50: hsl(205, 100%, 50%);
+  --color-blue-205-100-95: hsl(205, 100%, 95%);
+
+  --input-border-color: var(--color-grey-225-10-75);
+  --input-focus-background-color: var(--color-blue-205-100-95);
+  --input-focus-border-color: var(--color-blue-205-100-50);
+
+  --placeholder-color: var(--color-grey-225-10-50);
+
+  --popup-body-background-color: var(--color-white);
+  --popup-header-entry-selected-color: var(--color-blue-205-100-50);
+  --popup-header-entry-selected-background-color: var(--color-black-opacity-10);
+  --popup-header-separator-color: var(--color-grey-225-10-75);
+  --popup-background-color: var(--color-grey-225-10-97);
+  --popup-border-color: var(--color-grey-225-10-75);
+
+  --text-size-base: 14px;
+  --text-size-small: 13px;
+  --text-line-height: 21px;
+}
+
+.append-menu__backdrop {
+  width: 100%;
+  height: 100%;
+}
+
+.append-menu__overlay {
+  position: absolute;
+}
+
+
+/**
+ * Styling
+ */
+.append-menu__overlay {
+  width: 275px;
+  background: var(--popup-background-color);
+  border: solid 1px var(--popup-border-color);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.append-menu__search input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: var(--text-size-base);
+  padding: 3px 6px;
+  border-radius: 2px;
+  border: solid 1px var(--input-border-color);
+  line-height: var(--text-line-height);
+}
+
+.append-menu__search input:focus {
+  background-color: var(--input-focus-background-color);
+  border: solid 1px var(--input-focus-border-color);
+  outline: none;
+}
+
+.append-menu__search input::placeholder {
+  color: var(--placeholder-color);
+}
+
+.append-menu__results {
+  margin: 4px 0 0 0;
+  padding: 0;
+  list-style: none;
+  max-height: 250px;
+  overflow: auto;
+}
+
+.append-menu__entry,
+.append-menu__muted-entry {
+  padding: 5px 7px;
+  cursor: default;
+  border-radius: 3px;
+}
+
+.append-menu__entry:first-child,
+.append-menu__muted-entry:first-child {
+  margin-top: 5px;
+}
+
+.append-menu__results:not(:hover) .append-menu__entry.selected,
+.append-menu__entry:hover {
+  background-color: #EEE;
+}
+
+.append-menu__entry:not(:first-child) {
+  margin-top: 5px;
+}
+
+.append-menu__description {
+  font-weight: normal;
+  font-size: var(--text-size-small);
+}
+
+.append-menu__name {
+  font-size: var(--text-size-small);
+  font-weight: bold;
+}
+
+.append-menu__name,
+.append-menu__description {
+  line-height: 1.4em;
+  display: block;
+}
+
+.append-menu__name[class^="bpmn-icon-"]:before,
+.append-menu__name[class*=" bpmn-icon-"]:before {
+  display: inline-block;
+  font-size: 1.4em;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.append-menu .djs-popup-body {
+  padding: 4px;
+}
+
+/**
+ * popup styles
+ */
+.append-menu .entry {
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: default;
+}
+
+/* larger font for prefixed icons */
+.append-menu .entry:before {
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+.append-menu .entry > span {
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.append-menu .entry:hover,
+.append-menu .entry.active:hover {
+  background: var(--popup-header-entry-selected-background-color);
+}
+
+.append-menu .entry.disabled {
+  background: inherit;
+}
+
+.append-menu .djs-popup-header .entry {
+  display: inline-block;
+  padding: 2px 3px 2px 3px;
+
+  border: solid 1px transparent;
+  border-radius: 3px;
+}
+
+.append-menu .djs-popup-header .entry.active {
+  color: var(--popup-header-entry-selected-color);
+  border: solid 1px var(--popup-header-entry-selected-color);
+  background-color: var(--popup-header-entry-selected-background-color);
+}
+
+.append-menu .djs-popup-body .entry {
+  padding: 4px 10px 4px 5px;
+}
+
+.append-menu .djs-popup-body .entry > span {
+  margin-left: 5px;
+}
+
+.append-menu .djs-popup-body {
+  background-color: var(--popup-body-background-color);
+}
+
+.append-menu .djs-popup-header {
+  border-bottom: 1px solid var(--popup-header-separator-color);
+}
+
+.append-menu .djs-popup-header .entry {
+  margin: 1px;
+  margin-left: 3px;
+}
+
+.append-menu .djs-popup-header .entry:last-child {
+  margin-right: 3px;
+}
+
+.append-menu *::-webkit-scrollbar {
+    width: 5px;
+}
+.append-menu *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.2);
+}
+.append-menu *::-webkit-scrollbar-track {
+    box-shadow: none;
+    background: rgba(200,200,200,0.2);
+    margin: 1px;
+}
