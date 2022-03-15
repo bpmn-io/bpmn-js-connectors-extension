@@ -105,8 +105,6 @@ ReplaceMenu.prototype._getContext = function(element) {
 
   const templateEntries = this._getTemplateEntries(element);
 
-  console.log(entries, headerEntries, templateEntries);
-
   return {
     entries: [
       ...Object.entries(entries).map(
@@ -130,16 +128,14 @@ ReplaceMenu.prototype.open = function(element, position) {
     headerEntries
   } = this._getContext(element);
 
-  console.log(position);
-
   const onClose = () => this.reset();
 
   render(html`
       <${ReplaceMenuComponent}
         entries=${ entries }
+        position=${ position }
         headerEntries=${ headerEntries }
         onClose=${ onClose }
-        position=${ position }
       />
     `, this._container
   );
@@ -186,7 +182,6 @@ function ReplaceMenuComponent(props) {
     shouldClose && onClose();
   };
 
-
   const inputRef = useRef();
 
   const [ value, setValue ] = useState('');
@@ -195,6 +190,8 @@ function ReplaceMenuComponent(props) {
   const [ keyboardSelectedTemplate, setKeyboardSelectedTemplate ] = useState(null);
   const [ mouseSelectedTemplate, setMouseSelectedTemplate ] = useState(null);
   const [ selectedTemplate, setSelectedTemplate ] = useState(null);
+
+  console.log(props);
 
   useEffect(() => {
 
@@ -284,40 +281,55 @@ function ReplaceMenuComponent(props) {
   return html`
     <div class="replace-menu">
       <div class="replace-menu__backdrop" onClick=${ onClose }></div>
-      <div class="replace-menu__overlay" style=${ { top: props.position.x, left: props.position.y } }>
+      <div class="replace-menu__overlay" style=${ `top: ${props.position.x}px; left: ${props.position.y }px` }>
 
-        <div class="replace-menu__search">
-          <input
-            ref=${ inputRef }
-            placeholder="Choose task type"
-            type="text"
-            onKeyup=${ handleKey }
-            onKeydown=${ handleKeyDown }
-          />
+        ${ Object.entries(props.headerEntries).length && html`
+          <div class="djs-popup-header">
+            ${ Object.entries(props.headerEntries).map(([key, value]) => html`
+              <span class=${ clsx('entry', value.className) } onClick=${ () => console.log(key, value) } title=${ value.title }></span>
+            `) }
+          </div>
+        ` }
+
+        <div class="djs-popup-body">
+          <div class="replace-menu__search">
+            <input
+              ref=${ inputRef }
+              placeholder="Change element..."
+              type="text"
+              onKeyup=${ handleKey }
+              onKeydown=${ handleKeyDown }
+            />
+          </div>
+
+          <ul class="replace-menu__results">
+            ${templates.map(template => html`
+              <li
+                key=${template.id}
+                class=${ clsx('replace-menu__entry', { selected: template === keyboardSelectedTemplate }) }
+                onMouseEnter=${ () => setMouseSelectedTemplate(template) }
+                onMouseLeave=${ () => setMouseSelectedTemplate(null) }
+                onClick=${ () => onSelect(template) }
+              >
+                ${ template.imageUrl && html`
+                  <img src=${ template.imageUrl } />
+                `}
+
+                <span class=${ clsx('replace-menu__name', template.className) }>
+                  ${template.label || template.name}
+                </span>
+                <span class="replace-menu__description">
+                  ${template.description || ''}
+                </span>
+
+              </li>
+            `)}
+
+            ${!templates.length && html`
+              <li class="replace-menu__muted-entry">Nothing found</li>
+            `}
+          </ul>
         </div>
-
-        <ul class="replace-menu__results">
-          ${templates.slice(0, 7).map(template => html`
-            <li
-              key=${template.id}
-              class=${ clsx('replace-menu__entry', { selected: template === selectedTemplate }) }
-              onMouseEnter=${ () => setMouseSelectedTemplate(template) }
-              onMouseLeave=${ () => setMouseSelectedTemplate(null) }
-              onClick=${ () => onSelect(template) }
-            >
-              <span class="replace-menu__name">
-                ${template.label || template.name}
-              </span>
-              <span class="replace-menu__description">
-                ${template.description || ''}
-              </span>
-            </li>
-          `)}
-
-          ${!templates.length && html`
-            <li class="replace-menu__muted-entry">No template found</li>
-          `}
-        </ul>
       </div>
     </div>
   `;
