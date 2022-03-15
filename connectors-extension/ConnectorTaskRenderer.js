@@ -40,7 +40,9 @@ function getElementTemplate(element) {
 }
 
 ConnectorTaskRenderer.prototype.canRender = function(element) {
-  return !!getElementTemplate(element);
+  const template = getElementTemplate(element);
+
+  return template && connectorTaskIcons[template];
 };
 
 const connectorTaskIcons = {

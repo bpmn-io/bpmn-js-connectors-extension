@@ -79,7 +79,7 @@ const emailImagePaletteUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(ema
 // https://github.com/camunda/camunda-bpmn-js/issues/87
 const LOWER_PRIORITY = 499;
 
-import EMAIL_TEMPLATES from './.camunda/element-templates/email-connector.json';
+import EMAIL_TEMPLATES from './.camunda/element-templates/sendgrid-connector.json';
 import REST_TEMPLATES from './.camunda/element-templates/rest-connector.json';
 
 
