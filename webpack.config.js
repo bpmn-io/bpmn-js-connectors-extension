@@ -28,7 +28,8 @@ module.exports = {
       patterns: [
         { from: '*.{html,css}', context: 'example', to: '.' },
         { from: 'bpmn-js/dist/assets/**/*', context: 'node_modules', to: './vendor' },
-        { from: 'bpmn-js-properties-panel/dist/assets/**/*', context: 'node_modules', to: './vendor' }
+        { from: 'bpmn-js-properties-panel/dist/assets/**/*', context: 'node_modules', to: './vendor' },
+        { from: '@ibm/plex/**', context: 'node_modules', to: './vendor' }
       ],
     }),
   ],

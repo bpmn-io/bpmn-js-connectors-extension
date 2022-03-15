@@ -1,11 +1,21 @@
+:root {
+  --font-family: 'IBM Plex Sans', system-ui, Arial, sans-serif;
+  --font-family-monospace: 'IBM Plex Mono', monospace;
+  --font-size-default: 14px;
+}
+
+.bio-properties-panel {
+  --font-family: var(--font-family);
+}
+
 html, body, #canvas {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
 
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-default);
 
   color: var(--token-simulation-grey-darken-30, #212121);
 }
