@@ -141,7 +141,8 @@
   margin-top: 2px;
 }
 
-.cmd-change-menu__entry:last-child {
+.cmd-change-menu__entry:last-child,
+.cmd-change-menu__muted-entry {
   margin-bottom: 7px;
 }
 
