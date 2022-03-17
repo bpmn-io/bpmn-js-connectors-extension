@@ -29,12 +29,16 @@ if [[ "x$SKIP_COMMIT" = "x" ]]; then
   git config --local user.name "$GIT_USER_NAME"
   git config push.default simple
 
-  # add all resources
+  echo "Commiting..."
   git add -A
   git commit -m "chore: update example"
+
+  echo "Pushing..."
   git push -qf -u origin gh-pages &2>/dev/null
 else
   echo "Skipping commit (SKIP_COMMIT=$SKIP_COMMIT)"
 fi
+
+echo "Done."
 
 cd "$WORK_DIR"
