@@ -1,20 +1,16 @@
 [
   {
     "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-    "name": "REST Task",
-    "id": "io.camunda.connectors.RestConnector-s1",
-    "description": "Invoke a REST API and retrieve the result",
+    "name": "REST Connector (No Auth)",
+    "id": "io.camunda.connectors.HttpJson.v1.noAuth",
+    "description": "Invoke REST API and retrieve the result",
     "appliesTo": [
       "bpmn:ServiceTask"
     ],
     "groups": [
       {
-        "id": "endpoint-configuration",
-        "label": "REST endpoint"
-      },
-      {
-        "id": "authentication",
-        "label": "Authentication"
+        "id": "endpoint",
+        "label": "HTTP Endpoint"
       },
       {
         "id": "input",
@@ -22,66 +18,69 @@
       },
       {
         "id": "output",
-        "label": "Response mapping"
+        "label": "Response Mapping"
       }
     ],
     "properties": [
       {
         "type": "Hidden",
-        "value": "http",
+        "value": "io.camunda:http-json:1",
         "binding": {
           "type": "zeebe:taskDefinition:type"
         }
       },
       {
-        "label": "URL",
-        "group": "endpoint-configuration",
-        "type": "String",
-        "binding": {
-          "type": "zeebe:taskHeader",
-          "key": "url"
-        },
-        "constraints": {
-          "notEmpty": true,
-          "pattern": {
-            "value": "^https?://.*",
-            "message": "Must be http(s) URL."
-          }
-        }
-      },
-      {
         "label": "Method",
-        "group": "endpoint-configuration",
+        "group": "endpoint",
         "type": "Dropdown",
         "value": "get",
         "choices": [
           { "name": "GET", "value": "get" },
           { "name": "POST", "value": "post" },
           { "name": "PATCH", "value": "patch" },
+          { "name": "PUT", "value": "put" },
           { "name": "DELETE", "value": "delete" }
         ],
         "binding": {
-          "type": "zeebe:taskHeader",
-          "key": "method"
+          "type": "zeebe:input",
+          "name": "method"
         }
       },
       {
-        "label": "Username",
-        "group": "authentication",
+        "label": "URL",
+        "group": "endpoint",
         "type": "String",
         "binding": {
           "type": "zeebe:input",
-          "name": "USER_NAME"
+          "name": "url"
+        },
+        "constraints": {
+          "notEmpty": true,
+          "pattern": {
+            "value": "^https?://.*",
+            "message": "Must be a http(s) URL."
+          }
+        }
+      },
+      {
+        "label": "Query Parameters",
+        "description": "Map of query parameters to add to the request URL",
+        "group": "endpoint",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "queryParamters"
         },
         "optional": true
       },
       {
-        "label": "Password",
-        "group": "authentication",
-        "type": "String",
+        "label": "HTTP Headers",
+        "description": "Map of HTTP headers to add to the request",
+        "group": "endpoint",
+        "type": "Text",
         "binding": {
           "type": "zeebe:input",
-          "name": "PASSWORD"
+          "name": "headers"
         },
         "optional": true
       },
@@ -89,7 +88,6 @@
         "label": "Request Body",
         "description": "JSON payload to send with the request",
         "group": "input",
-        "value": "",
         "type": "Text",
         "binding": {
           "type": "zeebe:input",
@@ -99,15 +97,319 @@
       },
       {
         "label": "Result Variable",
-        "description": "Name of variable to store the response body in",
+        "description": "Name of variable to store the response in",
         "group": "output",
-        "value": "response",
         "type": "String",
         "binding": {
-          "type": "zeebe:output",
-          "source": "= body"
+          "type": "zeebe:taskHeader",
+          "key": "resultVariable"
+        }
+      },
+      {
+        "label": "Result Expression",
+        "description": "Expression to map the response into process variables",
+        "group": "output",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:taskHeader",
+          "key": "resultExpression"
+        }
+      }
+    ]
+  },
+  {
+    "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+    "name": "REST Connector (Basic Auth)",
+    "id": "io.camunda.connectors.HttpJson.v1.basicAuth",
+    "description": "Invoke REST API and retrieve the result secured by Basic Authentication",
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "groups": [
+      {
+        "id": "endpoint",
+        "label": "HTTP Endpoint"
+      },
+      {
+        "id": "input",
+        "label": "Payload"
+      },
+      {
+        "id": "authentication",
+        "label": "Authentication"
+      },
+      {
+        "id": "output",
+        "label": "Response Mapping"
+      }
+    ],
+    "properties": [
+      {
+        "type": "Hidden",
+        "value": "io.camunda:http-json:1",
+        "binding": {
+          "type": "zeebe:taskDefinition:type"
+        }
+      },
+      {
+        "label": "Method",
+        "group": "endpoint",
+        "type": "Dropdown",
+        "value": "get",
+        "choices": [
+          { "name": "GET", "value": "get" },
+          { "name": "POST", "value": "post" },
+          { "name": "PATCH", "value": "patch" },
+          { "name": "PUT", "value": "put" },
+          { "name": "DELETE", "value": "delete" }
+        ],
+        "binding": {
+          "type": "zeebe:input",
+          "name": "method"
+        }
+      },
+      {
+        "label": "URL",
+        "group": "endpoint",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "url"
+        },
+        "constraints": {
+          "notEmpty": true,
+          "pattern": {
+            "value": "^https?://.*",
+            "message": "Must be a http(s) URL."
+          }
+        }
+      },
+      {
+        "label": "Query Parameters",
+        "description": "Map of query parameters to add to the request URL",
+        "group": "endpoint",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "queryParamters"
         },
         "optional": true
+      },
+      {
+        "label": "HTTP Headers",
+        "description": "Map of HTTP headers to add to the request",
+        "group": "endpoint",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "headers"
+        },
+        "optional": true
+      },
+      {
+        "type": "Hidden",
+        "value": "basic",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "authentication.type"
+        }
+      },
+      {
+        "label": "Username",
+        "group": "authentication",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "authentication.username"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      },
+      {
+        "label": "Password",
+        "group": "authentication",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "authentication.password"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      },
+      {
+        "label": "Request Body",
+        "description": "JSON payload to send with the request",
+        "group": "input",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "body"
+        },
+        "optional": true
+      },
+      {
+        "label": "Result Variable",
+        "description": "Name of variable to store the response in",
+        "group": "output",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:taskHeader",
+          "key": "resultVariable"
+        }
+      },
+      {
+        "label": "Result Expression",
+        "description": "Expression to map the response into process variables",
+        "group": "output",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:taskHeader",
+          "key": "resultExpression"
+        }
+      }
+    ]
+  },
+  {
+    "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+    "name": "REST Connector (Bearer Token Auth)",
+    "id": "io.camunda.connectors.HttpJson.v1.bearerToken",
+    "description": "Invoke REST API and retrieve the result secured by Bearer Token Authentication",
+    "appliesTo": [
+      "bpmn:ServiceTask"
+    ],
+    "groups": [
+      {
+        "id": "endpoint",
+        "label": "HTTP Endpoint"
+      },
+      {
+        "id": "input",
+        "label": "Payload"
+      },
+      {
+        "id": "authentication",
+        "label": "Authentication"
+      },
+      {
+        "id": "output",
+        "label": "Response Mapping"
+      }
+    ],
+    "properties": [
+      {
+        "type": "Hidden",
+        "value": "io.camunda:http-json:1",
+        "binding": {
+          "type": "zeebe:taskDefinition:type"
+        }
+      },
+      {
+        "label": "Method",
+        "group": "endpoint",
+        "type": "Dropdown",
+        "value": "get",
+        "choices": [
+          { "name": "GET", "value": "get" },
+          { "name": "POST", "value": "post" },
+          { "name": "PATCH", "value": "patch" },
+          { "name": "PUT", "value": "put" },
+          { "name": "DELETE", "value": "delete" }
+        ],
+        "binding": {
+          "type": "zeebe:input",
+          "name": "method"
+        }
+      },
+      {
+        "label": "URL",
+        "group": "endpoint",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "url"
+        },
+        "constraints": {
+          "notEmpty": true,
+          "pattern": {
+            "value": "^https?://.*",
+            "message": "Must be a http(s) URL."
+          }
+        }
+      },
+      {
+        "label": "Query Parameters",
+        "description": "Map of query parameters to add to the request URL",
+        "group": "endpoint",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "queryParamters"
+        },
+        "optional": true
+      },
+      {
+        "label": "HTTP Headers",
+        "description": "Map of HTTP headers to add to the request",
+        "group": "endpoint",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "headers"
+        },
+        "optional": true
+      },
+      {
+        "type": "Hidden",
+        "value": "bearer",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "authentication.type"
+        }
+      },
+      {
+        "label": "Bearer Token",
+        "group": "authentication",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "authentication.token"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      },
+      {
+        "label": "Request Body",
+        "description": "JSON payload to send with the request",
+        "group": "input",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:input",
+          "name": "body"
+        },
+        "optional": true
+      },
+      {
+        "label": "Result Variable",
+        "description": "Name of variable to store the response in",
+        "group": "output",
+        "type": "String",
+        "binding": {
+          "type": "zeebe:taskHeader",
+          "key": "resultVariable"
+        }
+      },
+      {
+        "label": "Result Expression",
+        "description": "Expression to map the response into process variables",
+        "group": "output",
+        "type": "Text",
+        "binding": {
+          "type": "zeebe:taskHeader",
+          "key": "resultExpression"
+        }
       }
     ]
   }
