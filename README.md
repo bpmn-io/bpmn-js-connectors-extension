@@ -2,17 +2,20 @@
 
 [![CI](https://github.com/bpmn-io/bpmn-js-connectors-extension/actions/workflows/CI.yml/badge.svg)](https://github.com/bpmn-io/bpmn-js-connectors-extension/actions/workflows/CI.yml)
 
-This module extends bpmn-js with a C8 element-templates everywhere modeling experience. To be integrated into the Camunda [Web](https://github.com/camunda/web-modeler) and [Desktop](https://github.com/camunda/camunda-modeler) Modeler apps.
+This module extends bpmn-js with a element-templates everywhere modeling experience, backed up by [C8 element templates](https://docs.camunda.io/docs/components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates/). 
+
+To be integrated into the Camunda [Web](https://github.com/camunda/web-modeler) and [Desktop](https://github.com/camunda/camunda-modeler) Modeler apps.
 
 [![screenshot](./resources/screenshot.png)](https://potential-winner-9f6a854d.pages.github.io/)
 
 
 ## Features
 
-* General [C8 element template support](https://docs.camunda.io/docs/components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates/)
-* Create connector tasks during modeling
+* [C8 element template support](https://docs.camunda.io/docs/components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates/)
+* Append connector tasks during modeling
 * Upgrade task to connector tasks
 * Visually distinguish connector tasks from standard BPMN tasks
+* Modern replace and append menu
 
 
 ## Use Extension
