@@ -1,4 +1,4 @@
-import ConnectorsExtensionModule from '..';
+import ConnectorsExtensionModule from '../src';
 
 import ZeebeModdle from 'zeebe-bpmn-moddle/resources/zeebe.json';
 
