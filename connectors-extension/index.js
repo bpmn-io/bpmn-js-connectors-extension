@@ -4,8 +4,6 @@
  * You may not use this file except in compliance with the commercial license.
  */
 
-import './Diagram.css';
-
 import ConnectorsExtension from './ConnectorsExtension';
 import ConnectorTaskRenderer from './ConnectorTaskRenderer';
 
