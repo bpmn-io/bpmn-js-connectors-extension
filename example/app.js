@@ -22,6 +22,11 @@ import download from 'downloadjs';
 
 import exampleXML from './newDiagram.bpmn';
 
+import EMAIL_TEMPLATES from './.camunda/element-templates/sendgrid-connector.json';
+import REST_TEMPLATES from './.camunda/element-templates/rest-connector.json';
+
+const TEMPLATES = [ ...EMAIL_TEMPLATES, ...REST_TEMPLATES ];
+
 const url = new URL(window.location.href);
 
 const persistent = url.searchParams.has('p');
@@ -57,9 +62,6 @@ const modeler = new BpmnModeler({
     ZeebePropertiesProviderModule,
     ZeebeModdleModule
   ],
-  connectorsExtension: {
-    loadTemplates: false
-  },
   exporter: {
     name: 'connectors-modeling-demo',
     version: '0.0.0'
@@ -82,7 +84,7 @@ modeler.on('elementTemplates.errors', event => {
   showTemplateErrors(errors);
 });
 
-modeler.get('connectorsExtension').loadTemplates();
+modeler.get('connectorsExtension').loadTemplates(TEMPLATES);
 
 modeler.openDiagram = function(diagram) {
   return this.importXML(diagram)

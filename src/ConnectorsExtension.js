@@ -11,12 +11,6 @@ const appendImageUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(appendSvg
 // https://github.com/camunda/camunda-bpmn-js/issues/87
 const LOWER_PRIORITY = 499;
 
-import EMAIL_TEMPLATES from './.camunda/element-templates/sendgrid-connector.json';
-import REST_TEMPLATES from './.camunda/element-templates/rest-connector.json';
-
-
-const TEMPLATES = [ ...EMAIL_TEMPLATES, ...REST_TEMPLATES ];
-
 
 export default function ConnectorsExtension(
     config,
@@ -37,10 +31,6 @@ export default function ConnectorsExtension(
   this._autoPlace = injector.get('autoPlace', false);
 
   contextPad.registerProvider(LOWER_PRIORITY, this);
-
-  if (config && config.loadTemplates !== false) {
-    this.loadTemplates();
-  }
 }
 
 ConnectorsExtension.$inject = [
@@ -52,8 +42,8 @@ ConnectorsExtension.$inject = [
   'canvas'
 ];
 
-ConnectorsExtension.prototype.loadTemplates = function() {
-  this._elementTemplatesLoader.setTemplates(TEMPLATES);
+ConnectorsExtension.prototype.loadTemplates = function(templates) {
+  this._elementTemplatesLoader.setTemplates(templates);
 };
 
 ConnectorsExtension.prototype._getReplaceMenuPosition = function(element) {
