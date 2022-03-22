@@ -1,8 +1,8 @@
-# Connectors Modeling Demo
+# bpmn-js-connectors-extension
 
-[![CI](https://github.com/bpmn-io/connectors-modeling-demo/actions/workflows/CI.yml/badge.svg)](https://github.com/bpmn-io/connectors-modeling-demo/actions/workflows/CI.yml)
+[![CI](https://github.com/bpmn-io/bpmn-js-connectors-extension/actions/workflows/CI.yml/badge.svg)](https://github.com/bpmn-io/bpmn-js-connectors-extension/actions/workflows/CI.yml)
 
-This demo showcases the in-the-works connectors modeling experience. To be integrated into the Camunda [Web](https://github.com/camunda/web-modeler) and [Desktop](https://github.com/camunda/camunda-modeler) Modeler apps.
+This module extends bpmn-js with a C8 element-templates everywhere modeling experience. To be integrated into the Camunda [Web](https://github.com/camunda/web-modeler) and [Desktop](https://github.com/camunda/camunda-modeler) Modeler apps.
 
 [![screenshot](./resources/screenshot.png)](https://potential-winner-9f6a854d.pages.github.io/)
 
@@ -17,7 +17,35 @@ This demo showcases the in-the-works connectors modeling experience. To be integ
 
 ## Use Extension
 
-The [`connectors-extension`](./connectors-extension) is all that is needed to extend [bpmn-js](https://github.com/bpmn-io/bpmn-js) for connectors.
+Install via npm:
+
+```
+npm install bpmn-js-connectors-extension
+```
+
+Use in your [bpmn-js powered editor](https://github.com/bpmn-io/bpmn-js):
+
+```javascript
+import ConnectorsExtensionModule from 'bpmn-js-connectors-extension';
+
+import 'bpmn-js-connectors-extension/dist/connectors-extension.css';
+
+const modeler = new BpmnModeler({
+  additionalModules: [
+    ...,
+    ConnectorsExtensionModule,
+    BpmnPropertiesPanelModule,
+    BpmnPropertiesProviderModule,
+    ZeebePropertiesProviderModule,
+    ZeebeModdleModule
+  ],
+  moddleExtensions: {
+    zeebe: ZeebeModdle
+  }
+});
+```
+
+See [`example`](./example) for a full featured example or [checkout the demo](https://potential-winner-9f6a854d.pages.github.io/).
 
 
 ## Run locally
