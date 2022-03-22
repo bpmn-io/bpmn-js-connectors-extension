@@ -79,7 +79,7 @@ ConnectorsExtension.prototype._getReplaceMenuPosition = function(element) {
 
 ConnectorsExtension.prototype._getAppendMenuPosition = function(element) {
 
-  var Y_OFFSET = 5;
+  var X_OFFSET = 5;
 
   var diagramContainer = this._canvas.getContainer(),
       pad = this._contextPad.getPad(element).html;
@@ -91,7 +91,7 @@ ConnectorsExtension.prototype._getAppendMenuPosition = function(element) {
   var left = padRect.left - diagramRect.left;
 
   var pos = {
-    x: left + Y_OFFSET + padRect.width,
+    x: left + X_OFFSET + padRect.width,
     y: top
   };
 
