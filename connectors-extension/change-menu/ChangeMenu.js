@@ -37,6 +37,14 @@ export default function ChangeMenu(eventBus, canvas) {
     this._destroy();
   });
 
+  eventBus.on('element.changed', event => {
+
+    const element = this._open && this._open.element;
+
+    if (event.element === element) {
+      this._refresh();
+    }
+  });
 }
 
 ChangeMenu.$inject = [
@@ -44,19 +52,13 @@ ChangeMenu.$inject = [
   'canvas'
 ];
 
-
-ChangeMenu.prototype.open = function(renderFn, options = {}) {
+ChangeMenu.prototype._refresh = function() {
 
   const {
+    renderFn,
     position: _position,
     className
-  } = options;
-
-  if (this._open) {
-    this.close();
-  }
-
-  this._open = defer();
+  } = this._open;
 
   const position = _position && (
     (container) => this._ensureVisible(container, _position)
@@ -74,6 +76,35 @@ ChangeMenu.prototype.open = function(renderFn, options = {}) {
       </${ChangeMenu}>
     `, this._container
   );
+};
+
+ChangeMenu.prototype.open = function(renderFn, options = {}) {
+
+  const {
+    position,
+    className,
+    element
+  } = options;
+
+  if (this._open) {
+    this.close();
+  }
+
+  const {
+    promise,
+    resolve
+  } = defer();
+
+  this._open = {
+    renderFn,
+    promise,
+    resolve,
+    position,
+    className,
+    element
+  };
+
+  this._refresh();
 
   return this._open.promise;
 };

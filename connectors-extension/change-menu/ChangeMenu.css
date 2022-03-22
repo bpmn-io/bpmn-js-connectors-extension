@@ -26,7 +26,7 @@
   --hover-background-color: #F1F2F4;
   --change-menu-background-color: var(--color-white);
   --change-menu-header-entry-selected-color: var(--color-blue-205-100-50);
-  --change-menu-header-entry-selected-background-color: var(--color-black-opacity-10);
+  --change-menu-header-entry-hover-bg: var(--color-black-opacity-10);
   --change-menu-header-separator-color: var(--color-grey-225-10-75);
   --change-menu-border-color: var(--color-grey-225-10-75);
   --change-menu-shadow-color: var(--color-black-opacity-25);
@@ -85,6 +85,19 @@
   align-items: stretch;
   line-height: 20px;
   margin: 12px 12px 10px 12px;
+}
+
+.cmd-change-menu__header-entry {
+  font-size: 1.4em;
+  border-radius: 2px;
+}
+
+.cmd-change-menu__header-entry.active {
+  color: var(--change-menu-header-entry-selected-color);
+}
+
+.cmd-change-menu__header-entry:hover {
+  background: var(--change-menu-header-entry-hover-bg);
 }
 
 .cmd-change-menu__search {

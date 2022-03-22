@@ -111,20 +111,25 @@ ReplaceMenu.prototype._getContext = function(element) {
 
 ReplaceMenu.prototype.open = function(element, position) {
 
-  const {
-    entries,
-    headerEntries
-  } = this._getContext(element);
+  const renderFn = (onClose) => {
+    const {
+      entries,
+      headerEntries
+    } = this._getContext(element);
 
-  const renderFn = (onClose) => html`
-    <${ReplaceMenuComponent}
-      entries=${ entries }
-      headerEntries=${ headerEntries }
-      onClose=${ onClose }
-    />
-  `;
+    return html`
+      <${ReplaceMenuComponent}
+        entries=${ entries }
+        headerEntries=${ headerEntries }
+        onClose=${ onClose }
+      />
+    `;
+  };
 
-  return this._changeMenu.open(renderFn, { position }).finally(() => {
+  return this._changeMenu.open(renderFn, {
+    element,
+    position
+  }).finally(() => {
     console.log('replace menu closed');
   });
 };
@@ -145,8 +150,8 @@ function ReplaceMenuComponent(props) {
     onClose
   } = props;
 
-  const onSelect = (entry, shouldClose=true) => {
-    entry.action();
+  const onSelect = (event, entry, shouldClose=true) => {
+    entry.action(event, entry);
 
     shouldClose && onClose();
   };
@@ -222,7 +227,7 @@ function ReplaceMenuComponent(props) {
   const handleKeyDown = useCallback(event => {
 
     if (event.key === 'Enter' && selectedTemplate) {
-      return onSelect(selectedTemplate);
+      return onSelect(event, selectedTemplate);
     }
 
     if (event.key === 'Escape') {
@@ -255,7 +260,11 @@ function ReplaceMenuComponent(props) {
       Change element
     </h3>
     ${ Object.entries(props.headerEntries).map(([key, value]) => html`
-      <span class=${ clsx('entry', value.className) } onClick=${ () => console.log(key, value) } title=${ value.title }></span>
+      <span
+        class=${ clsx('cmd-change-menu__header-entry', value.className, { active: value.active }) }
+        onClick=${ (event) => onSelect(event, value, false) }
+        title=${ `Toggle ${ value.title }` }
+      ></span>
     `) }
   </div>
 
@@ -280,7 +289,7 @@ function ReplaceMenuComponent(props) {
           class=${ clsx('cmd-change-menu__entry', { selected: template === keyboardSelectedTemplate }) }
           onMouseEnter=${ () => setMouseSelectedTemplate(template) }
           onMouseLeave=${ () => setMouseSelectedTemplate(null) }
-          onClick=${ () => onSelect(template) }
+          onClick=${ (event) => onSelect(event, template) }
         >
 
           <div class="cmd-change-menu__entry-content">
