@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# publish connectors-modeling-demo example to <gh-pages>
+# publish bpmn-js-connectors-extension example to <gh-pages>
 
 set -e
 
@@ -14,7 +14,7 @@ echo "Publishing <public> to <gh-pages>"
 mkdir -p "$TEMP_DIR"
 
 # setup gh-pages branch
-git clone --depth=1 "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/bpmn-io/connectors-modeling-demo.git" "$GH_PAGES_DIR"
+git clone --depth=1 "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/bpmn-io/bpmn-js-connectors-extension.git" "$GH_PAGES_DIR"
 
 cd "$GH_PAGES_DIR"
 git checkout --orphan gh-pages
