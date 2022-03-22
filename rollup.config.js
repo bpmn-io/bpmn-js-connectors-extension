@@ -31,8 +31,8 @@ export default [
   {
     input: srcEntry,
     output: [
-      { file: pkg.main, format: 'cjs', exports: 'auto' },
-      { file: pkg.module, format: 'es' }
+      { file: pkg.main, format: 'cjs', exports: 'auto', sourcemap: true },
+      { file: pkg.module, format: 'es', sourcemap: true }
     ],
     external: external,
     plugins: pgl()
