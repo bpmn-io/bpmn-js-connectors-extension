@@ -19,6 +19,7 @@ const TEMPLATES = [ ...EMAIL_TEMPLATES, ...REST_TEMPLATES ];
 
 
 export default function ConnectorsExtension(
+    config,
     injector, create,
     contextPad, translate,
     elementTemplatesLoader,
@@ -36,9 +37,14 @@ export default function ConnectorsExtension(
   this._autoPlace = injector.get('autoPlace', false);
 
   contextPad.registerProvider(LOWER_PRIORITY, this);
+
+  if (config && config.loadTemplates !== false) {
+    this.loadTemplates();
+  }
 }
 
 ConnectorsExtension.$inject = [
+  'config.connectorExtension',
   'injector', 'create',
   'contextPad', 'translate',
   'elementTemplatesLoader',

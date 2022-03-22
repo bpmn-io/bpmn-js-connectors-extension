@@ -57,6 +57,9 @@ const modeler = new BpmnModeler({
     ZeebePropertiesProviderModule,
     ZeebeModdleModule
   ],
+  connectorsExtension: {
+    loadTemplates: false
+  },
   exporter: {
     name: 'connectors-modeling-demo',
     version: '0.0.0'
