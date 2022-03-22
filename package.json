@@ -10,7 +10,7 @@
     "start": "webpack serve --open",
     "lint": "eslint ."
   },
-  "repository": "https://github.com/camunda/connectors-modeling-demo.git",
+  "repository": "https://github.com/bpmn-io/connectors-extension.git",
   "license": "MIT",
   "devDependencies": {
     "@bpmn-io/add-exporter": "^0.2.0",
@@ -43,7 +43,5 @@
     "bpmn-js": ">= 5"
   },
   "files": [
-    "connectors-extension/*",
-    "index.js"
   ]
 }
