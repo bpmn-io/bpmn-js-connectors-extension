@@ -93,7 +93,7 @@
 
 .cmd-change-menu__title {
   font-size: 14px;
-  font-weight: bolder;
+  font-weight: 500;
   flex: 1;
   margin: 0;
 }
