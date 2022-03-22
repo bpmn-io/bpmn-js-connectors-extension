@@ -104,6 +104,9 @@ ConnectorsExtension.prototype.getContextPadEntries = function(element) {
   const appendMenu = this._appendMenu;
   const translate = this._translate;
 
+  if (element.labelTarget) {
+    return null;
+  }
 
   return (entries) => {
 
