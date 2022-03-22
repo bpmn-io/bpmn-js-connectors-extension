@@ -9,6 +9,7 @@ import './Diagram.css';
 import ConnectorsExtension from './ConnectorsExtension';
 import ConnectorTaskRenderer from './ConnectorTaskRenderer';
 
+import ChangeMenuModule from './change-menu';
 import ElementTemplateChooserModule from './element-template-chooser';
 import ReplaceMenuModule from './replace-menu';
 import AppendMenuModule from './append-menu';
@@ -21,6 +22,7 @@ import {
 export default {
   __depends__: [
     CloudElementTemplatesPropertiesProviderModule,
+    ChangeMenuModule,
     ElementTemplateChooserModule,
     ReplaceMenuModule,
     AppendMenuModule
