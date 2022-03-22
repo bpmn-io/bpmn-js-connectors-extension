@@ -1,8 +1,7 @@
 {
-  "name": "connectors-modeling-demo",
-  "private": true,
+  "name": "bpmn-js-connectors-extension",
   "version": "0.0.0",
-  "description": "A connectors modeling demonstration project",
+  "description": "The bpmn-js connectors extension",
   "scripts": {
     "dev": "npm start",
     "all": "run-s lint bundle build:example",
@@ -15,7 +14,7 @@
   "source": "src/index.js",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "repository": "https://github.com/bpmn-io/connectors-extension.git",
+  "repository": "https://github.com/bpmn-io/bpmn-js-connectors-extension.git",
   "license": "MIT",
   "devDependencies": {
     "@bpmn-io/add-exporter": "^0.2.0",
