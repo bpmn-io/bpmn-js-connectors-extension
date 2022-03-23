@@ -12,14 +12,9 @@ import ElementTemplateChooserModule from './element-template-chooser';
 import ReplaceMenuModule from './replace-menu';
 import AppendMenuModule from './append-menu';
 
-import {
-  CloudElementTemplatesPropertiesProviderModule
-} from 'bpmn-js-properties-panel';
-
 
 export default {
   __depends__: [
-    CloudElementTemplatesPropertiesProviderModule,
     ChangeMenuModule,
     ElementTemplateChooserModule,
     ReplaceMenuModule,

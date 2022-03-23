@@ -7,7 +7,8 @@ import ZeebeModdleModule from 'zeebe-bpmn-moddle/lib';
 import {
   BpmnPropertiesPanelModule,
   BpmnPropertiesProviderModule,
-  ZeebePropertiesProviderModule
+  ZeebePropertiesProviderModule,
+  CloudElementTemplatesPropertiesProviderModule
 } from 'bpmn-js-properties-panel';
 
 import BpmnModeler from 'bpmn-js/lib/Modeler';
@@ -60,6 +61,7 @@ const modeler = new BpmnModeler({
     BpmnPropertiesPanelModule,
     BpmnPropertiesProviderModule,
     ZeebePropertiesProviderModule,
+    CloudElementTemplatesPropertiesProviderModule,
     ZeebeModdleModule
   ],
   exporter: {
