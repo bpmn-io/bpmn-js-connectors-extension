@@ -37,10 +37,6 @@ const modeler = new BpmnModeler({
   additionalModules: [
     ...,
     ConnectorsExtensionModule,
-    BpmnPropertiesPanelModule,
-    BpmnPropertiesProviderModule,
-    ZeebePropertiesProviderModule,
-    ZeebeModdleModule
   ],
   moddleExtensions: {
     zeebe: ZeebeModdle
@@ -48,7 +44,9 @@ const modeler = new BpmnModeler({
 });
 ```
 
-See [`example`](./example) for a full featured example or [checkout the demo](https://potential-winner-9f6a854d.pages.github.io/).
+The extension relies on `elementTemplates` to be provided via additional setup, i.e. [camunda-bpmn-js](https://github.com/camunda/camunda-bpmn-js).
+
+See [`example`](./example) for a full featured demo or [check it out in action](https://potential-winner-9f6a854d.pages.github.io/).
 
 
 ## Run locally
