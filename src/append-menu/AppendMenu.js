@@ -24,7 +24,7 @@ AppendMenu.$inject = [
   'changeMenu'
 ];
 
-AppendMenu.prototype._getMatchingTemplates = function(element) {
+AppendMenu.prototype._getMatchingTemplates = function() {
   return this._elementTemplates.getAll().filter(template => {
     return template.appliesTo.includes('bpmn:Task') || template.appliesTo.includes('bpmn:ServiceTask');
   });
@@ -32,7 +32,7 @@ AppendMenu.prototype._getMatchingTemplates = function(element) {
 
 AppendMenu.prototype._getTemplateEntries = function(element) {
 
-  const templates = this._getMatchingTemplates(element);
+  const templates = this._getMatchingTemplates();
 
   return templates.map(template => {
 
