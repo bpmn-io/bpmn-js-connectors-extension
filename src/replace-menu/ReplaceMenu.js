@@ -19,18 +19,16 @@ import clsx from 'clsx';
 const REPLACE_MENU_PROVIDER = 'bpmn-replace';
 
 
-export default function ReplaceMenu(elementTemplates, popupMenu, changeMenu, injector) {
+export default function ReplaceMenu(elementTemplates, popupMenu, changeMenu) {
   this._elementTemplates = elementTemplates;
   this._popupMenu = popupMenu;
   this._changeMenu = changeMenu;
-  this._injector = injector;
 }
 
 ReplaceMenu.$inject = [
   'elementTemplates',
   'popupMenu',
-  'changeMenu',
-  'injector'
+  'changeMenu'
 ];
 
 ReplaceMenu.prototype._getMatchingTemplates = function(element) {
@@ -40,16 +38,7 @@ ReplaceMenu.prototype._getMatchingTemplates = function(element) {
 };
 
 ReplaceMenu.prototype._applyTemplate = function(element, newTemplate) {
-  const commandStack = this._injector.get('commandStack'),
-        elementTemplates = this._injector.get('elementTemplates');
-
-  const oldTemplate = elementTemplates.get(element);
-
-  commandStack.execute('propertiesPanel.zeebe.changeTemplate', {
-    element: element,
-    newTemplate,
-    oldTemplate
-  });
+  this._elementTemplates.applyTemplate(element, newTemplate);
 };
 
 ReplaceMenu.prototype._getTemplateEntries = function(element) {
