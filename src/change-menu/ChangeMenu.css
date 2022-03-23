@@ -36,6 +36,8 @@
   --text-size-base: 14px;
   --text-size-small: 14px;
   --text-line-height: 21px;
+
+  line-height: 1;
 }
 
 .cmd-change-menu__backdrop {
