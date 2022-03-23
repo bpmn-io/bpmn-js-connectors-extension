@@ -17,8 +17,7 @@ export default function ConnectorsExtension(
     injector, create,
     contextPad, translate,
     elementTemplatesLoader,
-    replaceMenu, appendMenu,
-    canvas) {
+    replaceMenu, appendMenu) {
 
   this._create = create;
   this._contextPad = contextPad;
@@ -26,7 +25,6 @@ export default function ConnectorsExtension(
   this._elementTemplatesLoader = elementTemplatesLoader;
   this._replaceMenu = replaceMenu;
   this._appendMenu = appendMenu;
-  this._canvas = canvas;
 
   this._autoPlace = injector.get('autoPlace', false);
 
@@ -38,8 +36,7 @@ ConnectorsExtension.$inject = [
   'injector', 'create',
   'contextPad', 'translate',
   'elementTemplatesLoader',
-  'replaceMenu', 'appendMenu',
-  'canvas'
+  'replaceMenu', 'appendMenu'
 ];
 
 ConnectorsExtension.prototype.loadTemplates = function(templates) {
@@ -50,18 +47,13 @@ ConnectorsExtension.prototype._getReplaceMenuPosition = function(element) {
 
   var Y_OFFSET = 5;
 
-  var diagramContainer = this._canvas.getContainer(),
-      pad = this._contextPad.getPad(element).html;
+  var pad = this._contextPad.getPad(element).html;
 
-  var diagramRect = diagramContainer.getBoundingClientRect(),
-      padRect = pad.getBoundingClientRect();
-
-  var top = padRect.top - diagramRect.top;
-  var left = padRect.left - diagramRect.left;
+  var padRect = pad.getBoundingClientRect();
 
   var pos = {
-    x: left,
-    y: top + padRect.height + Y_OFFSET
+    x: padRect.left,
+    y: padRect.bottom + Y_OFFSET
   };
 
   return pos;
@@ -71,18 +63,13 @@ ConnectorsExtension.prototype._getAppendMenuPosition = function(element) {
 
   var X_OFFSET = 5;
 
-  var diagramContainer = this._canvas.getContainer(),
-      pad = this._contextPad.getPad(element).html;
+  var pad = this._contextPad.getPad(element).html;
 
-  var diagramRect = diagramContainer.getBoundingClientRect(),
-      padRect = pad.getBoundingClientRect();
-
-  var top = padRect.top - diagramRect.top;
-  var left = padRect.left - diagramRect.left;
+  var padRect = pad.getBoundingClientRect();
 
   var pos = {
-    x: left + X_OFFSET + padRect.width,
-    y: top
+    x: padRect.right + X_OFFSET,
+    y: padRect.top
   };
 
   return pos;

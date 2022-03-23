@@ -25,11 +25,8 @@ import clsx from 'clsx';
  * so components can build on top to do actual things.
  *
  * @param {EventBus} eventBus
- * @param {Canvas} canvas
  */
-export default function ChangeMenu(eventBus, canvas) {
-
-  this._canvas = canvas;
+export default function ChangeMenu(eventBus) {
 
   this._container = this._createContainer({});
 
@@ -48,8 +45,7 @@ export default function ChangeMenu(eventBus, canvas) {
 }
 
 ChangeMenu.$inject = [
-  'eventBus',
-  'canvas'
+  'eventBus'
 ];
 
 ChangeMenu.prototype._refresh = function() {
@@ -146,18 +142,18 @@ ChangeMenu.prototype._destroy = function() {
 };
 
 ChangeMenu.prototype._ensureVisible = function(container, position) {
-  var canvasBounds = this._canvas.getContainer().getBoundingClientRect();
+  var documentBounds = document.documentElement.getBoundingClientRect();
   var containerBounds = container.getBoundingClientRect();
 
   var overAxis = {},
       left = position.x,
       top = position.y;
 
-  if (position.x + containerBounds.width > canvasBounds.width) {
+  if (position.x + containerBounds.width > documentBounds.width) {
     overAxis.x = true;
   }
 
-  if (position.y + containerBounds.height > canvasBounds.height) {
+  if (position.y + containerBounds.height > documentBounds.height) {
     overAxis.y = true;
   }
 
