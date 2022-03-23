@@ -28,10 +28,10 @@ import './ElementTemplateChooser.css';
  * @param {ChangeMenu} changeMenu
  */
 export default function ElementTemplateChooser(
-    eventBus, injector,
-    elementTemplates, changeMenu) {
+    eventBus,
+    elementTemplates,
+    changeMenu) {
 
-  this._injector = injector;
   this._changeMenu = changeMenu;
   this._elementTemplates = elementTemplates;
 
@@ -54,22 +54,13 @@ export default function ElementTemplateChooser(
 }
 
 ElementTemplateChooser.$inject = [
-  'eventBus', 'injector',
-  'elementTemplates', 'changeMenu'
+  'eventBus',
+  'elementTemplates',
+  'changeMenu'
 ];
 
 ElementTemplateChooser.prototype._applyTemplate = function(element, newTemplate) {
-
-  const commandStack = this._injector.get('commandStack'),
-        elementTemplates = this._injector.get('elementTemplates');
-
-  const oldTemplate = elementTemplates.get(element);
-
-  commandStack.execute('propertiesPanel.zeebe.changeTemplate', {
-    element: element,
-    newTemplate,
-    oldTemplate
-  });
+  this._elementTemplates.applyTemplate(element, newTemplate);
 };
 
 ElementTemplateChooser.prototype._getMatchingTemplates = function(element) {
