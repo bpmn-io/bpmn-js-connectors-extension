@@ -217,6 +217,7 @@ function TemplateComponent(props) {
             onMouseEnter=${ () => setMouseSelectedTemplate(template) }
             onMouseLeave=${ () => setMouseSelectedTemplate(null) }
             onClick=${ () => onClose(template) }
+            data-entry-id=${template.id}
           >
 
             <div class="cmd-change-menu__entry-content">

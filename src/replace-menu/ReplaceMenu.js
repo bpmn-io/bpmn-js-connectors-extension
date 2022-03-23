@@ -127,6 +127,7 @@ ReplaceMenu.prototype.open = function(element, position) {
   };
 
   return this._changeMenu.open(renderFn, {
+    className: 'cmd-replace-menu',
     element,
     position
   }).finally(() => {
@@ -290,6 +291,7 @@ function ReplaceMenuComponent(props) {
           onMouseEnter=${ () => setMouseSelectedTemplate(template) }
           onMouseLeave=${ () => setMouseSelectedTemplate(null) }
           onClick=${ (event) => onSelect(event, template) }
+          data-entry-id=${ template.id }
         >
 
           <div class="cmd-change-menu__entry-content">

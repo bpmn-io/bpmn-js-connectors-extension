@@ -80,7 +80,10 @@ AppendMenu.prototype.open = function(element, position) {
     />
   `;
 
-  return this._changeMenu.open(renderFn, { position }).then((element) => {
+  return this._changeMenu.open(renderFn, {
+    position,
+    className: 'cmd-append-menu'
+  }).then((element) => {
 
     if (!element) {
       return Promise.reject('user canceled');
@@ -104,8 +107,6 @@ function AppendMenuComponent(props) {
 
   const onSelect = (entry) => {
     const selection = entry.action();
-
-    console.log(selection);
 
     onClose(selection);
   };
@@ -237,6 +238,7 @@ function AppendMenuComponent(props) {
             onMouseEnter=${ () => setMouseSelectedTemplate(template) }
             onMouseLeave=${ () => setMouseSelectedTemplate(null) }
             onClick=${ (event) => { event.stopPropagation(); onSelect(template); } }
+            data-entry-id=${ template.id }
           >
             <div class="cmd-change-menu__entry-content">
               ${ template.imageUrl && html`
