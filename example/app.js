@@ -23,7 +23,7 @@ import download from 'downloadjs';
 import exampleXML from './newDiagram.bpmn';
 
 import EMAIL_TEMPLATES from './.camunda/element-templates/sendgrid-connector.json';
-import REST_TEMPLATES from './.camunda/element-templates/rest-connector.json';
+import REST_TEMPLATES from './.camunda/element-templates/http-json-connector.json';
 
 const TEMPLATES = [ ...EMAIL_TEMPLATES, ...REST_TEMPLATES ];
 
