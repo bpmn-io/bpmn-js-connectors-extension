@@ -19,7 +19,10 @@ function pgl(plugins=[]) {
   ];
 }
 
-const deps = [].concat(pkg.peerDependencies || [], pkg.dependencies || []);
+const deps = [
+  ...Object.keys(pkg.peerDependencies || {}),
+  ...Object.keys(pkg.dependencies || {})
+];
 
 const external = (id) => {
   return deps.some(dep => id.startsWith(dep) || id === dep);
