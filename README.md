@@ -16,6 +16,7 @@ To be integrated into the Camunda [Web](https://github.com/camunda/web-modeler) 
 * Upgrade task to connector tasks
 * Visually distinguish connector tasks from standard BPMN tasks
 * Modern replace and append menu
+* Support for documentation links and icons
 
 
 ## Resources
