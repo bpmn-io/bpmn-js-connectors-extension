@@ -8,6 +8,7 @@
 
 import ConnectorsExtension from './ConnectorsExtension';
 import ConnectorTaskRenderer from './ConnectorTaskRenderer';
+import ConnectorKeyboardBindings from './ConnectorKeyboardBindings';
 
 import ChangeMenuModule from './change-menu';
 import ElementTemplateChooserModule from './element-template-chooser';
@@ -24,8 +25,10 @@ export default {
   ],
   __init__: [
     'connectorsExtension',
-    'connectorTaskRenderer'
+    'connectorTaskRenderer',
+    'connectorsKeyboardBindings'
   ],
   connectorsExtension: ['type', ConnectorsExtension],
-  connectorTaskRenderer: ['type', ConnectorTaskRenderer]
+  connectorTaskRenderer: ['type', ConnectorTaskRenderer],
+  connectorsKeyboardBindings: ['type', ConnectorKeyboardBindings]
 };
