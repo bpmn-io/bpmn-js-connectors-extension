@@ -6,6 +6,11 @@ All notable changes to [bpmn-js-connectors-extension](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.0.10
+
+* `FEAT`: integrate with other editing components ([#10](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/10))
+* `FEAT`: support create anywhere from append menu ([#11](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/11))
+
 ## 0.0.9
 
 * `FEAT`: move keyboard selected entries into viewport ([`87fd87fe`](https://github.com/bpmn-io/bpmn-js-connectors-extension/commit/87fd87feca03a4d0e40c1e69c2c7001df67ced98))
