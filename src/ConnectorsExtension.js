@@ -136,21 +136,31 @@ ConnectorsExtension.prototype.getContextPadEntries = function(element) {
               cursor: { x: event.x, y: event.y }
             };
 
-            appendMenu.open(element, position).then(newElement => {
+            appendMenu.open(element, position).then(result => {
 
-              const createStart = (source) => {
+              if (!result) {
+                return console.log('append-anything :: user canceled');
+              }
+
+              const {
+                event,
+                newElement,
+                dragstart = false
+              } = result;
+
+              const createStart = (event, source, newElement) => {
                 this._create.start(event, newElement, {
                   source
                 });
               };
 
-              const autoPlace = this._autoPlace
-                ? (source) => {
+              const append = !dragstart && this._autoPlace
+                ? (event, source, newElement) => {
                   this._autoPlace.append(source, newElement);
                 }
                 : createStart;
 
-              autoPlace(element, newElement);
+              append(event, element, newElement);
             }).catch(err => console.warn(err));
           }
         }
