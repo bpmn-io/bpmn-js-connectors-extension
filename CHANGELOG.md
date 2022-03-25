@@ -6,6 +6,10 @@ All notable changes to [bpmn-js-connectors-extension](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.0.11
+
+* `CHORE`: remove debug logging ([#13](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/13))
+
 ## 0.0.10
 
 * `FEAT`: integrate with other editing components ([#10](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/10))
