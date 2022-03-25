@@ -18,6 +18,12 @@ To be integrated into the Camunda [Web](https://github.com/camunda/web-modeler) 
 * Modern replace and append menu
 
 
+## Resources
+
+* [Issues](https://github.com/bpmn-io/bpmn-js-connectors-extension/issues)
+* [Changelog](./CHANGELOG.md)
+
+
 ## Use Extension
 
 Install via npm:
