@@ -68,6 +68,19 @@ AppendMenu.prototype._getContext = function(element) {
   };
 };
 
+/**
+ * Open append menu and return a promise to signal the result.
+ *
+ * If the user canceles the append operation the promise will be
+ * rejected with `user-canceled`.
+ *
+ * @typedef { { event: DOMEvent, dragstart: boolean, newElement: DiagramElement } } AppendMenuResult
+ *
+ * @param { DiagramElement } element
+ * @param { Point } position
+ *
+ * @return { Promise<AppendMenuResult> }
+ */
 AppendMenu.prototype.open = function(element, position) {
 
   const {
@@ -106,10 +119,14 @@ function AppendMenuComponent(props) {
     entries
   } = props;
 
-  const onSelect = (entry) => {
-    const selection = entry.action();
+  const onSelect = (event, entry, dragstart=false) => {
+    const newElement = entry.action();
 
-    onClose(selection);
+    onClose({
+      event,
+      newElement,
+      dragstart
+    });
   };
 
   const inputRef = useRef();
@@ -195,7 +212,7 @@ function AppendMenuComponent(props) {
   const handleKeyDown = useCallback(event => {
 
     if (event.key === 'Enter' && selectedTemplate) {
-      return onSelect(selectedTemplate);
+      return onSelect(event, selectedTemplate);
     }
 
     if (event.key === 'Escape') {
@@ -250,7 +267,9 @@ function AppendMenuComponent(props) {
             class=${ clsx('cmd-change-menu__entry', { selected: !mouseSelectedTemplate && template === keyboardSelectedTemplate }) }
             onMouseEnter=${ () => setMouseSelectedTemplate(template) }
             onMouseLeave=${ () => setMouseSelectedTemplate(null) }
-            onClick=${ (event) => { event.stopPropagation(); onSelect(template); } }
+            draggable
+            onDragStart=${ (event) => { event.stopPropagation(); event.preventDefault(); onSelect(event, template, true); } }
+            onClick=${ (event) => { event.stopPropagation(); onSelect(event, template); } }
             data-entry-id=${ template.id }
           >
             <div class="cmd-change-menu__entry-content">
