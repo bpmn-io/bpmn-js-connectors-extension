@@ -65,7 +65,8 @@ AppendMenu.prototype._getDefaultEntries = function() {
       target,
       description,
       category,
-      search
+      search,
+      rating
     } = option;
 
     return {
@@ -75,6 +76,7 @@ AppendMenu.prototype._getDefaultEntries = function() {
       description,
       category,
       search,
+      rating,
       action: () => {
         return this._elementFactory.create('shape', { ...target });
       }
@@ -211,7 +213,7 @@ function AppendMenuComponent(props) {
 
     const filter = (template) => {
       if (!value) {
-        return true;
+        return template.rating !== -1;
       }
 
       const search = [
