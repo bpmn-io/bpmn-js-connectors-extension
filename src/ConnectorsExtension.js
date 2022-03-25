@@ -75,10 +75,73 @@ ConnectorsExtension.prototype._getAppendMenuPosition = function(element) {
   return pos;
 };
 
+ConnectorsExtension.prototype.appendAnything = function(event, element) {
+
+  const appendMenu = this._appendMenu;
+
+  if (appendMenu.isEmpty(element)) {
+    return;
+  }
+
+  const position = {
+    ...(this._getAppendMenuPosition(element)),
+    cursor: event && { x: event.x, y: event.y }
+  };
+
+  return appendMenu.open(element, position).then(result => {
+
+    if (!result) {
+      return;
+    }
+
+    const {
+      event,
+      newElement,
+      dragstart = false
+    } = result;
+
+    const createStart = (event, source, newElement) => {
+      this._create.start(event, newElement, {
+        source
+      });
+    };
+
+    const append = !dragstart && this._autoPlace
+      ? (event, source, newElement) => {
+        this._autoPlace.append(source, newElement);
+      }
+      : createStart;
+
+    append(event, element, newElement);
+  }).catch(error => {
+    if (error !== 'user-canceled') {
+      console.error('append-anything :: error', error);
+    }
+  });
+};
+
+ConnectorsExtension.prototype.replaceAnything = function(event, element) {
+
+  const replaceMenu = this._replaceMenu;
+
+  if (replaceMenu.isEmpty(element)) {
+    return;
+  }
+
+  const position = {
+    ...(this._getReplaceMenuPosition(element)),
+    cursor: event && { x: event.x, y: event.y }
+  };
+
+  return replaceMenu.open(element, position).catch(error => {
+    if (error !== 'user-canceled') {
+      console.error('replace-anything :: error', error);
+    }
+  });
+};
 ConnectorsExtension.prototype.getContextPadEntries = function(element) {
 
   const replaceMenu = this._replaceMenu;
-  const appendMenu = this._appendMenu;
   const translate = this._translate;
 
   if (element.labelTarget) {
@@ -107,13 +170,7 @@ ConnectorsExtension.prototype.getContextPadEntries = function(element) {
         title: translate('Change type'),
         action: {
           click: (event, element) => {
-
-            const position = {
-              ...(this._getReplaceMenuPosition(element)),
-              cursor: { x: event.x, y: event.y }
-            };
-
-            replaceMenu.open(element, position);
+            this.replaceAnything(event, element);
           }
         }
       };
@@ -130,42 +187,7 @@ ConnectorsExtension.prototype.getContextPadEntries = function(element) {
         title: translate('Append connector'),
         action: {
           click: (event, element) => {
-
-            const position = {
-              ...(this._getAppendMenuPosition(element)),
-              cursor: { x: event.x, y: event.y }
-            };
-
-            appendMenu.open(element, position).then(result => {
-
-              if (!result) {
-                return;
-              }
-
-              const {
-                event,
-                newElement,
-                dragstart = false
-              } = result;
-
-              const createStart = (event, source, newElement) => {
-                this._create.start(event, newElement, {
-                  source
-                });
-              };
-
-              const append = !dragstart && this._autoPlace
-                ? (event, source, newElement) => {
-                  this._autoPlace.append(source, newElement);
-                }
-                : createStart;
-
-              append(event, element, newElement);
-            }).catch(error => {
-              if (error !== 'user-canceled') {
-                console.error('append-anything :: error', error);
-              }
-            });
+            this.appendAnything(event, element);
           }
         }
       };
