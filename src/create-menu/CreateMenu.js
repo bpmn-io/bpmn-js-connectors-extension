@@ -49,10 +49,10 @@ CreateMenu.prototype._getDefaultEntries = function() {
       actionName,
       className,
       label,
-      rating,
-      target,
       category,
-      search
+      search,
+      rating,
+      target
     } = option;
 
     return {
@@ -188,7 +188,7 @@ function CreateMenuComponent(props) {
 
     const filter = (template) => {
       if (!value) {
-        return true;
+        return template.rating !== -1;
       }
 
       const search = [

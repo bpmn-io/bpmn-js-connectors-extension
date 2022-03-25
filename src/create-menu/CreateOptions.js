@@ -33,6 +33,7 @@ export var NONE_EVENTS = [
     label: 'Start Event',
     actionName: 'replace-non-start-event',
     className: 'bpmn-icon-start-event-none',
+    rating: -1,
     target: {
       type: 'bpmn:StartEvent'
     }
@@ -41,6 +42,7 @@ export var NONE_EVENTS = [
     label: 'Intermediate Throw Event',
     actionName: 'replace-with-none-intermediate-throwing',
     className: 'bpmn-icon-intermediate-event-none',
+    rating: -1,
     target: {
       type: 'bpmn:IntermediateThrowEvent'
     }
@@ -49,6 +51,7 @@ export var NONE_EVENTS = [
     label: 'Boundary Event',
     actionName: 'replace-with-boundary-event',
     className: 'bpmn-icon-intermediate-event-none',
+    rating: -1,
     target: {
       type: 'bpmn:IntermediateThrowEvent'
     }
@@ -57,6 +60,7 @@ export var NONE_EVENTS = [
     label: 'End Event',
     actionName: 'replace-with-none-end',
     className: 'bpmn-icon-end-event-none',
+    rating: -1,
     target: {
       type: 'bpmn:EndEvent'
     }
@@ -414,6 +418,7 @@ export var GATEWAY = [
     search: 'or',
     actionName: 'replace-with-inclusive-gateway',
     className: 'bpmn-icon-gateway-or',
+    rating: -1,
     target: {
       type: 'bpmn:InclusiveGateway'
     }
@@ -422,6 +427,7 @@ export var GATEWAY = [
     label: 'Complex Gateway',
     actionName: 'replace-with-complex-gateway',
     className: 'bpmn-icon-gateway-complex',
+    rating: -1,
     target: {
       type: 'bpmn:ComplexGateway'
     }
@@ -486,6 +492,7 @@ export var TASK = [
     label: 'Task',
     actionName: 'replace-with-task',
     className: 'bpmn-icon-task',
+    rating: -1,
     target: {
       type: 'bpmn:Task'
     }
@@ -494,6 +501,7 @@ export var TASK = [
     label: 'Send Task',
     actionName: 'replace-with-send-task',
     className: 'bpmn-icon-send',
+    rating: -1,
     target: {
       type: 'bpmn:SendTask'
     }
@@ -502,6 +510,7 @@ export var TASK = [
     label: 'Receive Task',
     actionName: 'replace-with-receive-task',
     className: 'bpmn-icon-receive',
+    rating: -1,
     target: {
       type: 'bpmn:ReceiveTask'
     }
@@ -518,6 +527,7 @@ export var TASK = [
     label: 'Manual Task',
     actionName: 'replace-with-manual-task',
     className: 'bpmn-icon-manual',
+    rating: -1,
     target: {
       type: 'bpmn:ManualTask'
     }
@@ -542,6 +552,7 @@ export var TASK = [
     label: 'Script Task',
     actionName: 'replace-with-script-task',
     className: 'bpmn-icon-script',
+    rating: -1,
     target: {
       type: 'bpmn:ScriptTask'
     }
