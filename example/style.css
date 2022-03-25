@@ -12,6 +12,15 @@
   --change-menu-header-font-weight: 500;
 }
 
+.djs-palette .separator {
+  margin: 5px;
+  padding-top: 10px;
+}
+
+.djs-palette .entry:before {
+  vertical-align: initial;
+}
+
 html, body, #canvas {
   width: 100%;
   height: 100%;

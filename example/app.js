@@ -32,6 +32,8 @@ const TEMPLATES = [ ...EMAIL_TEMPLATES, ...REST_TEMPLATES ];
 
 const url = new URL(window.location.href);
 
+const appendAnything = url.searchParams.has('aa');
+
 const persistent = url.searchParams.has('p');
 const presentationMode = url.searchParams.has('pm');
 
@@ -72,6 +74,9 @@ const modeler = new BpmnModeler({
   },
   keyboard: {
     bindTo: document
+  },
+  connectorsExtension: {
+    appendAnything
   },
   propertiesPanel: {
     parent: '#properties-panel'

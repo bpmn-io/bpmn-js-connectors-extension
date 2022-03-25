@@ -14,6 +14,7 @@ import ChangeMenuModule from './change-menu';
 import ElementTemplateChooserModule from './element-template-chooser';
 import ReplaceMenuModule from './replace-menu';
 import AppendMenuModule from './append-menu';
+import CreateMenuModule from './create-menu';
 
 
 export default {
@@ -21,7 +22,8 @@ export default {
     ChangeMenuModule,
     ElementTemplateChooserModule,
     ReplaceMenuModule,
-    AppendMenuModule
+    AppendMenuModule,
+    CreateMenuModule
   ],
   __init__: [
     'connectorsExtension',
