@@ -64,6 +64,12 @@
   overflow: hidden;
 }
 
+.cmd-change-menu__search.hidden {
+  position: absolute;
+  height: 0;
+  top: -1000px;
+}
+
 .cmd-change-menu__search input {
   width: 100%;
   box-sizing: border-box;
