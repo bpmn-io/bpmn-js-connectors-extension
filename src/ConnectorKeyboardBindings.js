@@ -43,10 +43,18 @@ ConnectorKeyboardBindings.prototype.registerKeyboardBindings = function(keyboard
       return true;
     }
 
+    if (keyboard.isKey(['n', 'N'], event)) {
+      connectorsExtension.createAnything(mouseEvent);
+
+      return true;
+    }
+
     if (keyboard.isKey(['a', 'A'], event)) {
 
       if (selection.get().length === 1) {
         connectorsExtension.appendAnything(mouseEvent, selection.get()[0]);
+      } else {
+        connectorsExtension.createAnything(mouseEvent);
       }
 
       return true;

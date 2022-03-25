@@ -12,17 +12,15 @@ import {
 
 import clsx from 'clsx';
 
+
 import {
   CREATE_OPTIONS
-} from '../create-menu/CreateOptions';
+} from './CreateOptions';
 
 
-export default function AppendMenu(
-    config,
+export default function CreateMenu(
     elementTemplates, elementFactory,
     injector, changeMenu) {
-
-  this._config = config;
 
   this._elementTemplates = elementTemplates;
   this._elementFactory = elementFactory;
@@ -30,40 +28,29 @@ export default function AppendMenu(
   this._changeMenu = changeMenu;
 }
 
-AppendMenu.$inject = [
-  'config.connectorsExtension',
+CreateMenu.$inject = [
   'elementTemplates',
   'elementFactory',
   'injector',
   'changeMenu'
 ];
 
-AppendMenu.prototype._isAppendAnything = function() {
-  return this._config && this._config.appendAnything;
-};
-
-AppendMenu.prototype._getMatchingTemplates = function() {
+CreateMenu.prototype._getMatchingTemplates = function() {
   return this._elementTemplates.getAll().filter(template => {
     return template.appliesTo.includes('bpmn:Task') || template.appliesTo.includes('bpmn:ServiceTask');
   });
 };
 
-AppendMenu.prototype._getDefaultEntries = function() {
+CreateMenu.prototype._getDefaultEntries = function() {
 
-  if (!this._isAppendAnything()) {
-    return [];
-  }
-
-  return CREATE_OPTIONS.filter(
-    option => ![ 'bpmn:StartEvent', 'bpmn:Participant' ].includes(option.target.type)
-  ).map(option => {
+  return CREATE_OPTIONS.map(option => {
 
     const {
       actionName,
       className,
       label,
+      rating,
       target,
-      description,
       category,
       search
     } = option;
@@ -72,9 +59,9 @@ AppendMenu.prototype._getDefaultEntries = function() {
       label,
       id: `create-${actionName}`,
       className,
-      description,
       category,
       search,
+      rating,
       action: () => {
         return this._elementFactory.create('shape', { ...target });
       }
@@ -83,7 +70,7 @@ AppendMenu.prototype._getDefaultEntries = function() {
 
 };
 
-AppendMenu.prototype._getTemplateEntries = function() {
+CreateMenu.prototype._getTemplateEntries = function() {
 
   if (!('createElement' in this._elementTemplates)) {
     return [];
@@ -104,12 +91,12 @@ AppendMenu.prototype._getTemplateEntries = function() {
     return {
       name,
       description,
-      id: `append-template-${id}`,
+      search,
       category: category || {
         id: 'templates',
         name: 'Templates'
       },
-      search,
+      id: `create-template-${id}`,
       action: () => {
         return this._elementTemplates.createElement(template);
       }
@@ -117,7 +104,7 @@ AppendMenu.prototype._getTemplateEntries = function() {
   });
 };
 
-AppendMenu.prototype._getContext = function(element) {
+CreateMenu.prototype._getContext = function() {
 
   const defaultEntries = this._getDefaultEntries();
 
@@ -135,36 +122,33 @@ AppendMenu.prototype._getContext = function(element) {
 };
 
 /**
- * Open append menu and return a promise to signal the result.
+ * Open create menu and return a promise to signal the result.
  *
- * If the user canceles the append operation the promise will be
+ * If the user canceles the operation the promise will be
  * rejected with `user-canceled`.
  *
- * @typedef { { event: DOMEvent, dragstart: boolean, newElement: DiagramElement } } AppendMenuResult
+ * @typedef { { event: DOMEvent, newElement: DiagramElement } } CreateMenuResult
  *
- * @param { DiagramElement } element
  * @param { Point } position
  *
- * @return { Promise<AppendMenuResult> }
+ * @return { Promise<CreateMenuResult> }
  */
-AppendMenu.prototype.open = function(element, position) {
+CreateMenu.prototype.open = function(position) {
 
   const {
     entries
-  } = this._getContext(element);
+  } = this._getContext();
 
   const renderFn = (onClose) => html`
-    <${AppendMenuComponent}
+    <${CreateMenuComponent}
       entries=${ entries }
       onClose=${ onClose }
-      title=${ this._isAppendAnything() ? 'Append element' : 'Append connector' }
-      showCategories=${ this._isAppendAnything() }
     />
   `;
 
   return this._changeMenu.open(renderFn, {
     position,
-    className: 'cmd-append-menu'
+    className: 'cmd-create-menu'
   }).then((element) => {
 
     if (!element) {
@@ -175,18 +159,11 @@ AppendMenu.prototype.open = function(element, position) {
   });
 };
 
-AppendMenu.prototype.isEmpty = function(element) {
-  return this._getContext(element).empty;
-};
-
-
-function AppendMenuComponent(props) {
+function CreateMenuComponent(props) {
 
   const {
     onClose,
-    entries,
-    title,
-    showCategories = true
+    entries
   } = props;
 
   const onSelect = (event, entry, dragstart=false) => {
@@ -252,6 +229,7 @@ function AppendMenuComponent(props) {
     }
   }, [ selectedTemplate ]);
 
+
   const keyboardSelect = useCallback(direction => {
 
     const idx = templates.indexOf(selectedTemplate);
@@ -304,7 +282,7 @@ function AppendMenuComponent(props) {
   return html`
     <div class="cmd-change-menu__header">
       <h3 class="cmd-change-menu__title">
-        ${ title }
+        Create element
       </h3>
     </div>
 
@@ -324,7 +302,7 @@ function AppendMenuComponent(props) {
 
       <ul class="cmd-change-menu__results" ref=${ resultsRef }>
         ${templates.map((template, idx) => html`
-          ${ showCategories && categoryChanged(template, templates[idx - 1]) && html`
+          ${ categoryChanged(template, templates[idx - 1]) && html`
             <li
               key=${ template.category.id }
               class="cmd-change-menu__entry_header"
