@@ -139,7 +139,7 @@ ConnectorsExtension.prototype.getContextPadEntries = function(element) {
             appendMenu.open(element, position).then(result => {
 
               if (!result) {
-                return console.log('append-anything :: user canceled');
+                return;
               }
 
               const {
@@ -161,7 +161,11 @@ ConnectorsExtension.prototype.getContextPadEntries = function(element) {
                 : createStart;
 
               append(event, element, newElement);
-            }).catch(err => console.warn(err));
+            }).catch(error => {
+              if (error !== 'user-canceled') {
+                console.error('append-anything :: error', error);
+              }
+            });
           }
         }
       };

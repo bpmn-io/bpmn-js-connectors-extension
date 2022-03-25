@@ -120,8 +120,10 @@ ReplaceMenu.prototype.open = function(element, position) {
     className: 'cmd-replace-menu',
     element,
     position
-  }).finally(() => {
-    console.log('replace menu closed');
+  }).catch((error) => {
+    if (error !== 'user-canceled') {
+      console.error('replaceMenu.open :: error', error);
+    }
   });
 };
 

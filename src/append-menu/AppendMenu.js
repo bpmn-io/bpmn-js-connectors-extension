@@ -100,7 +100,7 @@ AppendMenu.prototype.open = function(element, position) {
   }).then((element) => {
 
     if (!element) {
-      return Promise.reject('user canceled');
+      return Promise.reject('user-canceled');
     }
 
     return element;

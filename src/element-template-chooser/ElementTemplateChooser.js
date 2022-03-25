@@ -45,11 +45,9 @@ export default function ElementTemplateChooser(
     this.open(templates).then(template => {
       this._applyTemplate(element, template);
     }).catch(err => {
-      if (err === 'user-canceled') {
-        console.log('elementTemplate.select :: user canceled');
+      if (err !== 'user-canceled') {
+        console.error('elementTemplate.select :: error', err);
       }
-
-      console.error('elementTemplate.select', err);
     });
   });
 }
