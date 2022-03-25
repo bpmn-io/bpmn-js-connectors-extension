@@ -212,7 +212,9 @@ function AppendMenuComponent(props) {
   const handleKeyDown = useCallback(event => {
 
     if (event.key === 'Enter' && selectedTemplate) {
-      return onSelect(event, selectedTemplate);
+      onSelect(event, selectedTemplate);
+
+      return event.preventDefault();
     }
 
     if (event.key === 'Escape') {
