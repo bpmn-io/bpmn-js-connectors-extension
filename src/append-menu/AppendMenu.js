@@ -33,6 +33,10 @@ AppendMenu.prototype._getMatchingTemplates = function() {
 
 AppendMenu.prototype._getTemplateEntries = function(element) {
 
+  if (!('createElement' in this._elementTemplates)) {
+    return [];
+  }
+
   const templates = this._getMatchingTemplates();
 
   return templates.map(template => {
