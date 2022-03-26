@@ -29,6 +29,7 @@ import './ElementTemplateChooser.css';
  * @param {ChangeMenu} changeMenu
  */
 export default function ElementTemplateChooser(
+    config,
     eventBus,
     elementTemplates,
     changeMenu) {
@@ -36,7 +37,9 @@ export default function ElementTemplateChooser(
   this._changeMenu = changeMenu;
   this._elementTemplates = elementTemplates;
 
-  eventBus.on('elementTemplates.select', (event) => {
+  const enableChooser = config && config.elementTemplateChooser !== false;
+
+  enableChooser && eventBus.on('elementTemplates.select', (event) => {
 
     const { element } = event;
 
@@ -53,6 +56,7 @@ export default function ElementTemplateChooser(
 }
 
 ElementTemplateChooser.$inject = [
+  'config.connectorsExtension',
   'eventBus',
   'elementTemplates',
   'changeMenu'
