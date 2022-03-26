@@ -139,9 +139,7 @@ function AppendMenuComponent(props) {
   const [ value, setValue ] = useState('');
 
   const [ templates, setTemplates ] = useState(props.entries);
-  const [ keyboardSelectedTemplate, setKeyboardSelectedTemplate ] = useState(null);
-  const [ mouseSelectedTemplate, setMouseSelectedTemplate ] = useState(null);
-  const [ selectedTemplate, setSelectedTemplate ] = useState(null);
+  const [ selectedTemplate, setSelectedTemplate ] = useState(templates[0]);
 
   useEffect(() => {
 
@@ -163,16 +161,12 @@ function AppendMenuComponent(props) {
 
     const templates = entries.filter(filter);
 
-    if (!templates.includes(keyboardSelectedTemplate)) {
-      setKeyboardSelectedTemplate(templates[0]);
-    }
-
-    if (!templates.includes(mouseSelectedTemplate)) {
-      setMouseSelectedTemplate(null);
+    if (!templates.includes(selectedTemplate)) {
+      setSelectedTemplate(templates[0]);
     }
 
     setTemplates(templates);
-  }, [ value, keyboardSelectedTemplate, mouseSelectedTemplate, props.templates ]);
+  }, [ value, selectedTemplate, props.templates ]);
 
   // focus input on initial mount
   useLayoutEffect(() => {
@@ -189,16 +183,11 @@ function AppendMenuComponent(props) {
     if (selectedEl) {
       selectedEl.scrollIntoViewIfNeeded();
     }
-  }, [ keyboardSelectedTemplate ]);
-
-  useEffect(() => {
-    setSelectedTemplate(mouseSelectedTemplate || keyboardSelectedTemplate);
-  }, [ keyboardSelectedTemplate, mouseSelectedTemplate ]);
-
+  }, [ selectedTemplate ]);
 
   const keyboardSelect = useCallback(direction => {
 
-    const idx = templates.indexOf(keyboardSelectedTemplate);
+    const idx = templates.indexOf(selectedTemplate);
 
     let nextIdx = idx + direction;
 
@@ -210,8 +199,8 @@ function AppendMenuComponent(props) {
       nextIdx = 0;
     }
 
-    setKeyboardSelectedTemplate(templates[nextIdx]);
-  }, [ templates, keyboardSelectedTemplate ]);
+    setSelectedTemplate(templates[nextIdx]);
+  }, [ templates, selectedTemplate ]);
 
   const handleKeyDown = useCallback(event => {
 
@@ -270,9 +259,8 @@ function AppendMenuComponent(props) {
         ${templates.map(template => html`
           <li
             key=${template.id}
-            class=${ clsx('cmd-change-menu__entry', { selected: !mouseSelectedTemplate && template === keyboardSelectedTemplate }) }
-            onMouseEnter=${ () => setMouseSelectedTemplate(template) }
-            onMouseLeave=${ () => setMouseSelectedTemplate(null) }
+            class=${ clsx('cmd-change-menu__entry', { selected: template === selectedTemplate }) }
+            onMouseEnter=${ () => setSelectedTemplate(template) }
             draggable
             onDragStart=${ (event) => { event.stopPropagation(); event.preventDefault(); onSelect(event, template, true); } }
             onClick=${ (event) => { event.stopPropagation(); onSelect(event, template); } }

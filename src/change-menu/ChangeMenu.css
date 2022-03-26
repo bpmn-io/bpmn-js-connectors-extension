@@ -147,8 +147,7 @@
   color: var(--text-muted-color);
 }
 
-.cmd-change-menu__results:not(:hover) .cmd-change-menu__entry.selected,
-.cmd-change-menu__entry:hover {
+.cmd-change-menu__entry.selected {
   background-color: var(--hover-background-color);
 }
 
