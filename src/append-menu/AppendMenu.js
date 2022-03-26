@@ -44,13 +44,17 @@ AppendMenu.prototype._getTemplateEntries = function(element) {
     const {
       id,
       name,
-      description
+      description,
+      category,
+      search
     } = template;
 
     return {
       name,
       description,
       id: `append-template-${id}`,
+      category,
+      search,
       action: () => {
         return this._elementTemplates.createElement(template);
       }
@@ -151,7 +155,8 @@ function AppendMenuComponent(props) {
       const search = [
         template.name && 'connector' || '',
         template.name, template.description || '',
-        template.label || ''
+        template.label || '',
+        template.search || ''
       ].join('---').toLowerCase();
 
       return value.toLowerCase().split(/\s/g).every(
@@ -256,7 +261,14 @@ function AppendMenuComponent(props) {
       </div>
 
       <ul class="cmd-change-menu__results" ref=${ resultsRef }>
-        ${templates.map(template => html`
+        ${templates.map((template, idx) => html`
+          ${ categoryChanged(template, templates[idx - 1]) && html`
+            <li
+              key=${ template.category.id }
+              class="cmd-change-menu__entry_header"
+            >${ template.category.name }</li>
+          ` }
+
           <li
             key=${template.id}
             class=${ clsx('cmd-change-menu__entry', { selected: template === selectedTemplate }) }
@@ -295,4 +307,15 @@ function AppendMenuComponent(props) {
       </ul>
     </div>
   `;
+}
+
+
+// helpers ////////////
+
+function categoryChanged(templateA, templateB) {
+
+  const categoryA = templateA && templateA.category;
+  const categoryB = templateB && templateB.category;
+
+  return (categoryA && categoryA.id) !== (categoryB && categoryB.id);
 }

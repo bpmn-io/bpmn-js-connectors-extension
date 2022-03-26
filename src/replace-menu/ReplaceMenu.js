@@ -51,7 +51,12 @@ ReplaceMenu.prototype._getTemplateEntries = function(element) {
     const {
       id,
       name,
-      description
+      description,
+      search,
+      category = {
+        id: 'templates',
+        name: 'Templates'
+      }
     } = template;
 
     /*
@@ -66,6 +71,8 @@ ReplaceMenu.prototype._getTemplateEntries = function(element) {
     return {
       name,
       description,
+      search,
+      category,
       id: `replace-template-${id}`,
       action: () => {
         this._applyTemplate(element, template);
@@ -166,8 +173,10 @@ function ReplaceMenuComponent(props) {
 
       const search = [
         template.name && 'connector' || '',
-        template.name, template.description || '',
-        template.label || ''
+        template.name,
+        template.description || '',
+        template.label || '',
+        template.search || ''
       ].join('---').toLowerCase();
 
       return value.toLowerCase().split(/\s/g).every(
@@ -278,7 +287,15 @@ function ReplaceMenuComponent(props) {
     </div>
 
     <ul class="cmd-change-menu__results" ref=${ resultsRef }>
-      ${templates.map(template => html`
+      ${templates.map((template, idx) => html`
+
+        ${ categoryChanged(template, templates[idx - 1]) && html`
+          <li
+            key=${ template.category.id }
+            class="cmd-change-menu__entry_header"
+          >${ template.category.name }</li>
+        ` }
+
         <li
           key=${template.id}
           class=${ clsx('cmd-change-menu__entry', { selected: template === selectedTemplate }) }
@@ -316,4 +333,15 @@ function ReplaceMenuComponent(props) {
     </ul>
   </div>
   `;
+}
+
+
+// helpers ////////////
+
+function categoryChanged(templateA, templateB) {
+
+  const categoryA = templateA && templateA.category;
+  const categoryB = templateB && templateB.category;
+
+  return (categoryA && categoryA.id) !== (categoryB && categoryB.id);
 }

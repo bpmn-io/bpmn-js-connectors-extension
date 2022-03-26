@@ -137,10 +137,20 @@
 }
 
 .cmd-change-menu__entry,
-.cmd-change-menu__muted-entry {
+.cmd-change-menu__muted-entry,
+.cmd-change-menu__entry_header {
   padding: 5px 7px;
   cursor: default;
   border-radius: 4px;
+}
+
+.cmd-change-menu__entry_header {
+  font-weight: 500;
+  color: #666;
+}
+
+.cmd-change-menu__entry_header:not(:first-child) {
+  margin-top: 6px;
 }
 
 .cmd-change-menu__muted-entry {
