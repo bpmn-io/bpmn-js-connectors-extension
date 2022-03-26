@@ -99,9 +99,7 @@ function TemplateComponent(props) {
   const [ value, setValue ] = useState('');
 
   const [ templates, setTemplates ] = useState(props.entries);
-  const [ keyboardSelectedTemplate, setKeyboardSelectedTemplate ] = useState(null);
-  const [ mouseSelectedTemplate, setMouseSelectedTemplate ] = useState(null);
-  const [ selectedTemplate, setSelectedTemplate ] = useState(null);
+  const [ selectedTemplate, setSelectedTemplate ] = useState(templates[0]);
 
   useEffect(() => {
 
@@ -110,22 +108,19 @@ function TemplateComponent(props) {
         return true;
       }
 
-      return [ template.name, template.description || '' ].join('---').toLowerCase().includes(value.toLowerCase());
+      return [
+        template.name, template.description || ''
+      ].join('---').toLowerCase().includes(value.toLowerCase());
     };
 
     const templates = props.entries.filter(filter);
 
-    if (!templates.includes(keyboardSelectedTemplate)) {
-      setKeyboardSelectedTemplate(templates[0]);
-    }
-
-    if (!templates.includes(mouseSelectedTemplate)) {
-      setMouseSelectedTemplate(null);
+    if (!templates.includes(selectedTemplate)) {
+      setSelectedTemplate(templates[0]);
     }
 
     setTemplates(templates);
-  }, [ value, keyboardSelectedTemplate, mouseSelectedTemplate, props.entries ]);
-
+  }, [ value, selectedTemplate, props.entries ]);
 
   // focus input on initial mount
   useLayoutEffect(() => {
@@ -142,15 +137,11 @@ function TemplateComponent(props) {
     if (selectedEl) {
       selectedEl.scrollIntoViewIfNeeded();
     }
-  }, [ keyboardSelectedTemplate ]);
-
-  useEffect(() => {
-    setSelectedTemplate(mouseSelectedTemplate || keyboardSelectedTemplate);
-  }, [ keyboardSelectedTemplate, mouseSelectedTemplate ]);
+  }, [ selectedTemplate ]);
 
   const keyboardSelect = useCallback(direction => {
 
-    const idx = templates.indexOf(keyboardSelectedTemplate);
+    const idx = templates.indexOf(selectedTemplate);
 
     let nextIdx = idx + direction;
 
@@ -162,8 +153,8 @@ function TemplateComponent(props) {
       nextIdx = 0;
     }
 
-    setKeyboardSelectedTemplate(templates[nextIdx]);
-  }, [ templates, keyboardSelectedTemplate ]);
+    setSelectedTemplate(templates[nextIdx]);
+  }, [ templates, selectedTemplate ]);
 
   const handleKeyDown = useCallback(event => {
 
@@ -220,9 +211,8 @@ function TemplateComponent(props) {
         ${templates.map(template => html`
           <li
             key=${template.id}
-            class=${ clsx('cmd-change-menu__entry', { selected: !mouseSelectedTemplate && template === keyboardSelectedTemplate }) }
-            onMouseEnter=${ () => setMouseSelectedTemplate(template) }
-            onMouseLeave=${ () => setMouseSelectedTemplate(null) }
+            class=${ clsx('cmd-change-menu__entry', { selected: template === selectedTemplate }) }
+            onMouseEnter=${ () => setSelectedTemplate(template) }
             onClick=${ () => onClose(template) }
             data-entry-id=${template.id}
           >
