@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/bpmn-io/bpmn-js-connectors-extension/actions/workflows/CI.yml/badge.svg)](https://github.com/bpmn-io/bpmn-js-connectors-extension/actions/workflows/CI.yml)
 
-This module extends bpmn-js with an element templates everywhere modeling experience. 
+This module extends [bpmn-js](https://github.com/bpmn-io/bpmn-js) with an element templates everywhere modeling experience. 
 
 To be integrated into the Camunda [Web](https://github.com/camunda/web-modeler) and [Desktop](https://github.com/camunda/camunda-modeler) Modeler apps.
 
