@@ -4,20 +4,21 @@
 
 This module extends bpmn-js with an element templates everywhere modeling experience. 
 
-To be integrated into the Camunda [Web](https://github.com/camunda/web-modeler) and [Desktop](https://github.com/camunda/camunda-modeler) Modeler apps for Camunda 8.
+To be integrated into the Camunda [Web](https://github.com/camunda/web-modeler) and [Desktop](https://github.com/camunda/camunda-modeler) Modeler apps.
 
 [![screenshot](./resources/screenshot.png)](https://potential-winner-9f6a854d.pages.github.io/)
 
 
 ## Features
 
-* [C8 element template support](https://docs.camunda.io/docs/components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates/)
-* Append connector tasks during modeling
-* Upgrade task to connector tasks
-* Visually distinguish connector tasks from standard BPMN tasks
-* Modern replace and append menu
-* Support for documentation links and icons
+Built on top of [element templates](https://docs.camunda.io/docs/components/modeler/camunda-modeler/element-templates/camunda-modeler-element-templates/):
 
+* Append template tasks during modeling
+* Upgrade template task via replace menu
+* (Optionally) Upgrade template tasks via properties panel
+* Modern replace and append with search + keyboard support
+* Documentation links and icons
+* Visually distinguish template tasks from standard BPMN tasks on the canvas
 
 ## Resources
 
@@ -54,6 +55,16 @@ const modeler = new BpmnModeler({
 The extension relies on `elementTemplates` to be provided via additional setup, i.e. [camunda-bpmn-js](https://github.com/camunda/camunda-bpmn-js).
 
 See [`example`](./example) for a full featured demo or [check it out in action](https://potential-winner-9f6a854d.pages.github.io/).
+
+
+## Configuration
+
+Customize this extension via the `connectorsExtension` config: 
+
+| Option | Impact |
+| :--- | :--- |
+| `appendAnything=false` | If `true`, append and create anything modeling experience |
+| `elementTemplateChooser=true` | If `false`, do not integrate with the properties panel element template chooser |
 
 
 ## Run locally
