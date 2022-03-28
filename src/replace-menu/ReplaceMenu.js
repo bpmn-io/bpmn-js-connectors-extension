@@ -257,7 +257,7 @@ function ReplaceMenuComponent(props) {
       return event.preventDefault();
     }
 
-  }, [ selectedTemplate ]);
+  }, [ selectedTemplate, keyboardSelect ]);
 
   const handleKey = useCallback((event) => {
     setValue(() => event.target.value);
