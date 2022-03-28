@@ -12,6 +12,10 @@ import {
 
 import clsx from 'clsx';
 
+import {
+  categoryChanged,
+  scrollIntoView
+} from '../utils';
 
 import {
   CREATE_OPTIONS
@@ -225,7 +229,7 @@ function CreateMenuComponent(props) {
     const selectedEl = containerEl.querySelector('.selected');
 
     if (selectedEl) {
-      selectedEl.scrollIntoViewIfNeeded();
+      scrollIntoView(selectedEl);
     }
   }, [ selectedTemplate ]);
 
@@ -347,15 +351,4 @@ function CreateMenuComponent(props) {
       </ul>
     </div>
   `;
-}
-
-
-// helpers ////////////
-
-function categoryChanged(templateA, templateB) {
-
-  const categoryA = templateA && templateA.category;
-  const categoryB = templateB && templateB.category;
-
-  return (categoryA && categoryA.id) !== (categoryB && categoryB.id);
 }

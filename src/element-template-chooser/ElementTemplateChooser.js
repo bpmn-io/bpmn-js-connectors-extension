@@ -11,6 +11,11 @@ import {
 } from 'preact/hooks';
 
 import {
+  scrollIntoView,
+  categoryChanged
+} from '../utils';
+
+import {
   isAny
 } from 'bpmn-js/lib/util/ModelUtil';
 
@@ -137,7 +142,7 @@ function TemplateComponent(props) {
     const selectedEl = containerEl.querySelector('.selected');
 
     if (selectedEl) {
-      selectedEl.scrollIntoViewIfNeeded();
+      scrollIntoView(selectedEl);
     }
   }, [ selectedTemplate ]);
 
@@ -256,15 +261,4 @@ function TemplateComponent(props) {
       </ul>
     </div>
   `;
-}
-
-
-// helpers ////////////
-
-function categoryChanged(templateA, templateB) {
-
-  const categoryA = templateA && templateA.category;
-  const categoryB = templateB && templateB.category;
-
-  return (categoryA && categoryA.id) !== (categoryB && categoryB.id);
 }
