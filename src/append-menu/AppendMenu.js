@@ -10,6 +10,11 @@ import {
   useState
 } from 'preact/hooks';
 
+import {
+  categoryChanged,
+  scrollIntoView
+} from '../utils';
+
 import clsx from 'clsx';
 
 import {
@@ -250,7 +255,7 @@ function AppendMenuComponent(props) {
     const selectedEl = containerEl.querySelector('.selected');
 
     if (selectedEl) {
-      selectedEl.scrollIntoViewIfNeeded();
+      scrollIntoView(selectedEl);
     }
   }, [ selectedTemplate ]);
 
@@ -371,15 +376,4 @@ function AppendMenuComponent(props) {
       </ul>
     </div>
   `;
-}
-
-
-// helpers ////////////
-
-function categoryChanged(templateA, templateB) {
-
-  const categoryA = templateA && templateA.category;
-  const categoryB = templateB && templateB.category;
-
-  return (categoryA && categoryA.id) !== (categoryB && categoryB.id);
 }
