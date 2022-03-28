@@ -76,7 +76,7 @@ ElementTemplateChooser.prototype.open = function(templates) {
 
   const renderFn = (onClose) => html`
     <${TemplateComponent}
-      templates=${ templates }
+      entries=${ templates }
       onClose=${ onClose }
     />
   `;
@@ -98,7 +98,7 @@ function TemplateComponent(props) {
 
   const [ value, setValue ] = useState('');
 
-  const [ templates, setTemplates ] = useState(props.templates);
+  const [ templates, setTemplates ] = useState(props.entries);
   const [ keyboardSelectedTemplate, setKeyboardSelectedTemplate ] = useState(null);
   const [ mouseSelectedTemplate, setMouseSelectedTemplate ] = useState(null);
   const [ selectedTemplate, setSelectedTemplate ] = useState(null);
@@ -113,7 +113,7 @@ function TemplateComponent(props) {
       return [ template.name, template.description || '' ].join('---').toLowerCase().includes(value.toLowerCase());
     };
 
-    const templates = props.templates.filter(filter);
+    const templates = props.entries.filter(filter);
 
     if (!templates.includes(keyboardSelectedTemplate)) {
       setKeyboardSelectedTemplate(templates[0]);
@@ -124,7 +124,7 @@ function TemplateComponent(props) {
     }
 
     setTemplates(templates);
-  }, [ value, keyboardSelectedTemplate, mouseSelectedTemplate, props.templates ]);
+  }, [ value, keyboardSelectedTemplate, mouseSelectedTemplate, props.entries ]);
 
 
   // focus input on initial mount
