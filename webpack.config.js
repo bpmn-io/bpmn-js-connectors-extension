@@ -26,7 +26,7 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: '*.{html,css}', context: 'example', to: '.' },
+        { from: '*.html', context: 'example', to: '.' },
         { from: 'bpmn-js/dist/assets/**/*', context: 'node_modules', to: './vendor' },
         { from: 'bpmn-js-properties-panel/dist/assets/**/*', context: 'node_modules', to: './vendor' },
         { from: '@ibm/plex/{css/ibm-plex.min.css,IBM-Plex-Sans/fonts/{complete,split}/woff2/**}', context: 'node_modules', to: './vendor' }

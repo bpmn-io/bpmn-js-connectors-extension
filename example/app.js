@@ -26,6 +26,8 @@ import exampleXML from './newDiagram.bpmn';
 import EMAIL_TEMPLATES from './.camunda/element-templates/sendgrid-connector.json';
 import REST_TEMPLATES from './.camunda/element-templates/http-json-connector.json';
 
+import './style.css';
+
 const TEMPLATES = [ ...EMAIL_TEMPLATES, ...REST_TEMPLATES ];
 
 const url = new URL(window.location.href);
