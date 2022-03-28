@@ -37,7 +37,7 @@ export default function ElementTemplateChooser(
   this._changeMenu = changeMenu;
   this._elementTemplates = elementTemplates;
 
-  const enableChooser = config && config.elementTemplateChooser !== false;
+  const enableChooser = !config || config.elementTemplateChooser !== false;
 
   enableChooser && eventBus.on('elementTemplates.select', (event) => {
 
