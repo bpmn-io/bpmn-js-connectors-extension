@@ -6,6 +6,18 @@ All notable changes to [bpmn-js-connectors-extension](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.0.12
+
+* `FEAT`: support categories and search ([#18](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/18))
+* `FEAT`: improve mixed mouse + keyboard selection ([#19](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/19))
+* `FEAT`: improve existing tools integration ([#17](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/17))
+* `FEAT`: visually hide search if less than five elements ([#16](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/16))
+* `FEAT`: optionally support create/append anything ([#14](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/14))
+* `FEAT`: add append (`a`), replace (`r`) and create (`n`) keyboard bindings ([#15](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/15))
+* `FIX`: correct muted entry sizing ([#24](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/24))
+* `FIX`: correct scroll into on Firefox ([#23](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/23))
+* `FIX`: prevent ENTER propagation on append
+
 ## 0.0.11
 
 * `CHORE`: remove debug logging ([#13](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/13))
