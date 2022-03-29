@@ -12,7 +12,8 @@ import {
 
 import {
   scrollIntoView,
-  categoryChanged
+  categoryChanged,
+  sanitizeImageUrl
 } from '../utils';
 
 import {
@@ -77,11 +78,26 @@ ElementTemplateChooser.prototype._getMatchingTemplates = function(element) {
   });
 };
 
+ElementTemplateChooser.prototype._toEntries = function(templates) {
+
+  return templates.map(template => {
+
+    const {
+      icon = {}
+    } = template;
+
+    return {
+      ...template,
+      imageUrl: sanitizeImageUrl(icon.contents)
+    };
+  });
+};
+
 ElementTemplateChooser.prototype.open = function(templates) {
 
   const renderFn = (onClose) => html`
     <${TemplateComponent}
-      entries=${ templates }
+      entries=${ this._toEntries(templates) }
       onClose=${ onClose }
     />
   `;
@@ -233,11 +249,11 @@ function TemplateComponent(props) {
           >
 
             <div class="cmd-change-menu__entry-content">
-              ${ template.imageUrl && html`
-                <img src=${ template.imageUrl } />
-              `}
-
               <span class=${ clsx('cmd-change-menu__name', template.className) } title="${ template.label || template.name }">
+                ${ template.imageUrl && html`
+                  <img class="cmd-change-menu__entry-icon" src=${ template.imageUrl } />
+                `}
+
                 ${template.label || template.name}
               </span>
               <span class="cmd-change-menu__description" title="${ template.description }">

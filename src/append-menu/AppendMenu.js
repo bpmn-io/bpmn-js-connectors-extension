@@ -12,7 +12,8 @@ import {
 
 import {
   categoryChanged,
-  scrollIntoView
+  scrollIntoView,
+  sanitizeImageUrl
 } from '../utils';
 
 import clsx from 'clsx';
@@ -105,6 +106,7 @@ AppendMenu.prototype._getTemplateEntries = function() {
       name,
       description,
       category,
+      icon = {},
       search
     } = template;
 
@@ -116,6 +118,7 @@ AppendMenu.prototype._getTemplateEntries = function() {
         id: 'templates',
         name: 'Templates'
       },
+      imageUrl: sanitizeImageUrl(icon.contents),
       search,
       action: () => {
         return this._elementTemplates.createElement(template);
@@ -348,11 +351,12 @@ function AppendMenuComponent(props) {
             data-entry-id=${ template.id }
           >
             <div class="cmd-change-menu__entry-content">
-              ${ template.imageUrl && html`
-                <img src=${ template.imageUrl } />
-              `}
 
               <span class=${ clsx('cmd-change-menu__name', template.className) } title="${ template.label || template.name }">
+                ${ template.imageUrl && html`
+                  <img class="cmd-change-menu__entry-icon" src=${ template.imageUrl } />
+                `}
+
                 ${template.label || template.name}
               </span>
               <span class="cmd-change-menu__description" title="${ template.description }">
