@@ -16,7 +16,8 @@ import {
 
 import {
   categoryChanged,
-  scrollIntoView
+  scrollIntoView,
+  sanitizeImageUrl
 } from '../utils';
 
 import clsx from 'clsx';
@@ -58,6 +59,7 @@ ReplaceMenu.prototype._getTemplateEntries = function(element) {
       name,
       description,
       search,
+      icon = {},
       category = {
         id: 'templates',
         name: 'Templates'
@@ -78,6 +80,7 @@ ReplaceMenu.prototype._getTemplateEntries = function(element) {
       description,
       search,
       category,
+      imageUrl: sanitizeImageUrl(icon.contents),
       id: `replace-template-${id}`,
       action: () => {
         this._applyTemplate(element, template);
@@ -310,11 +313,11 @@ function ReplaceMenuComponent(props) {
         >
 
           <div class="cmd-change-menu__entry-content">
-            ${ template.imageUrl && html`
-              <img src=${ template.imageUrl } />
-            `}
-
             <span class=${ clsx('cmd-change-menu__name', template.className) } title="${ template.label || template.name }">
+              ${ template.imageUrl && html`
+                <img class="cmd-change-menu__entry-icon" src=${ template.imageUrl } />
+              `}
+
               ${template.label || template.name}
             </span>
             <span class="cmd-change-menu__description" title="${ template.description }">

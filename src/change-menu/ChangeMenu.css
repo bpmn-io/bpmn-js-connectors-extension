@@ -159,6 +159,12 @@
   color: var(--change-menu-category-color);
 }
 
+.cmd-change-menu__entry-icon {
+  width: 16px;
+  margin-right: 0.5rem;
+  margin-bottom: -0.2rem;
+}
+
 .cmd-change-menu__entry_header:not(:first-child) {
   margin-top: 8px;
 }
