@@ -172,8 +172,9 @@ ConnectorsExtension.prototype.replaceAnything = function(event, element) {
   });
 };
 
-ConnectorsExtension.prototype.createAnything = function(event) {
-  return this._createMenu.open(event).then(result => {
+ConnectorsExtension.prototype.createAnything = function(event, position) {
+
+  return this._createMenu.open(event, position).then(result => {
 
     const {
       event: _event,
@@ -273,7 +274,16 @@ ConnectorsExtension.prototype.getPaletteEntries = function() {
       title: this._translate('Create anything'),
       action: {
         click: (event) => {
-          this.createAnything(event);
+
+          const cursor = event && { x: event.x, y: event.y };
+
+          const position = event && {
+            x: cursor.x + 35,
+            y: cursor.y + 10,
+            cursor
+          };
+
+          this.createAnything(event, position);
         }
       }
     }

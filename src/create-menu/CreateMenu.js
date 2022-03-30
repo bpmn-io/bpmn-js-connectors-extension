@@ -140,7 +140,7 @@ CreateMenu.prototype._getContext = function() {
  *
  * @return { Promise<CreateMenuResult> }
  */
-CreateMenu.prototype.open = function(position) {
+CreateMenu.prototype.open = function(event, position=event) {
 
   const {
     entries
