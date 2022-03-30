@@ -89,21 +89,23 @@ CreateMenu.prototype._getTemplateEntries = function() {
       id,
       name,
       description,
-      category,
+      category = {
+        id: 'templates',
+        name: 'Templates'
+      },
+      icon = {},
       search,
-      icon = {}
+      documentationRef
     } = template;
 
     return {
       name,
       description,
-      search,
-      category: category || {
-        id: 'templates',
-        name: 'Templates'
-      },
-      imageUrl: sanitizeImageUrl(icon.contents),
       id: `create-template-${id}`,
+      category,
+      imageUrl: sanitizeImageUrl(icon.contents),
+      search,
+      documentationRef,
       action: () => {
         return this._elementTemplates.createElement(template);
       }

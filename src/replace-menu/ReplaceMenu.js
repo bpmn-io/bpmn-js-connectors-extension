@@ -58,30 +58,23 @@ ReplaceMenu.prototype._getTemplateEntries = function(element) {
       id,
       name,
       description,
-      search,
-      icon = {},
       category = {
         id: 'templates',
         name: 'Templates'
-      }
+      },
+      icon = {},
+      search,
+      documentationRef
     } = template;
-
-    /*
-    var menuEntry = {
-      label: translate(label),
-      className: definition.className,
-      id: definition.actionName,
-      action: action
-    };
-    */
 
     return {
       name,
       description,
-      search,
+      id: `replace-template-${id}`,
       category,
       imageUrl: sanitizeImageUrl(icon.contents),
-      id: `replace-template-${id}`,
+      search,
+      documentationRef,
       action: () => {
         this._applyTemplate(element, template);
       }

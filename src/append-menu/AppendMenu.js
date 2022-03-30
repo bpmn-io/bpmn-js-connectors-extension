@@ -105,21 +105,23 @@ AppendMenu.prototype._getTemplateEntries = function() {
       id,
       name,
       description,
-      category,
+      category = {
+        id: 'templates',
+        name: 'Templates'
+      },
       icon = {},
-      search
+      search,
+      documentationRef
     } = template;
 
     return {
       name,
       description,
       id: `append-template-${id}`,
-      category: category || {
-        id: 'templates',
-        name: 'Templates'
-      },
+      category,
       imageUrl: sanitizeImageUrl(icon.contents),
       search,
+      documentationRef,
       action: () => {
         return this._elementTemplates.createElement(template);
       }
