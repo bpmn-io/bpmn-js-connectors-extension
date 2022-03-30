@@ -6,6 +6,10 @@ All notable changes to [bpmn-js-connectors-extension](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.0.13
+
+* `FIX`: correctly handle missing `appendAnything` feature toggle
+
 ## 0.0.12
 
 * `FEAT`: support template icons ([#26](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/26))
