@@ -225,7 +225,6 @@
   display: none;
 }
 
-.cmd-change-menu__results:not(:hover) .cmd-change-menu__entry.selected .cmd-change-menu__entry-help,
 .cmd-change-menu__entry:hover .cmd-change-menu__entry-help {
   display: flex;
 }
