@@ -48,7 +48,7 @@ AppendMenu.$inject = [
 ];
 
 AppendMenu.prototype._isAppendAnything = function() {
-  return this._config && this._config.appendAnything;
+  return this._config && this._config.appendAnything || false;
 };
 
 AppendMenu.prototype._getMatchingTemplates = function() {

@@ -72,7 +72,7 @@ ConnectorsExtension.prototype.loadTemplates = function(templates) {
 };
 
 ConnectorsExtension.prototype._isAppendAnything = function() {
-  return this._config && this._config.appendAnything;
+  return this._config && this._config.appendAnything || false;
 };
 
 ConnectorsExtension.prototype._getReplaceMenuPosition = function(element) {
