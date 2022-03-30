@@ -75,7 +75,7 @@
         "feel": "required",
         "binding": {
           "type": "zeebe:input",
-          "name": "queryParamters"
+          "name": "queryParameters"
         },
         "optional": true
       },
@@ -206,7 +206,7 @@
         "feel": "required",
         "binding": {
           "type": "zeebe:input",
-          "name": "queryParamters"
+          "name": "queryParameters"
         },
         "optional": true
       },
@@ -371,7 +371,7 @@
         "feel": "required",
         "binding": {
           "type": "zeebe:input",
-          "name": "queryParamters"
+          "name": "queryParameters"
         },
         "optional": true
       },
