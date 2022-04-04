@@ -1,7 +1,7 @@
 [
   {
     "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-    "name": "SendGrid Email Template Task",
+    "name": "SendGrid Email Template Connector",
     "id": "io.camunda.connectors.SendGrid.v1.template",
     "description": "Send an Email via SendGrid Dynamic Template",
     "documentationRef": "https://docs.camunda.io/docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/",
@@ -135,7 +135,7 @@
   },
   {
     "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-    "name": "SendGrid Email Task",
+    "name": "SendGrid Email Connector",
     "id": "io.camunda.connectors.SendGrid.v1.content",
     "description": "Send an Email via SendGrid",
     "documentationRef": "https://docs.camunda.io/docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/",
