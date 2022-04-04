@@ -18,6 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "@bpmn-io/add-exporter": "^0.2.0",
+    "@bpmn-io/element-templates-icons-renderer": "^0.1.2",
     "@bpmn-io/properties-panel": "^0.13.1",
     "@ibm/plex": "^6.0.0",
     "@rollup/plugin-commonjs": "^21.0.2",
@@ -43,7 +44,7 @@
     "webpack": "^5.51.0",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.0.0",
-    "zeebe-bpmn-moddle": "^0.11.0"
+    "zeebe-bpmn-moddle": "^0.12.0"
   },
   "dependencies": {
     "min-dom": "^3.1.3",

@@ -11,6 +11,8 @@ import {
   CloudElementTemplatesPropertiesProviderModule
 } from 'bpmn-js-properties-panel';
 
+import TemplateIconRendererModule from '@bpmn-io/element-templates-icons-renderer';
+
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 
 import AddExporterModule from '@bpmn-io/add-exporter';
@@ -67,6 +69,7 @@ const modeler = new BpmnModeler({
     BpmnPropertiesProviderModule,
     ZeebePropertiesProviderModule,
     CloudElementTemplatesPropertiesProviderModule,
+    TemplateIconRendererModule,
     ZeebeModdleModule
   ],
   exporter: {
