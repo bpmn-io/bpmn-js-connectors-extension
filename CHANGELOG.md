@@ -6,6 +6,14 @@ All notable changes to [bpmn-js-connectors-extension](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.0.14
+
+* `FEAT`: require official [template icon renderer](https://github.com/bpmn-io/element-templates-icons-renderer)
+
+### Breaking Change
+
+* Rendering of template icons on the canvas is now a concern outside this library.
+
 ## 0.0.13
 
 * `FIX`: correctly handle missing `appendAnything` feature toggle
