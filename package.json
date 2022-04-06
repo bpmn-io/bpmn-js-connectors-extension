@@ -1,6 +1,6 @@
 {
   "name": "bpmn-js-connectors-extension",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The bpmn-js connectors extension",
   "scripts": {
     "dev": "npm start",
