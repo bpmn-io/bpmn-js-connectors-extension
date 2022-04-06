@@ -65,6 +65,11 @@ Customize this extension via the `connectorsExtension` config:
 | `elementTemplateChooser=true` | If `false`, do not integrate with the properties panel element template chooser |
 
 
+## Related
+
+* [@bpmn-io/element-templates-icons-renderer](https://github.com/bpmn-io/element-templates-icons-renderer) - A renderer for task icons
+
+
 ## Run locally
 
 To run the demo application, execute:
