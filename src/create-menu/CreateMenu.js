@@ -65,7 +65,7 @@ CreateMenu.prototype._getDefaultEntries = function() {
 
     return {
       label,
-      id: `create-${actionName}`,
+      id: `create.${actionName}`,
       className,
       category,
       search,
@@ -104,7 +104,7 @@ CreateMenu.prototype._getTemplateEntries = function() {
     return {
       name,
       description,
-      id: `create-template-${id}`,
+      id: `create.template-${id}`,
       category,
       imageUrl: sanitizeImageUrl(icon.contents),
       search,

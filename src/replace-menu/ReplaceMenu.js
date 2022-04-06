@@ -73,7 +73,7 @@ ReplaceMenu.prototype._getTemplateEntries = function(element) {
     return {
       name,
       description,
-      id: `replace-template-${id}`,
+      id: `replace.template-${id}`,
       category,
       imageUrl: sanitizeImageUrl(icon.contents),
       search,

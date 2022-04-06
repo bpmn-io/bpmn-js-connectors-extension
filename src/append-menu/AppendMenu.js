@@ -80,7 +80,7 @@ AppendMenu.prototype._getDefaultEntries = function() {
 
     return {
       label,
-      id: `create-${actionName}`,
+      id: `append.${actionName}`,
       className,
       description,
       category,
@@ -120,7 +120,7 @@ AppendMenu.prototype._getTemplateEntries = function() {
     return {
       name,
       description,
-      id: `append-template-${id}`,
+      id: `append.template-${id}`,
       category,
       imageUrl: sanitizeImageUrl(icon.contents),
       search,
