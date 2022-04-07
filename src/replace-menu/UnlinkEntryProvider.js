@@ -27,9 +27,10 @@ export default function UnlinkEntryProvider(elementTemplates, popupMenu, transla
  *
  * @return { [ index, option ] } unlinkOption
  */
-UnlinkEntryProvider.prototype._getUnlinkOption = function(element, entries) {
+UnlinkEntryProvider.prototype._getUnlinkEntry = function(element, entries) {
 
   const elementTemplates = this._elementTemplates;
+  const translate = this._translate;
 
   const currentTemplate = elementTemplates.get(element);
 
@@ -49,6 +50,15 @@ UnlinkEntryProvider.prototype._getUnlinkOption = function(element, entries) {
 
   const option = options[optionIndex];
 
+  const unlinkEntry = {
+    id: 'replace-unlink-element-template',
+    action: () => {
+      elementTemplates.applyTemplate(element, null);
+    },
+    label: translate(option.label),
+    className: option.className
+  };
+
   // insert after previous option, if it exists
   const previousOption = options[optionIndex - 1];
   const previousEntry = previousOption && entries.find(([key]) => key === previousOption.actionName);
@@ -56,7 +66,7 @@ UnlinkEntryProvider.prototype._getUnlinkOption = function(element, entries) {
   if (previousEntry) {
     return [
       entries.indexOf(previousEntry) + 1,
-      option
+      unlinkEntry
     ];
   }
 
@@ -67,22 +77,19 @@ UnlinkEntryProvider.prototype._getUnlinkOption = function(element, entries) {
   if (nextEntry) {
     return [
       entries.indexOf(nextEntry),
-      option
+      unlinkEntry
     ];
   }
 
   // fallback to insert at start
   return [
     0,
-    option
+    unlinkEntry
   ];
 };
 
 
 UnlinkEntryProvider.prototype.getPopupMenuEntries = function(element) {
-
-  const translate = this._translate;
-  const elementTemplates = this._elementTemplates;
 
   return (entries) => {
 
@@ -90,7 +97,7 @@ UnlinkEntryProvider.prototype.getPopupMenuEntries = function(element) {
     const entrySet = Object.entries(entries);
 
     // retrieve insert entry
-    const unlinkOption = this._getUnlinkOption(element, entrySet);
+    const unlinkOption = this._getUnlinkEntry(element, entrySet);
 
     if (!unlinkOption) {
       return entries;
@@ -98,19 +105,11 @@ UnlinkEntryProvider.prototype.getPopupMenuEntries = function(element) {
 
     const [
       insertIndex,
-      option
+      unlinkEntry
     ] = unlinkOption;
 
-    const unlinkEntry = {
-      action: () => {
-        elementTemplates.applyTemplate(element, null);
-      },
-      label: translate(option.label),
-      className: option.className
-    };
-
     // insert unlink entry
-    entrySet.splice(insertIndex, 0, [ 'replace-unlink-element-template', unlinkEntry ]);
+    entrySet.splice(insertIndex, 0, [ unlinkEntry.id, unlinkEntry ]);
 
     // convert back to object
     return entrySet.reduce((entries, [ key, value ]) => {
