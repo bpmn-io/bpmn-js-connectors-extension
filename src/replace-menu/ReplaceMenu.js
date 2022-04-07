@@ -98,7 +98,7 @@ ReplaceMenu.prototype._getContext = function(element) {
     entries: [
       ...Object.entries(entries).map(
         ([key, value]) => ({ id: key, ...value })
-      ),
+      ).sort((a, b) => a.priority - b.priority),
       ...templateEntries
     ],
     headerEntries,

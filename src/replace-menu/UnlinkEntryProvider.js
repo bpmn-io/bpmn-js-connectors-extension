@@ -1,7 +1,6 @@
-import * as replaceOptions from 'bpmn-js/lib/features/replace/ReplaceOptions';
 import { isDifferentType } from 'bpmn-js/lib/features/popup-menu/util/TypeUtil';
+import { getOptionsForElement } from './util/ReplaceOptionsUtil';
 
-const ALL_OPTIONS = Object.values(replaceOptions).flat();
 const REPLACE_MENU_PROVIDER = 'bpmn-replace';
 const VERY_LOW_PRIORITY = 100;
 
@@ -13,14 +12,15 @@ export default function UnlinkEntryProvider(elementTemplates, popupMenu, transla
 }
 
 /**
- * Creates a option to replace a templated task with a plain task of the same
- * type. Uses `replaceOptions` for label and icon of the entry.
+ * Creates an entry to replace a templated task with a plain task of the same
+ * type.
  *
  * @param {djs.model.Base} element
+ * @param {Array<Object>} options
  *
  * @return {Array<Object>} a list of menu entry items
  */
-UnlinkEntryProvider.prototype._getUnlinkEntry = function(element) {
+UnlinkEntryProvider.prototype._getUnlinkEntry = function(element, options) {
   const elementTemplates = this._elementTemplates,
         translate = this._translate;
 
@@ -32,14 +32,16 @@ UnlinkEntryProvider.prototype._getUnlinkEntry = function(element) {
 
   const isSameType = (element, option) => !isDifferentType(element)(option);
 
-  const option = ALL_OPTIONS.find(option => isSameType(element, option));
+  const optionIndex = options.findIndex(option => isSameType(element, option));
+  const option = options[optionIndex];
 
   const entry = {
     action: () => {
       elementTemplates.applyTemplate(element, null);
     },
     label: translate(option.label),
-    className: option.className
+    className: option.className,
+    priority: optionIndex
   };
 
   return entry;
@@ -47,8 +49,8 @@ UnlinkEntryProvider.prototype._getUnlinkEntry = function(element) {
 
 
 UnlinkEntryProvider.prototype.getPopupMenuEntries = function(element) {
-
-  const newEntry = this._getUnlinkEntry(element);
+  const options = getOptionsForElement(element);
+  const newEntry = this._getUnlinkEntry(element, options);
 
   return function(entries) {
 
@@ -56,11 +58,12 @@ UnlinkEntryProvider.prototype.getPopupMenuEntries = function(element) {
       return entries;
     }
 
+    for (const actionName in entries) {
+      entries[actionName].priority = options.findIndex(option => option.actionName === actionName);
+    }
+
     entries['replace-unlink-element-template'] = newEntry;
 
-    for (const entry in entries) {
-      entries[entry].priority = VERY_LOW_PRIORITY;
-    }
     return entries;
   };
 
