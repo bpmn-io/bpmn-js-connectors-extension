@@ -3,13 +3,13 @@ import { isDifferentType } from 'bpmn-js/lib/features/popup-menu/util/TypeUtil';
 
 const ALL_OPTIONS = Object.values(replaceOptions).flat();
 const REPLACE_MENU_PROVIDER = 'bpmn-replace';
-const HIGH_PRIORITY = 2000;
+const VERY_LOW_PRIORITY = 100;
 
 export default function UnlinkEntryProvider(elementTemplates, popupMenu, translate) {
   this._elementTemplates = elementTemplates;
   this._translate = translate;
 
-  popupMenu.registerProvider(REPLACE_MENU_PROVIDER, HIGH_PRIORITY, this);
+  popupMenu.registerProvider(REPLACE_MENU_PROVIDER, VERY_LOW_PRIORITY, this);
 }
 
 /**
@@ -20,14 +20,14 @@ export default function UnlinkEntryProvider(elementTemplates, popupMenu, transla
  *
  * @return {Array<Object>} a list of menu entry items
  */
-UnlinkEntryProvider.prototype.getEntries = function(element) {
+UnlinkEntryProvider.prototype._getUnlinkEntry = function(element) {
   const elementTemplates = this._elementTemplates,
         translate = this._translate;
 
   const currentTemplate = elementTemplates.get(element);
 
   if (!currentTemplate) {
-    return [];
+    return;
   }
 
   const isSameType = (element, option) => !isDifferentType(element)(option);
@@ -35,7 +35,6 @@ UnlinkEntryProvider.prototype.getEntries = function(element) {
   const option = ALL_OPTIONS.find(option => isSameType(element, option));
 
   const entry = {
-    id: 'replace-unlink-element-template',
     action: () => {
       elementTemplates.applyTemplate(element, null);
     },
@@ -43,7 +42,28 @@ UnlinkEntryProvider.prototype.getEntries = function(element) {
     className: option.className
   };
 
-  return [entry];
+  return entry;
+};
+
+
+UnlinkEntryProvider.prototype.getPopupMenuEntries = function(element) {
+
+  const newEntry = this._getUnlinkEntry(element);
+
+  return function(entries) {
+
+    if (!newEntry) {
+      return entries;
+    }
+
+    entries['replace-unlink-element-template'] = newEntry;
+
+    for (const entry in entries) {
+      entries[entry].priority = VERY_LOW_PRIORITY;
+    }
+    return entries;
+  };
+
 };
 
 UnlinkEntryProvider.$inject = [
