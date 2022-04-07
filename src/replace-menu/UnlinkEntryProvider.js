@@ -4,6 +4,15 @@ import { getOptionsForElement } from './util/ReplaceOptionsUtil';
 const REPLACE_MENU_PROVIDER = 'bpmn-replace';
 const VERY_LOW_PRIORITY = 100;
 
+
+/**
+ * Injects an unlink entry into the properties panel to turn a
+ * template task into a plain BPMN task.
+ *
+ * @param {ElementTemplates} elementTemplates
+ * @param {PopupMenu} popupMenu
+ * @param {Function} translate
+ */
 export default function UnlinkEntryProvider(elementTemplates, popupMenu, translate) {
   this._elementTemplates = elementTemplates;
   this._translate = translate;
@@ -12,17 +21,15 @@ export default function UnlinkEntryProvider(elementTemplates, popupMenu, transla
 }
 
 /**
- * Creates an entry to replace a templated task with a plain task of the same
- * type.
+ * Returns the unlink option to insert at a specific position.
  *
  * @param {djs.model.Base} element
- * @param {Array<Object>} options
  *
- * @return {Array<Object>} a list of menu entry items
+ * @return { [ index, option ] } unlinkOption
  */
-UnlinkEntryProvider.prototype._getUnlinkEntry = function(element, options) {
-  const elementTemplates = this._elementTemplates,
-        translate = this._translate;
+UnlinkEntryProvider.prototype._getUnlinkOption = function(element, entries) {
+
+  const elementTemplates = this._elementTemplates;
 
   const currentTemplate = elementTemplates.get(element);
 
@@ -30,41 +37,87 @@ UnlinkEntryProvider.prototype._getUnlinkEntry = function(element, options) {
     return;
   }
 
+  const options = getOptionsForElement(element);
+
   const isSameType = (element, option) => !isDifferentType(element)(option);
 
   const optionIndex = options.findIndex(option => isSameType(element, option));
+
+  if (optionIndex === -1) {
+    return;
+  }
+
   const option = options[optionIndex];
 
-  const entry = {
-    action: () => {
-      elementTemplates.applyTemplate(element, null);
-    },
-    label: translate(option.label),
-    className: option.className,
-    priority: optionIndex
-  };
+  // insert after previous option, if it exists
+  const previousOption = options[optionIndex - 1];
+  const previousEntry = previousOption && entries.find(([key]) => key === previousOption.actionName);
 
-  return entry;
+  if (previousEntry) {
+    return [
+      entries.indexOf(previousEntry) + 1,
+      option
+    ];
+  }
+
+  // insert before next option, if it exists
+  const nextOption = options[optionIndex + 1];
+  const nextEntry = nextOption && entries.find(([key]) => key === nextOption.actionName);
+
+  if (nextEntry) {
+    return [
+      entries.indexOf(nextEntry),
+      option
+    ];
+  }
+
+  // fallback to insert at start
+  return [
+    0,
+    option
+  ];
 };
 
 
 UnlinkEntryProvider.prototype.getPopupMenuEntries = function(element) {
-  const options = getOptionsForElement(element);
-  const newEntry = this._getUnlinkEntry(element, options);
 
-  return function(entries) {
+  const translate = this._translate;
+  const elementTemplates = this._elementTemplates;
 
-    if (!newEntry) {
+  return (entries) => {
+
+    // convert our entries into something sortable
+    const entrySet = Object.entries(entries);
+
+    // retrieve insert entry
+    const unlinkOption = this._getUnlinkOption(element, entrySet);
+
+    if (!unlinkOption) {
       return entries;
     }
 
-    for (const actionName in entries) {
-      entries[actionName].priority = options.findIndex(option => option.actionName === actionName);
-    }
+    const [
+      insertIndex,
+      option
+    ] = unlinkOption;
 
-    entries['replace-unlink-element-template'] = newEntry;
+    const unlinkEntry = {
+      action: () => {
+        elementTemplates.applyTemplate(element, null);
+      },
+      label: translate(option.label),
+      className: option.className
+    };
 
-    return entries;
+    // insert unlink entry
+    entrySet.splice(insertIndex, 0, [ 'replace-unlink-element-template', unlinkEntry ]);
+
+    // convert back to object
+    return entrySet.reduce((entries, [ key, value ]) => {
+      entries[key] = value;
+
+      return entries;
+    }, {});
   };
 
 };
