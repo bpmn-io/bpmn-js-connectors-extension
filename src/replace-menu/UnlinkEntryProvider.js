@@ -1,5 +1,5 @@
 import { isDifferentType } from 'bpmn-js/lib/features/popup-menu/util/TypeUtil';
-import { getOptionsForElement } from './util/ReplaceOptionsUtil';
+import { getReplaceOptions } from './util/ReplaceOptionsUtil';
 
 const REPLACE_MENU_PROVIDER = 'bpmn-replace';
 const VERY_LOW_PRIORITY = 100;
@@ -37,7 +37,7 @@ UnlinkEntryProvider.prototype._getUnlinkOption = function(element, entries) {
     return;
   }
 
-  const options = getOptionsForElement(element);
+  const options = getReplaceOptions();
 
   const isSameType = (element, option) => !isDifferentType(element)(option);
 
