@@ -35,7 +35,7 @@ UnlinkEntryProvider.prototype.getEntries = function(element) {
   const option = ALL_OPTIONS.find(option => isSameType(element, option));
 
   const entry = {
-    id: 'unlink-element-template',
+    id: 'replace-unlink-element-template',
     action: () => {
       elementTemplates.applyTemplate(element, null);
     },
