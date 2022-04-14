@@ -6,6 +6,10 @@ All notable changes to [bpmn-js-connectors-extension](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.3.1
+
+* `FIX`: handle missing target in replace options ([`cba23f08`](https://github.com/bpmn-io/bpmn-js-connectors-extension/commit/cba23f084cfca854436da305dcf647dc782c94c7))
+
 ## 0.3.0
 
 * `FEAT`: insert unlink entry late ([#35](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/35))
