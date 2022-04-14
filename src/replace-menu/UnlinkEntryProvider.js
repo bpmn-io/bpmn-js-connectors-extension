@@ -40,7 +40,7 @@ UnlinkEntryProvider.prototype._getUnlinkEntry = function(element, entries) {
 
   const options = getReplaceOptions();
 
-  const isSameType = (element, option) => !isDifferentType(element)(option);
+  const isSameType = (element, option) => option.target && !isDifferentType(element)(option);
 
   const optionIndex = options.findIndex(option => isSameType(element, option));
 
