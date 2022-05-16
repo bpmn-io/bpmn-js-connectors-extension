@@ -18,7 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "@bpmn-io/add-exporter": "^0.2.0",
-    "@bpmn-io/element-templates-icons-renderer": "^0.1.2",
+    "@bpmn-io/element-templates-icons-renderer": "^0.2.0",
     "@bpmn-io/properties-panel": "^0.13.2",
     "@ibm/plex": "^6.0.0",
     "@rollup/plugin-commonjs": "^21.0.2",
