@@ -48,7 +48,7 @@ export default function ChangeMenu(injector, eventBus) {
 
   eventBus.on('changeMenu.open', () => {
     const directEditing = injector.get('directEditing', false);
-    directEditing && directEditing.cancel();
+    directEditing && directEditing.complete();
 
     const popupMenu = injector.get('popupMenu', false);
     popupMenu && popupMenu.close();
