@@ -76,7 +76,7 @@ ElementTemplateChooser.prototype._applyTemplate = function(element, newTemplate)
 };
 
 ElementTemplateChooser.prototype._getMatchingTemplates = function(element) {
-  return this._elementTemplates.getAll().filter(template => {
+  return this._elementTemplates.getLatest().filter(template => {
     return isAny(element, template.appliesTo);
   });
 };
