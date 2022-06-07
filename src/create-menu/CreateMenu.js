@@ -44,7 +44,7 @@ CreateMenu.$inject = [
 ];
 
 CreateMenu.prototype._getMatchingTemplates = function() {
-  return this._elementTemplates.getAll().filter(template => {
+  return this._elementTemplates.getLatest().filter(template => {
     return template.appliesTo.includes('bpmn:Task') || template.appliesTo.includes('bpmn:ServiceTask');
   });
 };

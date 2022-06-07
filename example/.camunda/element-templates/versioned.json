@@ -1,0 +1,50 @@
+[
+  {
+    "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+    "name": "A versioned template",
+    "id": "foop.example.versioned.template",
+    "description": "A template with multiple versions",
+    "version": 1,
+    "appliesTo": [
+      "bpmn:Task"
+    ],
+    "elementType": {
+      "value": "bpmn:ServiceTask"
+    },
+    "properties": [
+      {
+        "label": "Task Header <b>",
+        "type": "String",
+        "feel": "optional",
+        "binding": {
+          "type": "zeebe:taskHeader",
+          "key": "b"
+        }
+      }
+    ]
+  },
+  {
+    "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+    "name": "A versioned template",
+    "id": "foop.example.versioned.template",
+    "description": "A template with multiple versions",
+    "version": 2,
+    "appliesTo": [
+      "bpmn:Task"
+    ],
+    "elementType": {
+      "value": "bpmn:ServiceTask"
+    },
+    "properties": [
+      {
+        "label": "Task Header <b>",
+        "type": "String",
+        "feel": "optional",
+        "binding": {
+          "type": "zeebe:taskHeader",
+          "key": "b"
+        }
+      }
+    ]
+  }
+]
