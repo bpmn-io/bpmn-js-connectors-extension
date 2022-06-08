@@ -15,7 +15,7 @@ export default function ChangeMenuResult(props) {
   } = props;
 
   return html`
-    ${ showCategories && categoryChanged(template, lastTemplate) && html`
+    ${ showCategories && categoryChanged(template, lastTemplate) && template.category && html`
       <li
         key=${ template.category.id }
         class="cmd-change-menu__entry_header"
