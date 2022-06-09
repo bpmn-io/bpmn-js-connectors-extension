@@ -1,3 +1,7 @@
+import {
+  isLabel
+} from 'bpmn-js/lib/util/LabelUtil';
+
 
 export default function ConnectorKeyboardBindings(
     injector, selection,
@@ -28,6 +32,28 @@ ConnectorKeyboardBindings.prototype.registerKeyboardBindings = function(keyboard
   const selection = this._selection;
   const mouse = this._mouse;
 
+  /**
+   * Returns the element that is subject
+   * to replace/append anything, if it exists.
+   *
+   * @return {djs.model.Shape}
+   */
+  function getTargetElement() {
+    const selected = selection.get();
+
+    const element = selected[0];
+
+    if (selected.length !== 1) {
+      return null;
+    }
+
+    if (isLabel(element)) {
+      return null;
+    }
+
+    return element;
+  }
+
   keyboard.addListener(context => {
     var event = context.keyEvent;
 
@@ -37,8 +63,10 @@ ConnectorKeyboardBindings.prototype.registerKeyboardBindings = function(keyboard
 
     var mouseEvent = mouse.getLastMoveEvent();
 
-    if (keyboard.isKey(['r', 'R'], event) && selection.get().length === 1) {
-      connectorsExtension.replaceAnything(mouseEvent, selection.get()[0]);
+    var element = getTargetElement();
+
+    if (keyboard.isKey(['r', 'R'], event) && element) {
+      connectorsExtension.replaceAnything(mouseEvent, element);
 
       return true;
     }
@@ -51,8 +79,8 @@ ConnectorKeyboardBindings.prototype.registerKeyboardBindings = function(keyboard
 
     if (keyboard.isKey(['a', 'A'], event)) {
 
-      if (selection.get().length === 1) {
-        connectorsExtension.appendAnything(mouseEvent, selection.get()[0]);
+      if (element) {
+        connectorsExtension.appendAnything(mouseEvent, element);
       } else {
         connectorsExtension.createAnything(mouseEvent);
       }
