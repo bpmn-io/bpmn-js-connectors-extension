@@ -94,9 +94,16 @@ AppendMenu.prototype._getDefaultEntries = function() {
 
 };
 
-AppendMenu.prototype._getTemplateEntries = function() {
+AppendMenu.prototype._getTemplateEntries = function(element) {
 
+  // no appending if create from template
+  // capabilities are missing (C7)
   if (!('createElement' in this._elementTemplates)) {
+    return [];
+  }
+
+  // no appending on connections
+  if (isConnection(element)) {
     return [];
   }
 
@@ -136,7 +143,7 @@ AppendMenu.prototype._getContext = function(element) {
 
   const defaultEntries = this._getDefaultEntries();
 
-  const templateEntries = this._getTemplateEntries();
+  const templateEntries = this._getTemplateEntries(element);
 
   return {
     entries: [
@@ -359,4 +366,11 @@ function AppendMenuComponent(props) {
       </ul>
     </div>
   `;
+}
+
+
+// helpers /////////////
+
+function isConnection(element) {
+  return element && !!element.waypoints;
 }
