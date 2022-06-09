@@ -11,7 +11,6 @@ ___Note:__ Yet to be released changes appear here._
 * `FEAT`: only offer latest template versions for selection ([#38](https://github.com/bpmn-io/bpmn-js-connectors-extension/issues/38))
 * `FIX`: gracefully handle missing template `category` ([#43](https://github.com/bpmn-io/bpmn-js-connectors-extension/issues/43))
 * `FIX`: prevent appending templates to connections ([#46](https://github.com/bpmn-io/bpmn-js-connectors-extension/issues/46))
-* `FIX`: prevent appending templates to connections ([#46](https://github.com/bpmn-io/bpmn-js-connectors-extension/issues/46))
 * `FIX`: do not trigger append on external labels ([#39](https://github.com/bpmn-io/bpmn-js-connectors-extension/issues/39))
 * `FIX`: complete direct editing when opening popup menu ([#40](https://github.com/bpmn-io/bpmn-js-connectors-extension/issues/40))
 
