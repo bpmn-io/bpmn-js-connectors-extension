@@ -30,10 +30,11 @@ import REST_TEMPLATES from './.camunda/element-templates/http-json-connector.jso
 import HEADER_INPUT_TEMPLATES from './.camunda/element-templates/header-input.json';
 import SLACK_TEMPLATES from './.camunda/element-templates/slack-connector.json';
 import VERSIONED_TEMPLATES from './.camunda/element-templates/versioned.json';
+import MISC_TEMPLATES from './.camunda/element-templates/misc.json';
 
 import './style.css';
 
-const TEMPLATES = [ ...EMAIL_TEMPLATES, ...REST_TEMPLATES, ...SLACK_TEMPLATES, ...HEADER_INPUT_TEMPLATES, ...VERSIONED_TEMPLATES ];
+const TEMPLATES = [ ...EMAIL_TEMPLATES, ...REST_TEMPLATES, ...SLACK_TEMPLATES, ...MISC_TEMPLATES, ...HEADER_INPUT_TEMPLATES, ...VERSIONED_TEMPLATES ];
 
 const url = new URL(window.location.href);
 
