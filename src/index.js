@@ -27,6 +27,6 @@ export default {
     'connectorsExtension',
     'connectorsKeyboardBindings'
   ],
-  connectorsExtension: ['type', ConnectorsExtension],
-  connectorsKeyboardBindings: ['type', ConnectorKeyboardBindings]
+  connectorsExtension: [ 'type', ConnectorsExtension ],
+  connectorsKeyboardBindings: [ 'type', ConnectorKeyboardBindings ]
 };

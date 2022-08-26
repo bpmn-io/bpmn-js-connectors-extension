@@ -97,7 +97,7 @@ ReplaceMenu.prototype._getContext = function(element) {
   return {
     entries: [
       ...Object.entries(entries).map(
-        ([key, value]) => ({ id: key, ...value })
+        ([ key, value ]) => ({ id: key, ...value })
       ),
       ...templateEntries
     ],
@@ -154,7 +154,7 @@ function ReplaceMenuComponent(props) {
     onClose
   } = props;
 
-  const onSelect = (event, entry, shouldClose=true) => {
+  const onSelect = (event, entry, shouldClose = true) => {
     entry.action(event, entry);
 
     shouldClose && onClose();
@@ -267,7 +267,7 @@ function ReplaceMenuComponent(props) {
     <h3 class="cmd-change-menu__title">
       Change element
     </h3>
-    ${ Object.entries(props.headerEntries).map(([key, value]) => html`
+    ${ Object.entries(props.headerEntries).map(([ key, value ]) => html`
       <span
         class=${ clsx('cmd-change-menu__header-entry', value.className, { active: value.active }) }
         onClick=${ (event) => onSelect(event, value, false) }

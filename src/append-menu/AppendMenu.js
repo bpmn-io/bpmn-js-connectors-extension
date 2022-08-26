@@ -211,7 +211,7 @@ function AppendMenuComponent(props) {
     showCategories = true
   } = props;
 
-  const onSelect = (event, entry, dragstart=false) => {
+  const onSelect = (event, entry, dragstart = false) => {
     const newElement = entry.action();
 
     onClose({

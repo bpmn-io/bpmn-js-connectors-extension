@@ -65,19 +65,19 @@ ConnectorKeyboardBindings.prototype.registerKeyboardBindings = function(keyboard
 
     var element = getTargetElement();
 
-    if (keyboard.isKey(['r', 'R'], event) && element) {
+    if (keyboard.isKey([ 'r', 'R' ], event) && element) {
       connectorsExtension.replaceAnything(mouseEvent, element);
 
       return true;
     }
 
-    if (keyboard.isKey(['n', 'N'], event)) {
+    if (keyboard.isKey([ 'n', 'N' ], event)) {
       connectorsExtension.createAnything(mouseEvent);
 
       return true;
     }
 
-    if (keyboard.isKey(['a', 'A'], event)) {
+    if (keyboard.isKey([ 'a', 'A' ], event)) {
 
       if (element) {
         connectorsExtension.appendAnything(mouseEvent, element);

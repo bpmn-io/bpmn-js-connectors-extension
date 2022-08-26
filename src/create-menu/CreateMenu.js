@@ -145,7 +145,7 @@ CreateMenu.prototype._getContext = function() {
  *
  * @return { Promise<CreateMenuResult> }
  */
-CreateMenu.prototype.open = function(event, position=event) {
+CreateMenu.prototype.open = function(event, position = event) {
 
   const {
     entries
@@ -178,7 +178,7 @@ function CreateMenuComponent(props) {
     entries
   } = props;
 
-  const onSelect = (event, entry, dragstart=false) => {
+  const onSelect = (event, entry, dragstart = false) => {
     const newElement = entry.action();
 
     onClose({

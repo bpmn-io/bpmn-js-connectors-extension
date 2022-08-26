@@ -61,7 +61,7 @@ UnlinkEntryProvider.prototype._getUnlinkEntry = function(element, entries) {
 
   // insert after previous option, if it exists
   const previousOption = options[optionIndex - 1];
-  const previousEntry = previousOption && entries.find(([key]) => key === previousOption.actionName);
+  const previousEntry = previousOption && entries.find(([ key ]) => key === previousOption.actionName);
 
   if (previousEntry) {
     return [
@@ -72,7 +72,7 @@ UnlinkEntryProvider.prototype._getUnlinkEntry = function(element, entries) {
 
   // insert before next option, if it exists
   const nextOption = options[optionIndex + 1];
-  const nextEntry = nextOption && entries.find(([key]) => key === nextOption.actionName);
+  const nextEntry = nextOption && entries.find(([ key ]) => key === nextOption.actionName);
 
   if (nextEntry) {
     return [
