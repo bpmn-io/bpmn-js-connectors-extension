@@ -52,7 +52,7 @@ const modeler = new BpmnModeler({
 
 The extension relies on `elementTemplates` to be provided via additional setup, i.e. [camunda-bpmn-js](https://github.com/camunda/camunda-bpmn-js).
 
-See [`example`](./example) for a full featured demo or [check it out in action](https://potential-winner-9f6a854d.pages.github.io/).
+See [`example`](./example) for a full featured demo or [check it out in action](https://bpmn-io.github.io/bpmn-js-connectors-extension/).
 
 
 ## Configuration
