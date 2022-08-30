@@ -6,6 +6,10 @@ All notable changes to [bpmn-js-connectors-extension](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.4.1
+
+* `FIX`: always upper case `Connector`
+
 ## 0.4.0
 
 * `FEAT`: only offer latest template versions for selection ([#38](https://github.com/bpmn-io/bpmn-js-connectors-extension/issues/38))
