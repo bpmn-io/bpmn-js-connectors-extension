@@ -6,6 +6,7 @@
     "dev": "npm start",
     "all": "run-s lint bundle build:example",
     "bundle": "rollup -c",
+    "test": "echo 'no tests'",
     "build:example": "NODE_ENV=production webpack",
     "start": "webpack serve --open",
     "lint": "eslint .",
