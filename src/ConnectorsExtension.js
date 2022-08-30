@@ -251,7 +251,7 @@ ConnectorsExtension.prototype.getContextPadEntries = function(element) {
         entries['append-connector'] = {
           group: 'model',
           imageUrl: appendConnectorImageUrl,
-          title: translate('Append connector'),
+          title: translate('Append Connector'),
           action: {
             click: (event, element) => {
               this.appendAnything(event, element);

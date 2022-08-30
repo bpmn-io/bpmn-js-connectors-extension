@@ -179,7 +179,7 @@ AppendMenu.prototype.open = function(element, position) {
     <${AppendMenuComponent}
       entries=${ entries }
       onClose=${ onClose }
-      title=${ this._isAppendAnything() ? 'Append element' : 'Append connector' }
+      title=${ this._isAppendAnything() ? 'Append element' : 'Append Connector' }
       showCategories=${ this._isAppendAnything() }
     />
   `;
