@@ -60,7 +60,8 @@ CreateMenu.prototype._getDefaultEntries = function() {
       category,
       search,
       rating,
-      target
+      target,
+      forceDragStart
     } = option;
 
     return {
@@ -72,7 +73,8 @@ CreateMenu.prototype._getDefaultEntries = function() {
       rating,
       action: () => {
         return this._elementFactory.create('shape', { ...target });
-      }
+      },
+      forceDragStart
     };
   });
 
@@ -179,12 +181,14 @@ function CreateMenuComponent(props) {
   } = props;
 
   const onSelect = (event, entry, dragstart = false) => {
+    const { forceDragStart } = entry;
+
     const newElement = entry.action();
 
     onClose({
       event,
       newElement,
-      dragstart
+      dragstart: dragstart || forceDragStart
     });
   };
 

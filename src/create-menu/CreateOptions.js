@@ -328,7 +328,7 @@ export var TYPED_BOUNDARY_EVENT = [
       cancelActivity: false
     }
   }
-].map(option => ({ ...option, category: EVENT_CATEGORY }));
+].map(option => ({ ...option, category: EVENT_CATEGORY, forceDragStart: true }));
 
 export var TYPED_END_EVENT = [
   {
