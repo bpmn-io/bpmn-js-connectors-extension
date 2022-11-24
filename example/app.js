@@ -25,29 +25,23 @@ import download from 'downloadjs';
 
 import exampleXML from './newDiagram.bpmn';
 
-import EMAIL_TEMPLATES from './.camunda/element-templates/sendgrid-connector.json';
-import REST_TEMPLATES from './.camunda/element-templates/http-json-connector.json';
-import HEADER_INPUT_TEMPLATES from './.camunda/element-templates/header-input.json';
-import SLACK_TEMPLATES from './.camunda/element-templates/slack-connector.json';
-import VERSIONED_TEMPLATES from './.camunda/element-templates/versioned.json';
-import MISC_TEMPLATES from './.camunda/element-templates/misc.json';
-import EMPTY_TEMPLATE from './.camunda/element-templates/empty.json';
-import DUE_DATE_TEMPLATE from './.camunda/element-templates/due-date.json';
-import GITHUB_WEBHOOK_TEMPLATE from './.camunda/element-templates/github-webhook.json';
+/**
+ * Load element templates under <.camunda/element-templates>
+ * dynamically.
+ *
+ * @return { object[] } element templates
+ */
+function loadTemplates() {
+
+  /* global require */
+  const context = require.context('./.camunda/element-templates/', false, /\.json$/);
+
+  return context.keys().map(key => context(key)).flat();
+}
 
 import './style.css';
 
-const TEMPLATES = [
-  ...EMAIL_TEMPLATES,
-  ...REST_TEMPLATES,
-  ...SLACK_TEMPLATES,
-  ...MISC_TEMPLATES,
-  ...HEADER_INPUT_TEMPLATES,
-  ...VERSIONED_TEMPLATES,
-  EMPTY_TEMPLATE,
-  DUE_DATE_TEMPLATE,
-  GITHUB_WEBHOOK_TEMPLATE
-];
+const TEMPLATES = loadTemplates();
 
 const url = new URL(window.location.href);
 
