@@ -6,6 +6,10 @@ All notable changes to [bpmn-js-connectors-extension](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.4.5
+
+* `FIX`: key replace menu entries by ID ([#55](https://github.com/bpmn-io/bpmn-js-connectors-extension/pull/55))
+
 ## 0.4.4
 
 * `FIX`: revert [`6189a49`](https://github.com/bpmn-io/bpmn-js-connectors-extension/commit/6189a499522250582584475bfc82ea6a0c544c50) due to [#54](https://github.com/bpmn-io/bpmn-js-connectors-extension/issues/54)
