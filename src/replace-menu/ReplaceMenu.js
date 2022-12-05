@@ -89,23 +89,28 @@ ReplaceMenu.prototype._getContext = function(element) {
 
   const providers = this._popupMenu._getProviders(REPLACE_MENU_PROVIDER);
 
-  const entries = this._popupMenu._getEntries(element, providers);
   const headerEntries = this._popupMenu._getHeaderEntries(element, providers);
 
-  const templateEntries = this._getTemplateEntries(element);
+  const defaultEntries = this._popupMenu._getEntries(element, providers);
+  const templateEntries = this._getTemplateEntries(element).reduce((cache, entry) => {
+    cache[entry.id] = entry;
+
+    return cache;
+  }, {});
+
+  const entries = Object.entries({
+    ...defaultEntries,
+    ...templateEntries
+  }).map(
+    ([ key, value ]) => ({ id: key, ...value })
+  );
 
   return {
-    entries: [
-      ...Object.entries(entries).map(
-        ([ key, value ]) => ({ id: key, ...value })
-      ),
-      ...templateEntries
-    ],
+    entries,
     headerEntries,
     empty: !(
-      Object.keys(entries).length ||
-      Object.keys(headerEntries).length ||
-      templateEntries.length
+      entries.length ||
+      Object.keys(headerEntries).length
     )
   };
 };
