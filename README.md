@@ -67,7 +67,7 @@ Customize this extension via the `connectorsExtension` config:
 
 ## Related
 
-* [@bpmn-io/element-templates-icons-renderer](https://github.com/bpmn-io/element-templates-icons-renderer) - A renderer for task icons
+* [`@bpmn-io/element-template-icon-renderer`](https://github.com/bpmn-io/element-template-icon-renderer) - A renderer for task icons
 
 
 ## Run locally
