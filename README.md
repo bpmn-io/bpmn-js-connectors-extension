@@ -1,3 +1,5 @@
+> We are currently in the process of incorporating this into the core modeling experience, cf. https://github.com/bpmn-io/bpmn-js/issues/1627.
+
 # bpmn-js-connectors-extension
 
 [![CI](https://github.com/bpmn-io/bpmn-js-connectors-extension/actions/workflows/CI.yml/badge.svg)](https://github.com/bpmn-io/bpmn-js-connectors-extension/actions/workflows/CI.yml)
