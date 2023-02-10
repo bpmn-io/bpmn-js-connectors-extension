@@ -1,4 +1,4 @@
-> We are currently in the process of incorporating this into the core modeling experience, cf. https://github.com/bpmn-io/bpmn-js/issues/1627.
+> Starting with [`bpmn-js@11.2`](https://github.com/bpmn-io/bpmn-js/blob/develop/CHANGELOG.md#1120) this is now integrated into the modeling core.
 
 # bpmn-js-connectors-extension
 
