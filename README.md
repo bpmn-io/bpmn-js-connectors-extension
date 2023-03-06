@@ -70,6 +70,7 @@ Customize this extension via the `connectorsExtension` config:
 ## Related
 
 * [`@bpmn-io/element-template-icon-renderer`](https://github.com/bpmn-io/element-template-icon-renderer) - A renderer for task icons
+* [`@bpmn-io/element-template-chooser`](https://github.com/bpmn-io/element-template-chooser) - A simple element template chooser that plugs into the [BPMN properties panel](https://github.com/bpmn-io/bpmn-js-properties-panel)
 
 
 ## Run locally
