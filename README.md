@@ -1,4 +1,4 @@
-> This extension now lives in an officially [supported extension](https://github.com/bpmn-io/bpmn-js-create-append-anything) for [`bpmn-js>=12`](https://github.com/bpmn-io/bpmn-js/blob/develop/CHANGELOG.md#1200).
+> This extension now lives in an [officially supported extension](https://github.com/bpmn-io/bpmn-js-create-append-anything) for [`bpmn-js>=12`](https://github.com/bpmn-io/bpmn-js/blob/develop/CHANGELOG.md#1200).
 
 # bpmn-js-connectors-extension
 
